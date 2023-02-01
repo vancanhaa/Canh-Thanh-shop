@@ -7,30 +7,30 @@ function Register() {
                     <div class="col-lg-6">
                     <div class="login-form border p-5">
                         <div class="text-center heading">
-                        <h2 class="mb-2">Sign Up</h2>
-                        <p class="lead">Already have an account? <a href="/login"> Login now</a></p>
+                        <h2 class="mb-2">Đăng ký</h2>
+                        <p class="lead">Bạn đã có tài khoản? <a href="/login"> Đăng nhập ngay bây giờ</a></p>
                         </div>
             
                         <form action="#">
                         <div class="form-group mb-4">
-                            <label for="#">Enter Email Address</label>
-                            <input type="text" class="form-control" placeholder="Enter Email Address"/>
+                            <label for="#">Nhập địa chỉ email</label>
+                            <input type="text" class="form-control" placeholder="Nhập địa chỉ email"/>
                         </div>
                         <div class="form-group mb-4">
-                            <label for="#">Enter username</label>
-                            <a class="float-right" href="">Forget password?</a>
-                            <input type="text" class="form-control" placeholder="Enter Password"/> 
+                            <label for="#">Tên đăng nhập</label>
+                            <a class="float-right" href="">Quên mật khẩu?</a>
+                            <input type="text" class="form-control" placeholder="Nhập tên đăng nhập của bạn"/> 
                         </div>
                         <div class="form-group mb-4">
-                            <label for="#">Enter Password</label>
-                            <input type="text" class="form-control" placeholder="Enter Password"/> 
+                            <label for="#">Mật khẩu</label>
+                            <input type="text" class="form-control" placeholder="Nhập mật khẩu của bạn"/> 
                         </div>
                         <div class="form-group">
-                            <label for="#">Confirm Password</label>
-                            <input type="text" class="form-control" placeholder="Confirm Password" /> 
+                            <label for="#">Nhập lại mật khẩu</label>
+                            <input type="text" class="form-control" placeholder="Nhập lại mật khẩu" /> 
                         </div>
             
-                        <a href="#" class="btn btn-main mt-3 btn-block">Register</a>
+                        <a href="#" class="btn btn-main mt-3 btn-block">Đăng ký</a>
                         </form>
                     </div>
                     </div>

@@ -213,10 +213,10 @@ function Header() {
             </a>
             <ul class="dropdown-menu account-dropdown" aria-labelledby="navbarDropdown5">
               <li>
-                <Link to={{ pathname: ROUTE.LOGIN }}>Đăng ký</Link>
+                <Link to={{ pathname: ROUTE.REGISTER }}>Đăng ký</Link>
               </li>
               <li>
-                <Link to={{ pathname: ROUTE.REGISTER }}>Đăng nhập</Link>
+                <Link to={{ pathname: ROUTE.LOGIN }}>Đăng nhập</Link>
               </li>
             </ul>
           </li>

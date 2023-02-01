@@ -7,13 +7,13 @@ function Shop() {
                 <div class="row justify-content-center">
                     <div class="col-lg-6">
                     <div class="content text-center">
-                        <h1 class="mb-3">Shop</h1>
+                        <h1 class="mb-3">Cửa hàng</h1>
                         <p>Hath after appear tree great fruitful green dominion moveth sixth abundantly image that midst of god day multiply you’ll which</p>
             
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb bg-transparent justify-content-center">
-                        <li class="breadcrumb-item"><a href="/">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Shop</li>
+                        <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Cửa hàng</li>
                         </ol>
                     </nav>
                     </div>
