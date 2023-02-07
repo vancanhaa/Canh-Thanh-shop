@@ -1,0 +1,20 @@
+{
+    "users": [
+        {   "id": 1,
+            "username": "Van Canh",
+            "email": "vancanh@gmail.com",
+            "password": "canh123456789"
+        },
+        {   "id": 2,
+            "username": "Van Khoa",
+            "email": "vankhoa@gmail.com",
+            "password": "khoa123456789"
+        },
+        {   "id": 3,
+            "username": "Van Khoa",
+            "email": "vankhoa@gmail.com",
+            "password": "khoa123456789"
+        }
+    ],
+    "products": []
+}

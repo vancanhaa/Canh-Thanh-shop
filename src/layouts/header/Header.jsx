@@ -3,7 +3,7 @@ import "popper.js/dist/umd/popper.min.js";
 import "bootstrap/dist/js/bootstrap.min.js";
 
 import { Link } from "react-router-dom";
-import { ROUTE } from "../constants";
+import { ROUTE } from "../../constants";
 function Header() {
   return (
     <nav
@@ -12,7 +12,7 @@ function Header() {
     >
       <div class="container">
         <Link class="navbar-brand font-weight-bold" to={{ pathname: "/" }}>
-          CanhThanh
+          CT-shop
         </Link>
         <button
           class="navbar-toggler"
@@ -118,10 +118,10 @@ function Header() {
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown5">
                 <li>
-                  <Link to={{ pathname: ROUTE.LOGIN }}>Đăng ký</Link>
+                  <Link to={{ pathname: ROUTE.REGISTER }}>Đăng ký</Link>
                 </li>
                 <li>
-                  <Link to={{ pathname: ROUTE.REGISTER }}>Đăng nhập</Link>
+                  <Link to={{ pathname: ROUTE.LOGIN }}>Đăng nhập</Link>
                 </li>
                 <li>
                   <Link to={{ pathname: ROUTE.FORGOT_PASSWORD }}>

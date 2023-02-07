@@ -5,6 +5,6 @@ export const ROUTE = {
     CHECK_OUT: "checkout",
     CART: "cart",
     LOGIN: "login",
-    REGISTER: "regíter",
+    REGISTER: "register",
     FORGOT_PASSWORD: "forgot-password"
 }
