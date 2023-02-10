@@ -3,7 +3,7 @@ const auth = require('json-server-auth')
 const server = jsonServer.create()
 const router = jsonServer.router('db.json')//chổ này nếu bạn đăt tên file json khác thì sửa ở đây
 const middlewares = jsonServer.defaults()
-const port = 8080
+const port = 3003
 
 
 server.db = router.db

@@ -3,13 +3,25 @@ import "popper.js/dist/umd/popper.min.js";
 import "bootstrap/dist/js/bootstrap.min.js";
 
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { ROUTE } from "../../constants";
+import { logoutAction } from "../../stores/slice/user.slice";
 function Header() {
+
+  const dispatch = useDispatch()
+  const userInfo = useSelector((state) => state.user.userInfoState)
+
+  const handleLogout = () => {
+    dispatch(logoutAction())
+    
+  }
+  
   return (
     <nav
       class="navbar navbar-expand-lg navbar-light bg-white w-100 navigation"
       id="navbar"
     >
+
       <div class="container">
         <Link class="navbar-brand font-weight-bold" to={{ pathname: "/" }}>
           CT-shop
@@ -128,6 +140,9 @@ function Header() {
                     Quên mật khẩu
                   </Link>
                 </li>
+                <li onClick={handleLogout}>
+                  <a href="#!">Đăng xuất</a>
+                </li>
               </ul>
             </li>
           </ul>
@@ -210,6 +225,8 @@ function Header() {
               data-hover="dropdown"
             >
               <i class="tf-ion-ios-person mr-3"></i>
+              { userInfo.data ? `${userInfo.data.lastName} ${userInfo.data.firstName}` : "" }
+
             </a>
             <ul class="dropdown-menu account-dropdown" aria-labelledby="navbarDropdown5">
               <li>

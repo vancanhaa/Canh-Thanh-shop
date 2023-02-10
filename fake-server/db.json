@@ -1,20 +1,118 @@
 {
-    "users": [
-        {   "id": 1,
-            "username": "Van Canh",
-            "email": "vancanh@gmail.com",
-            "password": "canh123456789"
-        },
-        {   "id": 2,
-            "username": "Van Khoa",
-            "email": "vankhoa@gmail.com",
-            "password": "khoa123456789"
-        },
-        {   "id": 3,
-            "username": "Van Khoa",
-            "email": "vankhoa@gmail.com",
-            "password": "khoa123456789"
-        }
-    ],
-    "products": []
+  "users": [
+    {
+      "id": 1,
+      "username": "Van Canh",
+      "email": "vancanh@gmail.com",
+      "password": "canh123456789"
+    },
+    {
+      "id": 2,
+      "username": "Van Khoa",
+      "email": "vankhoa@gmail.com",
+      "password": "khoa123456789"
+    },
+    {
+      "id": 3,
+      "username": "Van Khoa",
+      "email": "vankhoa@gmail.com",
+      "password": "khoa123456789"
+    },
+    {
+      "email": "thanhbui@gmail.com",
+      "password": "$2a$10$vk5Vs1tmy.VkmOcyyl.0KOjgfLlwc9CACW4f7RbxwNA7CSl595dyu",
+      "firstName": "thanh",
+      "lastName": "bui",
+      "confirm": "thanhbui",
+      "phone": "1727361783",
+      "id": "a24e2bc1-6917-4723-a966-54c547882b21",
+      "role": "user",
+      "createdAt": 1675758519944,
+      "updateAt": 1675758519944
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "name": "Áo Polo Nam Airymax Thêu Panda",
+      "description": "",
+      "price": 120000,
+      "discountPercentage": 12.96,
+      "rating": 4.69,
+      "stock": 94,
+      "brand": "Yody",
+      "category": "12345",
+      "thumbnail": "...",
+      "images": [
+        "...",
+        "...",
+        "..."
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Áo Polo Nam Pique Mắt Chim Basic Co Giãn Thoáng Khí",
+      "description": "",
+      "price": 120000,
+      "discountPercentage": 12.96,
+      "rating": 4.69,
+      "stock": 94,
+      "brand": "Yody",
+      "category": "Ao polo",
+      "thumbnail": "...",
+      "images": [
+        "...",
+        "...",
+        "..."
+      ]
+    },
+    {
+      "createdAt": 1676029791296,
+      "updateAt": 1676029791296,
+      "id": 8
+    },
+    {
+      "name": "Áo Polo Nam Coolmax Phối Bo Kẻ",
+      "description": "",
+      "price": 120000,
+      "discountPercentage": 12.96,
+      "rating": 4.69,
+      "stock": 94,
+      "brand": "Yody",
+      "category": "12345",
+      "thumbnail": "...",
+      "images": [
+        "...",
+        "...",
+        "..."
+      ],
+      "createdAt": 1676029796907,
+      "updateAt": 1676029796907,
+      "id": 9
+    },
+    {
+      "createdAt": 1676029818669,
+      "updateAt": 1676029818669,
+      "id": 10
+    },
+    {
+      "name": "Áo Polo Nam Coolmax Phối Bo Kẻ",
+      "description": "",
+      "price": 120000,
+      "discountPercentage": 12.96,
+      "rating": 4.69,
+      "stock": 94,
+      "brand": "Yody",
+      "category": "12345",
+      "thumbnail": "...",
+      "images": [
+        "...",
+        "...",
+        "..."
+      ],
+      "createdAt": 1676029823127,
+      "updateAt": 1676029823127,
+      "id": 11
+    }
+  ]
 }

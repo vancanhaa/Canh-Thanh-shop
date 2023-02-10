@@ -6,9 +6,11 @@ import {
 import React, { useEffect } from "react";
 import { Link, Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { loginAction } from "../../stores/actions/auth.action";
 
 import "./user-register-login.scss";
-import { loginAction } from "../../stores/slice/user.slice";
+
+
 
 function UserLogin() {
   const dispatch = useDispatch();
@@ -19,23 +21,17 @@ function UserLogin() {
   }, [])
 
   const onLogin = (values) => {
-    console.log(values)
-    dispatch(loginAction(values));
+    const payload = {
+      email: values.email,
+      password: values.password
+    }
+    dispatch(loginAction(payload));
   };
 
   if (userInfo.data) return <Navigate to={"/"} />;
 
   return (
     <div className="register-login-container">
-      <div className="register-login-header">
-        <Row>
-          <Col push="6">
-            <Link to="/">
-              <p>CTshop</p>
-            </Link>
-          </Col>
-        </Row>
-      </div>
       <div className="register-login-center">
         <div className="register-login">
           <div className="user-form">

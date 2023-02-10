@@ -6,34 +6,33 @@ import { v4 } from "uuid";
 
 
 import "./user-register-login.scss"
-import { registerAction } from "../../stores/slice/user.slice";
+import { registerAction } from "../../stores/actions/auth.action";
 
 function UserRegister() {
-  const userInfo = useSelector((state) => state.user.userInfoState);
   const dispatch = useDispatch();
   const navigate = useNavigate()
   const onRegister = (values) => {
-    values.id = v4();
-    values.role = "user";
-    dispatch(registerAction(values));
+    const payload = {
+      id: v4(),
+      role: "user",
+      email: values.email,
+      password: values.password,
+      "first_name": values.firstName,
+      "last_name": values.lastName,
+      phone: values.phone
+    }
+    dispatch(registerAction(payload));
   };
 
   if (localStorage.getItem("REGISTER") === "register") {
     return <Navigate to={"/login"} />;
   }
+  
+  console.log("hello")
 
 
   return (
     <div className="register-login-container">
-      <div className="register-login-header">
-      <Row>
-          <Col push="6">
-            <Link to="/">
-              <p>CTshop</p>
-            </Link>
-          </Col>
-        </Row>
-      </div>
       <div className="register-login-center">
         <div className="register-login">
           <div className="user-form">
