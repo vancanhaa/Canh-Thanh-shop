@@ -10,7 +10,7 @@ import { registerAction } from "../../stores/actions/auth.action";
 
 function UserRegister() {
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const registerSuccess = useSelector((state) => state.user.userInfoState.registerSuccess)
   const onRegister = (values) => {
     const payload = {
       id: v4(),
@@ -24,11 +24,10 @@ function UserRegister() {
     dispatch(registerAction(payload));
   };
 
-  if (localStorage.getItem("REGISTER") === "register") {
+  if (registerSuccess) {
     return <Navigate to={"/login"} />;
   }
   
-  console.log("hello")
 
 
   return (

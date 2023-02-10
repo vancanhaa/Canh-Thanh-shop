@@ -11,11 +11,11 @@ const initialState = {
   userInfoState: {
     data: userInfoFromStorage,
     loading: false,
-    error: null,
+    registerSuccess: false
   },
 };
 
-const userSlice = createSlice({
+const authSlice = createSlice({
   name: "auth",
   initialState,
   extraReducers: (builder) => {
@@ -45,8 +45,9 @@ const userSlice = createSlice({
         ...state.userInfoState,
         loading: false,
       };
+      console.log(action)
       notification.error({
-        message: `Login Failed: ${action.payload}`,
+        message: `Login Failed: User ${action.payload}`,
         style: { border: "3px solid #ff623d" },
         duration: 3,
       });
@@ -61,14 +62,15 @@ const userSlice = createSlice({
     });
 
     builder.addCase(registerAction.fulfilled, (state, action) => {
-      localStorage.setItem("REGISTER", "register");
       state.userInfoState = {
         ...state.userInfoState,
+        registerSuccess: !state.userInfoState.registerSuccess,
         loading: false,
         data: null,
       };
       notification.success({
-        message: "Register success! Now you can Login",
+        message: "Đăng ký thành công!",
+        description: "Đăng nhập ngay bây giờ"
       });
     });
 
@@ -81,4 +83,4 @@ const userSlice = createSlice({
   },
 });
 
-export const userReducer = userSlice.reducer;
+export const authReducer = authSlice.reducer;

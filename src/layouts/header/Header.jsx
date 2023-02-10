@@ -5,14 +5,12 @@ import "bootstrap/dist/js/bootstrap.min.js";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { ROUTE } from "../../constants";
-import { logoutAction } from "../../stores/slice/user.slice";
 function Header() {
 
   const dispatch = useDispatch()
   const userInfo = useSelector((state) => state.user.userInfoState)
 
   const handleLogout = () => {
-    dispatch(logoutAction())
     
   }
   

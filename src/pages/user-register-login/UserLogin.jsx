@@ -6,7 +6,7 @@ import {
 import React, { useEffect } from "react";
 import { Link, Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { loginAction } from "../../stores/actions/auth.action";
+import { loginAction } from "../../stores/actions/";
 
 import "./user-register-login.scss";
 
