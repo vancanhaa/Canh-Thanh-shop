@@ -12,7 +12,7 @@ const initialState = {
   },
 };
 
-const userSlice = createSlice({
+const productSlice = createSlice({
   name: "products",
   initialState,
   reducers: {
@@ -30,7 +30,5 @@ const userSlice = createSlice({
   }
 });
 
-export const {
-  
-} = userSlice.actions;
-export const userReducer = userSlice.reducer;
+export const {} = productSlice.actions;
+export const userReducer = productSlice.reducer;

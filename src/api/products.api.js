@@ -7,6 +7,5 @@ export const productsApi = {
     addNewProduct: (data) => API.post(`${BASEURL}/api/products, data`),
     updateProduct: (id, data) => API.patch(`${BASEURL}/api/products/${id}`, data),
     deleteProduct: (id) => API.delete(`${BASEURL}/api/product/${id}`),
-    
-    
+
 }
