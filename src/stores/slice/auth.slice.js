@@ -12,13 +12,15 @@ const initialState = {
     data: userInfoFromStorage,
     loading: false,
     error: null,
+    isRegisterSuccess: false
   },
 };
 
-const userSlice = createSlice({
+const authSlice = createSlice({
   name: "auth",
   initialState,
   extraReducers: (builder) => {
+    //login
     builder.addCase(loginAction.pending, (state, action) => {
       remove();
       state.userInfoState = {
@@ -27,7 +29,7 @@ const userSlice = createSlice({
       };
     });
     builder.addCase(loginAction.fulfilled, (state, action) => {
-      const userInfoResponse = { ...action.payload };
+      const userInfoResponse = { ...action.payload.user };
       set(userInfoResponse);
       state.userInfoState = {
         ...state.userInfoState,
@@ -35,8 +37,10 @@ const userSlice = createSlice({
         data: userInfoResponse,
       };
       notification.success({
-        message: "Login success! Now you can shopping",
+        message: "Đăng nhập thành công",
+        description: "Chào mừng bạn đã quay lại!",
         style: { border: "3px solid #71be34" },
+        duration: 2
       });
     });
     builder.addCase(loginAction.rejected, (state, action) => {
@@ -45,13 +49,16 @@ const userSlice = createSlice({
         ...state.userInfoState,
         loading: false,
       };
+      console.log(action)
       notification.error({
-        message: `Login Failed: ${action.payload}`,
+        message: "Đăng nhập không thành công",
+        description: `Email hoặc mật khẩu không chính xác`,
         style: { border: "3px solid #ff623d" },
-        duration: 3,
+        duration: 2,
       });
     });
 
+    //register
     builder.addCase(registerAction.pending, (state, action) => {
       remove();
       state.userInfoState = {
@@ -59,26 +66,42 @@ const userSlice = createSlice({
         loading: true,
       };
     });
-
     builder.addCase(registerAction.fulfilled, (state, action) => {
-      localStorage.setItem("REGISTER", "register");
       state.userInfoState = {
         ...state.userInfoState,
+        isRegisterSuccess: true,
         loading: false,
         data: null,
       };
       notification.success({
-        message: "Register success! Now you can Login",
+        message: "Đăng ký thành công!",
+        description: "Đăng nhập ngay bây giờ",
+        style: { border: "3px solid #71be34" },
+        duration: 2,
       });
     });
 
     builder.addCase(registerAction.rejected, (state, action) => {
       remove();
+      console.log(action.error)
       notification.error({
-        message: `Register Failed: ${action.payload}`,
+        message: "Đăng ký không thành công!",
+        description: "Email đã tồn tại!",
+        style: { border: "3px solid #ff623d" },
+        duration: 2,
+
       });
     });
   },
+  reducers: {
+    logOut: (state, action) => {
+      remove();
+      state.userInfoState = {
+        ...state.userInfoState,
+        data: null,
+      };
+    }
+  }
 });
-
-export const userReducer = userSlice.reducer;
+export const { logOut } = authSlice.actions 
+export const authReducer = authSlice.reducer;

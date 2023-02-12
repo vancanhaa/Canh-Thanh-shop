@@ -19,16 +19,92 @@
       "password": "khoa123456789"
     },
     {
-      "email": "thanhbui@gmail.com",
-      "password": "$2a$10$vk5Vs1tmy.VkmOcyyl.0KOjgfLlwc9CACW4f7RbxwNA7CSl595dyu",
-      "firstName": "thanh",
-      "lastName": "bui",
-      "confirm": "thanhbui",
-      "phone": "1727361783",
-      "id": "a24e2bc1-6917-4723-a966-54c547882b21",
+      "email": "canhpham@gmail.com",
+      "password": "$2a$10$W07KhBQFazbmn7c5BuN3v.egcy8UgJ6qxw0dwPIcd1Gscl0pNeoGe",
+      "id": "726a34f1-3cad-460b-988e-bc5f67c7c22e",
       "role": "user",
-      "createdAt": 1675758519944,
-      "updateAt": 1675758519944
+      "first_name": "canh",
+      "last_name": "pham",
+      "phone": "123456789",
+      "createdAt": 1676033311499,
+      "updateAt": 1676033311499
+    },
+    {
+      "email": "canhpham123@gmail.com",
+      "password": "$2a$10$4XgoW6M9Nhl5MhgYObghzuqrlONa6LhN3hZvMenhhUcDn6ebdx5fa",
+      "id": "3c2e9fca-aadf-4782-96f8-aa2d19bdfa3a",
+      "role": "user",
+      "first_name": "canh",
+      "last_name": "pham",
+      "phone": "2247229849",
+      "createdAt": 1676033897838,
+      "updateAt": 1676033897838
+    },
+    {
+      "email": "linhnguyen@gmail.com",
+      "password": "$2a$10$yl9ZWywWyFzuMSvGxru61udz/5ninET4L17ODyO4Z/00g5vZcFsgO",
+      "id": "544535d2-3dff-48c1-8bdc-9e61d8c9de69",
+      "role": "user",
+      "first_name": "linh",
+      "last_name": "nguyen",
+      "phone": "1334568795",
+      "createdAt": 1676034321017,
+      "updateAt": 1676034321017
+    },
+    {
+      "email": "hoangtran@gmail.com",
+      "password": "$2a$10$wMWW/tvZSZsCjrUcygsBEe0/hACrxjINcezfP6hYzp8zw1Suq/0Gq",
+      "id": "1136db88-31ce-4172-969f-4386eb2a2e43",
+      "role": "user",
+      "first_name": "hoang",
+      "last_name": "tran",
+      "phone": "2133455115",
+      "createdAt": 1676034551072,
+      "updateAt": 1676034551072
+    },
+    {
+      "email": "thanhbui@gmail.com",
+      "password": "$2a$10$tIIlQh.iho5AhyOcBM1FMemMjVqQrvePLMbrg2CvQOBV1FUCiYF1W",
+      "id": "d441bea3-db81-40a5-b758-349045f6e0d1",
+      "role": "user",
+      "first_name": "thanh",
+      "last_name": "bui",
+      "phone": "123456",
+      "createdAt": 1676034714508,
+      "updateAt": 1676034714508
+    },
+    {
+      "email": "vancanh11@gmail.com",
+      "password": "$2a$10$YFSXR.OKdshACQOm9FlSDuwJMBuMDS7T.2MCw1j88fTJbRBmx/dDS",
+      "id": "e8b752db-a2a1-4cac-82fc-d4d04e1a4a7d",
+      "role": "user",
+      "first_name": "canh",
+      "last_name": "van",
+      "phone": "1234325413243",
+      "createdAt": 1676040117023,
+      "updateAt": 1676040117023
+    },
+    {
+      "email": "linhpham@gmail.com",
+      "password": "$2a$10$Xcr/G5Nc3HVLB90TSt525.dAS.bIMDfQ8B0By2d17RE3Bjy0/SpKW",
+      "id": "b63b4afe-c544-4584-8c7c-a00e5b3f7133",
+      "role": "user",
+      "first_name": "pham",
+      "last_name": "linh",
+      "phone": "123456789",
+      "createdAt": 1676198444871,
+      "updateAt": 1676198444871
+    },
+    {
+      "email": "anpham@gmail.com",
+      "password": "$2a$10$LRU7nmPhbv2k.fn8pez0wuj90mU1gbAOsdzWRYjyx0czHpyeWePQe",
+      "id": "079ff0b7-3379-44a2-814a-2cac72ccf993",
+      "role": "user",
+      "first_name": "an",
+      "last_name": "pham",
+      "phone": "12141",
+      "createdAt": 1676200149193,
+      "updateAt": 1676200149193
     }
   ],
   "products": [
