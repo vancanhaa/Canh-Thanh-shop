@@ -72,6 +72,39 @@
       "phone": "123456",
       "createdAt": 1676034714508,
       "updateAt": 1676034714508
+    },
+    {
+      "email": "vancanh11@gmail.com",
+      "password": "$2a$10$YFSXR.OKdshACQOm9FlSDuwJMBuMDS7T.2MCw1j88fTJbRBmx/dDS",
+      "id": "e8b752db-a2a1-4cac-82fc-d4d04e1a4a7d",
+      "role": "user",
+      "first_name": "canh",
+      "last_name": "van",
+      "phone": "1234325413243",
+      "createdAt": 1676040117023,
+      "updateAt": 1676040117023
+    },
+    {
+      "email": "linhpham@gmail.com",
+      "password": "$2a$10$Xcr/G5Nc3HVLB90TSt525.dAS.bIMDfQ8B0By2d17RE3Bjy0/SpKW",
+      "id": "b63b4afe-c544-4584-8c7c-a00e5b3f7133",
+      "role": "user",
+      "first_name": "pham",
+      "last_name": "linh",
+      "phone": "123456789",
+      "createdAt": 1676198444871,
+      "updateAt": 1676198444871
+    },
+    {
+      "email": "anpham@gmail.com",
+      "password": "$2a$10$LRU7nmPhbv2k.fn8pez0wuj90mU1gbAOsdzWRYjyx0czHpyeWePQe",
+      "id": "079ff0b7-3379-44a2-814a-2cac72ccf993",
+      "role": "user",
+      "first_name": "an",
+      "last_name": "pham",
+      "phone": "12141",
+      "createdAt": 1676200149193,
+      "updateAt": 1676200149193
     }
   ],
   "products": [

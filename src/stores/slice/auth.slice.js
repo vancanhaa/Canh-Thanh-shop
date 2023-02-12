@@ -11,7 +11,8 @@ const initialState = {
   userInfoState: {
     data: userInfoFromStorage,
     loading: false,
-    registerSuccess: false
+    error: null,
+    isRegisterSuccess: false
   },
 };
 
@@ -19,6 +20,7 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   extraReducers: (builder) => {
+    //login
     builder.addCase(loginAction.pending, (state, action) => {
       remove();
       state.userInfoState = {
@@ -27,7 +29,7 @@ const authSlice = createSlice({
       };
     });
     builder.addCase(loginAction.fulfilled, (state, action) => {
-      const userInfoResponse = { ...action.payload };
+      const userInfoResponse = { ...action.payload.user };
       set(userInfoResponse);
       state.userInfoState = {
         ...state.userInfoState,
@@ -35,7 +37,8 @@ const authSlice = createSlice({
         data: userInfoResponse,
       };
       notification.success({
-        message: "Login success! Now you can shopping",
+        message: "Đăng nhập thành công",
+        description: "Mua sắm ngay bây giờ nào!",
         style: { border: "3px solid #71be34" },
       });
     });
@@ -47,12 +50,14 @@ const authSlice = createSlice({
       };
       console.log(action)
       notification.error({
-        message: `Login Failed: User ${action.payload}`,
+        message: "Đăng nhập không thành công",
+        description: `Email hoặc mật khẩu không chính xác`,
         style: { border: "3px solid #ff623d" },
         duration: 3,
       });
     });
 
+    //register
     builder.addCase(registerAction.pending, (state, action) => {
       remove();
       state.userInfoState = {
@@ -60,17 +65,18 @@ const authSlice = createSlice({
         loading: true,
       };
     });
-
     builder.addCase(registerAction.fulfilled, (state, action) => {
       state.userInfoState = {
         ...state.userInfoState,
-        registerSuccess: !state.userInfoState.registerSuccess,
+        isRegisterSuccess: true,
         loading: false,
         data: null,
       };
       notification.success({
         message: "Đăng ký thành công!",
-        description: "Đăng nhập ngay bây giờ"
+        description: "Đăng nhập ngay bây giờ",
+        style: { border: "3px solid #71be34" },
+        duration: 3,
       });
     });
 
@@ -81,6 +87,15 @@ const authSlice = createSlice({
       });
     });
   },
+  reducers: {
+    logOut: (state, action) => {
+      remove();
+      state.userInfoState = {
+        ...state.userInfoState,
+        data: null,
+      };
+    }
+  }
 });
-
+export const { logOut } = authSlice.actions 
 export const authReducer = authSlice.reducer;

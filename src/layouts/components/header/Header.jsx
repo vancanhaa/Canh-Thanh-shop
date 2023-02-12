@@ -4,14 +4,15 @@ import "bootstrap/dist/js/bootstrap.min.js";
 
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { ROUTE } from "../../constants";
+import { ROUTE } from "../../../constants/index";
+import {logOut} from "../../../stores/slice/auth.slice"
 function Header() {
 
   const dispatch = useDispatch()
-  const userInfo = useSelector((state) => state.user.userInfoState)
+  const userInfo = useSelector((state) => state.user.userInfoState.data)
 
   const handleLogout = () => {
-    
+    dispatch(logOut())
   }
   
   return (
@@ -223,7 +224,7 @@ function Header() {
               data-hover="dropdown"
             >
               <i class="tf-ion-ios-person mr-3"></i>
-              { userInfo.data ? `${userInfo.data.lastName} ${userInfo.data.firstName}` : "" }
+              { userInfo ? `${userInfo["last_name"]} ${userInfo["first_name"]}` : "" }
 
             </a>
             <ul class="dropdown-menu account-dropdown" aria-labelledby="navbarDropdown5">

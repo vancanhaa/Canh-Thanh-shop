@@ -1,0 +1,82 @@
+.user-register-container {
+    min-height: 100vh;
+    width: 100%;
+    background: url(https://bizweb.dktcdn.net/100/438/408/themes/894085/assets/bg_login.jpg?1676003121177) no-repeat center;
+    background-size: cover;
+
+    .ant-row.ant-row-center.ant-row-middle.css-dev-only-do-not-override-ixblex {
+        height: 100vh;
+    }
+
+    .user-register-center {
+        max-width: 600px;
+        background-color: #fff;
+        margin-left: auto;
+        margin-right: auto;
+
+        .user-register-logo {
+            a {
+                display: block;
+                font-size: 3.6rem;
+                color: var(--primary-color);
+                font-weight: 700;
+                margin: 40px 0 0 0;  
+                &:hover {
+                    opacity: 0.8;
+                }
+            }
+        }
+
+        .user-register-form {
+            padding: 30px;
+            h2 {
+                font-size: 2.8rem;
+                color: #0296cc;
+                font-weight: 500;
+
+            }
+            input {
+                background: transparent;
+                margin-left: 10px;
+                height: 36px;
+                &:focus {
+                    border: none;
+                }
+                &::placeholder {
+                    color: var(--title-color);
+                }
+            }
+            .form-item__submit {
+                margin-top: 30px;
+                display: flex;
+                justify-content: center;
+                .ant-row.ant-form-item-row.css-dev-only-do-not-override-ixblex {
+                    min-width: 40%;
+                }
+                button {
+                    min-height: 48px;
+                    min-width: 140px;
+                    font-size: 2rem;
+                    background-color: var(--primary-color);
+                    font-weight: 500;
+                    width: 100%;
+                }
+                button:hover {
+                    opacity: 0.8;
+                }
+            }
+
+            a {
+                color: var(--primary-color);
+                &:hover {
+                    opacity: 0.8;
+                }
+            }
+            .ant-form-item-explain-error {
+                margin-bottom: 12px;
+            }
+        }
+    }
+
+
+}

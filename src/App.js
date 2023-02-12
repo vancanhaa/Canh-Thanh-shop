@@ -1,8 +1,5 @@
 import { Route, Routes } from "react-router-dom";
 
-import Header from "./layouts/header/Header";
-import Footer from "./layouts/footer/Footer";
-import Home from "./routes/Home";
 import Shop from "./routes/Shop";
 import ProductDetail from "./routes/ProductDetail";
 import Checkout from "./routes/Checkout";
@@ -10,14 +7,13 @@ import Cart from "./routes/Cart";
 
 import ForgotPassword from "./routes/ForgotPassword";
 import {ROUTE} from "./constants"
-import UserRegister from "./pages/user-register-login/UserRegister";
-import UserLogin from "./pages/user-register-login/UserLogin";
-
+import UserLogin from "./pages/user-login/UserLogin";
+import UserRegister from "./pages/user-register/UserRegister";
+import Home from "./pages/home/Home"
 
 function App() {
   return (
     <div className="App">
-      <Header />
       <Routes>
         <Route path={ROUTE.HOME_PAGE} element={<Home />} />
         <Route path={ROUTE.SHOP} element={<Shop />} />
@@ -28,7 +24,7 @@ function App() {
         <Route path={ROUTE.REGISTER} element={<UserRegister />} />
         <Route path={ROUTE.FORGOT_PASSWORD} element={<ForgotPassword />} />
       </Routes>
-      <Footer />
+      
     </div>
   );
 }
