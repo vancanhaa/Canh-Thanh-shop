@@ -38,8 +38,9 @@ const authSlice = createSlice({
       };
       notification.success({
         message: "Đăng nhập thành công",
-        description: "Mua sắm ngay bây giờ nào!",
+        description: "Chào mừng bạn đã quay lại!",
         style: { border: "3px solid #71be34" },
+        duration: 2
       });
     });
     builder.addCase(loginAction.rejected, (state, action) => {
@@ -53,7 +54,7 @@ const authSlice = createSlice({
         message: "Đăng nhập không thành công",
         description: `Email hoặc mật khẩu không chính xác`,
         style: { border: "3px solid #ff623d" },
-        duration: 3,
+        duration: 2,
       });
     });
 
@@ -76,14 +77,19 @@ const authSlice = createSlice({
         message: "Đăng ký thành công!",
         description: "Đăng nhập ngay bây giờ",
         style: { border: "3px solid #71be34" },
-        duration: 3,
+        duration: 2,
       });
     });
 
     builder.addCase(registerAction.rejected, (state, action) => {
       remove();
+      console.log(action.error)
       notification.error({
-        message: `Register Failed: ${action.payload}`,
+        message: "Đăng ký không thành công!",
+        description: "Email đã tồn tại!",
+        style: { border: "3px solid #ff623d" },
+        duration: 2,
+
       });
     });
   },
