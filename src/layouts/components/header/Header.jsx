@@ -1,244 +1,160 @@
-import "jquery/dist/jquery.slim.min.js";
-import "popper.js/dist/umd/popper.min.js";
-import "bootstrap/dist/js/bootstrap.min.js";
-
+import { Col, Row, Input } from "antd";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import "./header.scss";
+import { ImLocation } from "react-icons/im";
+import { AiTwotonePhone, AiOutlineUser } from "react-icons/ai";
+import { BsHandbag } from "react-icons/bs";
+import { ROUTE } from "../../../constants";
 import { useDispatch, useSelector } from "react-redux";
-import { ROUTE } from "../../../constants/index";
-import {logOut} from "../../../stores/slice/auth.slice"
+import { logOut } from "../../../stores/slice/auth.slice"
 function Header() {
-
   const dispatch = useDispatch()
-  const userInfo = useSelector((state) => state.user.userInfoState.data)
+  const { Search } = Input;
+  const userInfo = useSelector((state) => state.user.userInfoState.data);
+  console.log(userInfo);
+  const onSearch = () => {};
 
-  const handleLogout = () => {
-    dispatch(logOut())
-  }
-  
-  return (
-    <nav
-      class="navbar navbar-expand-lg navbar-light bg-white w-100 navigation"
-      id="navbar"
-    >
-
-      <div class="container">
-        <Link class="navbar-brand font-weight-bold" to={{ pathname: "/" }}>
-          CT-shop
-        </Link>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#main-navbar"
-          aria-controls="main-navbar"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse " id="main-navbar">
-          <ul class="navbar-nav mx-auto">
-            <li class="nav-item active">
-              <Link class="nav-link" to={{ pathname: ROUTE.HOME_PAGE }}>
-                Trang chủ
-              </Link>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">
-                Về chúng tôi
-              </a>
-            </li>
-
-            <li class="nav-item dropdown dropdown-slide">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                id="navbarDropdown4"
-                role="button"
-                data-delay="350"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                Pages.
-              </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown4">
-                <li>
-                  <a href="#">Về chúng tôi</a>
-                </li>
-                <li>
-                  <a href="#">Blog</a>
-                </li>
-                <li>
-                  <a href="#">Blog Single</a>
-                </li>
-                <li>
-                  <a href="#">Liên hệ</a>
-                </li>
-                <li>
-                  <a href="#">404 Page</a>
-                </li>
-                <li>
-                  <a href="#">FAQ</a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item dropdown dropdown-slide">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                id="navbarDropdown3"
-                role="button"
-                data-delay="350"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                Shop.
-              </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown3">
-                <li>
-                  <Link to={{ pathname: ROUTE.SHOP }}>Cửa hàng</Link>
-                </li>
-                <li>
-                  <Link to={{ pathname: ROUTE.PRODUCT_DETAIL }}>
-                    Chi tiết sản phẩm
-                  </Link>
-                </li>
-                <li>
-                  <Link to={{ pathname: ROUTE.CHECK_OUT }}>Thanh toán</Link>
-                </li>
-                <li>
-                  <Link to={{ pathname: ROUTE.CART }}>Giỏ hàng</Link>
-                </li>
-              </ul>
-            </li>
-
-            <li class="nav-item dropdown dropdown-slide">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                id="navbarDropdown5"
-                role="button"
-                data-delay="350"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                Tài khoản.
-              </a>
-              <ul class="dropdown-menu" aria-labelledby="navbarDropdown5">
-                <li>
-                  <Link to={{ pathname: ROUTE.REGISTER }}>Đăng ký</Link>
-                </li>
-                <li>
-                  <Link to={{ pathname: ROUTE.LOGIN }}>Đăng nhập</Link>
-                </li>
-                <li>
-                  <Link to={{ pathname: ROUTE.FORGOT_PASSWORD }}>
-                    Quên mật khẩu
-                  </Link>
-                </li>
-                <li onClick={handleLogout}>
-                  <a href="#!">Đăng xuất</a>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-
-        <ul class="top-menu list-inline mb-0 d-none d-lg-block" id="top-menu">
-          <li class="list-inline-item">
-            <a href="#" class="search_toggle" id="search-icon">
-              <i class="tf-ion-android-search"></i>
-            </a>
-          </li>
-          <li class="dropdown cart-nav dropdown-slide list-inline-item">
-            <a
-              href="#"
-              class="dropdown-toggle cart-icon"
-              data-toggle="dropdown"
-              data-hover="dropdown"
-            >
-              <i class="tf-ion-android-cart"></i>
-            </a>
-            <div class="dropdown-menu cart-dropdown">
-              <div class="media">
-                <a href="/product-detail">
-                  <img
-                    class="media-object img- mr-3"
-                    src="assets/images/cart-1.jpg"
-                    alt="image"
-                  />
-                </a>
-                <div class="media-body">
-                  <h6>Ladies Bag</h6>
-                  <div class="cart-price">
-                    <span>1 x</span>
-                    <span>1250.00</span>
-                  </div>
-                </div>
-                <a href="#" class="remove">
-                  <i class="tf-ion-close"></i>
-                </a>
-              </div>
-
-              <div class="media">
-                <a href="/product-detail">
-                  <img
-                    class="media-object img-fluid mr-3"
-                    src="assets/images/cart-2.jpg"
-                    alt="image"
-                  />
-                </a>
-                <div class="media-body">
-                  <h6>Skinny Jeans</h6>
-                  <div class="cart-price">
-                    <span>1 x</span>
-                    <span>1250.00</span>
-                  </div>
-                </div>
-                <a href="#" class="remove">
-                  <i class="tf-ion-close"></i>
-                </a>
-              </div>
-              <div class="cart-summary">
-                <span class="h6">Total</span>
-                <span class="total-price h6">$1799.00</span>
-                <div class="text-center cart-buttons mt-3">
-                  <a href="#" class="btn btn-small btn-transparent btn-block">
-                    Xem giỏ hàng
-                  </a>
-                  <a href="#" class="btn btn-small btn-main btn-block">
-                    Thanh toán
-                  </a>
-                </div>
-              </div>
-            </div>
-          </li>
-          <li class="dropdown account-nav dropdown-slide list-inline-item">
-            <a
-              href="#"
-              class="dropdown-toggle acount-icon"
-              data-toggle="dropdown"
-              data-hover="dropdown"
-            >
-              <i class="tf-ion-ios-person mr-3"></i>
-              { userInfo ? `${userInfo["last_name"]} ${userInfo["first_name"]}` : "" }
-
-            </a>
-            <ul class="dropdown-menu account-dropdown" aria-labelledby="navbarDropdown5">
+  function AccountComponent() {
+    const handleLogOut = () => {
+      dispatch(logOut())
+    }
+    if (userInfo)
+      return (
+        <div className="header-account user">
+          <div className="header-account__icon">
+            <AiOutlineUser />
+          </div>
+          <div className="header-account__body">
+            <p>{`${userInfo["last_name"]} ${userInfo["first_name"]}`}</p>
+          </div>
+          <div class="header-account__menu">
+            <ul>
               <li>
-                <Link to={{ pathname: ROUTE.REGISTER }}>Đăng ký</Link>
+                <a href="#!">Tài khoản của tôi</a>
               </li>
               <li>
-                <Link to={{ pathname: ROUTE.LOGIN }}>Đăng nhập</Link>
+                <a href="#!">Đổi mật khẩu</a>
+              </li>
+              <li>
+                <a href="#!">Sổ địa chỉ</a>
+              </li>
+              <li>
+                <a href="#!">Đã xem gần đây</a>
+              </li>
+              <li>
+                <a href="#!">Sản phẩm yêu thích</a>
+              </li>
+              <li class="logout" onClick={handleLogOut}>
+                <a href="/" >Đăng xuất</a>
               </li>
             </ul>
-          </li>
-        </ul>
+          </div>
+        </div>
+      );
+
+    return (
+      <div className="header-account">
+        <div className="header-account__icon">
+          <AiOutlineUser />
+        </div>
+        <div className="header-account__body">
+          <Link to={ROUTE.REGISTER}>ĐĂNG KÝ</Link>/
+          <Link to={ROUTE.LOGIN}> ĐĂNG NHẬP</Link>
+        </div>
       </div>
-    </nav>
+    );
+  }
+
+  return (
+    <div className="header">
+      <div className="header-container">
+        <div className="header-topbar">
+          <Row
+            justify="space-between"
+            style={{ marginLeft: "10px", marginRight: "10px" }}
+          >
+            <Col lg={12} md={14}>
+              <Row justify={"space-between"} gutter={8}>
+                <Col flex="140px">
+                  <div className="header-logo">
+                    <Link to={"/"}>CT-shop</Link>
+                  </div>
+                </Col>
+                <Col flex="auto">
+                  <div className="header-search_bar">
+                    <Search
+                      placeholder="Tìm kiếm"
+                      onSearch={onSearch}
+                      enterButton
+                    />
+                  </div>
+                </Col>
+              </Row>
+            </Col>
+            <Col lg={6} md={8}>
+              <div className="header-contact">
+                <div className="header-location">
+                  <Link to={"#!"}>
+                    <div className="header-location__icon">
+                      <ImLocation />
+                    </div>
+                    <p>Tìm cửa hàng</p>
+                  </Link>
+                </div>
+                <div className="header-phone_number">
+                  <Link to={"#!"}>
+                    <div className="header-phone_number__icon">
+                      <AiTwotonePhone />
+                    </div>
+                    <p>1800 1010</p>
+                  </Link>
+                </div>
+              </div>
+            </Col>
+          </Row>
+        </div>
+        <div className="header-bottombar">
+          <Row justify="space-between" style={{ margin: "0 10px 0 10px" }}>
+            <Col lg={16} md={16}>
+              <nav className="header-nav">
+                <ul className="list-item-big">
+                  <li className="nav-item">
+                    <a href="#!">SALE UP TO 50%</a>
+                  </li>
+                  <li className="nav-item">
+                    <a href="#!">NỮ</a>
+                  </li>
+                  <li className="nav-item">
+                    <a href="#!">NAM</a>
+                  </li>
+                  <li className="nav-item">
+                    <a href="#!">TRẺ EM</a>
+                  </li>
+                  <li className="nav-item">
+                    <a href="#!">BỘ SƯU TẬP</a>
+                  </li>
+                </ul>
+              </nav>
+            </Col>
+            <Col lg={8} md={0}>
+              <div className="bottombar-right">
+                <div className="header-cart">
+                  <div className="header-cart__icon">
+                    <BsHandbag />
+                    {/* <div className="header-cart__number-item">0</div> */}
+                  </div>
+                  <p>GIỎ HÀNG</p>
+                </div>
+
+                {AccountComponent()}
+              </div>
+            </Col>
+          </Row>
+        </div>
+      </div>
+    </div>
   );
 }
+
 export default Header;
