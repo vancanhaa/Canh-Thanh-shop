@@ -7,18 +7,17 @@ import { AiTwotonePhone, AiOutlineUser } from "react-icons/ai";
 import { BsHandbag } from "react-icons/bs";
 import { ROUTE } from "../../../constants";
 import { useDispatch, useSelector } from "react-redux";
-import { logOut } from "../../../stores/slice/auth.slice"
+import { logOut } from "../../../stores/slice/auth.slice";
 function Header() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const { Search } = Input;
   const userInfo = useSelector((state) => state.user.userInfoState.data);
-  console.log(userInfo);
   const onSearch = () => {};
 
-  function AccountComponent() {
+  function AccountComponent({userInfo}) {
     const handleLogOut = () => {
-      dispatch(logOut())
-    }
+      dispatch(logOut());
+    };
     if (userInfo)
       return (
         <div className="header-account user">
@@ -46,13 +45,12 @@ function Header() {
                 <a href="#!">Sản phẩm yêu thích</a>
               </li>
               <li class="logout" onClick={handleLogOut}>
-                <a href="/" >Đăng xuất</a>
+                <a href="/">Đăng xuất</a>
               </li>
             </ul>
           </div>
         </div>
       );
-
     return (
       <div className="header-account">
         <div className="header-account__icon">
@@ -64,6 +62,28 @@ function Header() {
         </div>
       </div>
     );
+  }
+
+  function HeaderCartComponent () {
+    return (
+      <div className="header-cart">
+        <Link to={ROUTE.CART}>
+        <div className="header-cart__icon">
+                    <BsHandbag />
+                    {/* <div className="header-cart__number-item">0</div> */}
+                  </div>
+                  <p>GIỎ HÀNG</p>
+        </Link>
+        <div className="header-cart__body">
+        <div className="header-cart__empty">
+          <img src="https://bizweb.dktcdn.net/100/438/408/themes/894085/assets/blank_cart.svg?1676350489702" alt="" />
+          <p>Giỏ hàng của bạn trống</p>
+          <Link to={ROUTE.SHOP}>Mua ngay</Link>
+        </div>
+        </div>
+                </div>
+                  
+    )
   }
 
   return (
@@ -139,15 +159,9 @@ function Header() {
             </Col>
             <Col lg={8} md={0}>
               <div className="bottombar-right">
-                <div className="header-cart">
-                  <div className="header-cart__icon">
-                    <BsHandbag />
-                    {/* <div className="header-cart__number-item">0</div> */}
-                  </div>
-                  <p>GIỎ HÀNG</p>
-                </div>
+                {HeaderCartComponent()}
 
-                {AccountComponent()}
+                {AccountComponent({userInfo})}
               </div>
             </Col>
           </Row>

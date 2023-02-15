@@ -10,6 +10,7 @@ import {ROUTE} from "./constants"
 import UserLogin from "./pages/user-login/UserLogin";
 import UserRegister from "./pages/user-register/UserRegister";
 import Home from "./pages/home/Home"
+import Slider from "./layouts/components/slider/Slider";
 
 function App() {
   return (

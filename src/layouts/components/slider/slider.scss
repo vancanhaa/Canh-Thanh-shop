@@ -1,0 +1,33 @@
+.slider {
+    width: 100%;
+    
+    .slider-container {
+        max-width: 1240px;
+        margin-left: auto;
+        margin-right: auto;
+        .carousel-control-prev {
+            width: 30px;
+            height: 30px;
+            background-color: rgba(0,0,0,0.5);
+            border-radius: 50%;
+            left: 20px;
+            padding: 5px;
+            top: 50%;}
+            .carousel-control-next {
+                width: 30px;
+                height: 30px;
+                background-color: rgba(0,0,0,0.5);
+                border-radius: 50%;
+                right: 20px;
+                padding: 5px;
+                top: 50%;}
+            img {
+                min-height: 210px;
+                object-fit: cover;
+                width: 100%;
+            }
+
+            
+    }
+}
+
