@@ -140,7 +140,7 @@ function Header() {
               <nav className="header-nav">
                 <ul className="list-item-big">
                   <li className="nav-item">
-                    <a href="#!">SALE UP TO 50%</a>
+                    <a href="#!">CỬA HÀNG</a>
                   </li>
                   <li className="nav-item">
                     <a href="#!">NỮ</a>
