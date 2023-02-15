@@ -105,6 +105,17 @@
       "phone": "12141",
       "createdAt": 1676200149193,
       "updateAt": 1676200149193
+    },
+    {
+      "email": "thanh999@gmail.com",
+      "password": "$2a$10$dOUYgL71qfQBVSUZiq7KAOolLp80Htb/xh509C7uqcj8byHDBqlLu",
+      "id": "f7827dc9-d35d-4267-8e47-0515b4ea2ef0",
+      "role": "user",
+      "first_name": "kaka",
+      "last_name": "thanh",
+      "phone": "03355444",
+      "createdAt": 1676460502667,
+      "updateAt": 1676460502667
     }
   ],
   "products": [
