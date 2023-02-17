@@ -1,5 +1,4 @@
 import { Button, Col, Form, Input, Row } from "antd";
-import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Navigate, Route } from "react-router-dom";
 import { v4 } from "uuid";
@@ -29,8 +28,8 @@ const userInfo = useSelector((state) => state.user.userInfoState.data);
   };
 
   if (isRegisterSuccess) {
-    return <Navigate to={ROUTE.HOME_PAGE} />;
-  }
+    return <Navigate to={ROUTE.LOGIN} />;
+  };
 
   if (userInfo) return <Navigate to={ROUTE.HOME_PAGE} />;
 
@@ -113,7 +112,7 @@ const userInfo = useSelector((state) => state.user.userInfoState.data);
                           },
                         ]}
                       >
-                        <Input size="large" placeholder="SĐT"  prefix/>
+                        <Input size="large" placeholder="SĐT" type="tel"  prefix/>
                       </Form.Item>
                     </Col>
                   </Row>

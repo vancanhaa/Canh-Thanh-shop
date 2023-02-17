@@ -1,0 +1,17 @@
+.menu-bar {
+    :where(.css-dev-only-do-not-override-ixblex).ant-menu-light .ant-menu-submenu-selected >.ant-menu-submenu-title {
+        color: #000;
+    }
+    :where(.css-dev-only-do-not-override-ixblex).ant-menu-light .ant-menu-item-selected {
+        color: var(--primary-color);
+    }
+    .ant-menu-submenu-title {
+        padding-left: 10px !important;
+    }
+    li.ant-menu-item.ant-menu-item-only-child {
+        padding-left: 24px !important;
+    }
+    span.ant-menu-title-content {
+        font-size: 1.6rem;
+    }
+}

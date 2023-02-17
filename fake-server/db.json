@@ -116,6 +116,61 @@
       "phone": "03355444",
       "createdAt": 1676460502667,
       "updateAt": 1676460502667
+    },
+    {
+      "email": "canhphamvan@gmail.com",
+      "password": "$2a$10$FUm9bn6401Q7g1xvyf77perx5caVCePlCBu0cMAkdk6o18/k7otHa",
+      "id": "15897467-ba3a-4bbb-bf49-82c96ab289ee",
+      "role": "user",
+      "first_name": "van",
+      "last_name": "canhpham",
+      "phone": "645655646",
+      "createdAt": 1676464031148,
+      "updateAt": 1676464031148
+    },
+    {
+      "email": "linhlinh@gmail.com",
+      "password": "$2a$10$zrj8LK5LkVS63qoMwGpDQOGXp0tNZ81PaeUtu0bVYgx8IudfNWqAy",
+      "id": "d8c71bec-d2b8-4a9a-9081-8732c06d49c0",
+      "role": "user",
+      "first_name": "linh",
+      "last_name": "linh",
+      "phone": "jhdjfadgak",
+      "createdAt": 1676465775133,
+      "updateAt": 1676465775133
+    },
+    {
+      "email": "hoanghoang@gmail.com",
+      "password": "$2a$10$ejNOPs7NHqFYhv3hZiGbduzPie5Z97cfVqs4ck.TJNIcNo9x5tRb.",
+      "id": "9206578c-fc8f-4562-bced-39dd09c5c633",
+      "role": "user",
+      "first_name": "hoang",
+      "last_name": "hoang",
+      "phone": "29834357q4",
+      "createdAt": 1676465905382,
+      "updateAt": 1676465905382
+    },
+    {
+      "email": "phamhoang@gmail.com",
+      "password": "$2a$10$7a/9T3t1D1ta39zFLCmG5OIyz6W65WdvieQRJuld2YcjpKaXNUVjS",
+      "id": "ed3a5130-525e-4791-b734-3fdc8f21ce5f",
+      "role": "user",
+      "first_name": "pham",
+      "last_name": "hoang",
+      "phone": "13456648",
+      "createdAt": 1676466131752,
+      "updateAt": 1676466131752
+    },
+    {
+      "email": "haihoang@gmail.com",
+      "password": "$2a$10$Z6nEd4WVPcKqI7e.C6sJgu.9gdLLZmuE4ammy5U9nrHSBJmNVPgoq",
+      "id": "dc6b7ac5-cdb8-4947-aa42-5876ee376683",
+      "role": "user",
+      "first_name": "hoang",
+      "last_name": "hai",
+      "phone": "5666582665",
+      "createdAt": 1676466197728,
+      "updateAt": 1676466197728
     }
   ],
   "products": [
