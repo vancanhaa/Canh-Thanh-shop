@@ -1,351 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import MainLayout from "../../../layouts/main-layout/MainLayout";
 import "./product.scss";
 import { Col, Pagination, Row } from "antd";
 import Menubar from "./components/Menubar";
 import { Link } from "react-router-dom";
-
-const products = [
-  {
-    id: 1,
-    name: "Áo Polo Nam Pique Mắt Chim Basic Co Giãn Thoáng Khí",
-    description: "",
-    price: 120000,
-    discountPercentage: 12.96,
-    rating: 4.69,
-    sold: "112K",
-    stock: 94,
-    brand: "Yody",
-    category: "12345",
-    thumbnail:
-      "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/apm3299-xxm-7.jpg?v=1673602563000",
-    images: [
-      "https://bizweb.dktcdn.net/100/438/408/products/apm3299-xxm-9.jpg?v=1673602563443",
-      "...",
-      "...",
-    ],
-  },
-  {
-    id: 2,
-    name: "Áo Polo Nam Airymax Thêu Panda",
-    description: "",
-    price: 120000,
-    discountPercentage: 12.96,
-    rating: 4.69,
-    sold: "112K",
-    stock: 94,
-    brand: "Yody",
-    category: "12345",
-    thumbnail:
-      "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/apm3299-xxm-7.jpg?v=1673602563000",
-    images: [
-      "https://bizweb.dktcdn.net/100/438/408/products/apm3299-xxm-9.jpg?v=1673602563443",
-      "...",
-      "...",
-    ],
-  },
-  {
-    id: 3,
-    name: "Áo Polo Nam Airymax Thêu Panda",
-    description: "",
-    price: 120000,
-    discountPercentage: 12.96,
-    rating: 4.69,
-    sold: "112K",
-    stock: 94,
-    brand: "Yody",
-    category: "12345",
-    thumbnail:
-      "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/apm3299-xxm-7.jpg?v=1673602563000",
-    images: [
-      "https://bizweb.dktcdn.net/100/438/408/products/apm3299-xxm-9.jpg?v=1673602563443",
-      "...",
-      "...",
-    ],
-  },
-  {
-    id: 4,
-    name: "Áo Polo Nam Airymax Thêu Panda",
-    description: "",
-    price: 120000,
-    discountPercentage: 12.96,
-    rating: 4.69,
-    sold: "112K",
-    stock: 94,
-    brand: "Yody",
-    category: "12345",
-    thumbnail:
-      "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/apm3299-xxm-7.jpg?v=1673602563000",
-    images: [
-      "https://bizweb.dktcdn.net/100/438/408/products/apm3299-xxm-9.jpg?v=1673602563443",
-      "...",
-      "...",
-    ],
-  },
-  {
-    id: 5,
-    name: "Áo Polo Nam Airymax Thêu Panda",
-    description: "",
-    price: 120000,
-    discountPercentage: 12.96,
-    rating: 4.69,
-    sold: "112K",
-    stock: 94,
-    brand: "Yody",
-    category: "12345",
-    thumbnail:
-      "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/apm3299-xxm-7.jpg?v=1673602563000",
-    images: [
-      "https://bizweb.dktcdn.net/100/438/408/products/apm3299-xxm-9.jpg?v=1673602563443",
-      "...",
-      "...",
-    ],
-  },
-  {
-    id: 6,
-    name: "Áo Polo Nam Airymax Thêu Panda",
-    description: "",
-    price: 120000,
-    discountPercentage: 12.96,
-    rating: 4.69,
-    sold: "112K",
-    stock: 94,
-    brand: "Yody",
-    category: "12345",
-    thumbnail:
-      "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/apm3299-xxm-7.jpg?v=1673602563000",
-    images: [
-      "https://bizweb.dktcdn.net/100/438/408/products/apm3299-xxm-9.jpg?v=1673602563443",
-      "...",
-      "...",
-    ],
-  },
-  {
-    id: 7,
-    name: "Áo Polo Nam Airymax Thêu Panda",
-    description: "",
-    price: 120000,
-    discountPercentage: 12.96,
-    rating: 4.69,
-    sold: "112K",
-    stock: 94,
-    brand: "Yody",
-    category: "12345",
-    thumbnail:
-      "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/apm3299-xxm-7.jpg?v=1673602563000",
-    images: [
-      "https://bizweb.dktcdn.net/100/438/408/products/apm3299-xxm-9.jpg?v=1673602563443",
-      "...",
-      "...",
-    ],
-  },
-  {
-    id: 8,
-    name: "Áo Polo Nam Airymax Thêu Panda",
-    description: "",
-    price: 120000,
-    discountPercentage: 12.96,
-    rating: 4.69,
-    sold: "112K",
-    stock: 94,
-    brand: "Yody",
-    category: "12345",
-    thumbnail:
-      "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/apm3299-xxm-7.jpg?v=1673602563000",
-    images: [
-      "https://bizweb.dktcdn.net/100/438/408/products/apm3299-xxm-9.jpg?v=1673602563443",
-      "...",
-      "...",
-    ],
-  },
-  {
-    id: 9,
-    name: "Áo Polo Nam Airymax Thêu Panda",
-    description: "",
-    price: 120000,
-    discountPercentage: 12.96,
-    rating: 4.69,
-    sold: "112K",
-    stock: 94,
-    brand: "Yody",
-    category: "12345",
-    thumbnail:
-      "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/apm3299-xxm-7.jpg?v=1673602563000",
-    images: [
-      "https://bizweb.dktcdn.net/100/438/408/products/apm3299-xxm-9.jpg?v=1673602563443",
-      "...",
-      "...",
-    ],
-  },
-  {
-    id: 10,
-    name: "Áo Polo Nam Airymax Thêu Panda",
-    description: "",
-    price: 120000,
-    discountPercentage: 12.96,
-    rating: 4.69,
-    sold: "112K",
-    stock: 94,
-    brand: "Yody",
-    category: "12345",
-    thumbnail:
-      "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/apm3299-xxm-7.jpg?v=1673602563000",
-    images: [
-      "https://bizweb.dktcdn.net/100/438/408/products/apm3299-xxm-9.jpg?v=1673602563443",
-      "...",
-      "...",
-    ],
-  },
-  {
-    id: 11,
-    name: "Áo Polo Nam Airymax Thêu Panda",
-    description: "",
-    price: 120000,
-    discountPercentage: 12.96,
-    rating: 4.69,
-    sold: "112K",
-    stock: 94,
-    brand: "Yody",
-    category: "12345",
-    thumbnail:
-      "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/apm3299-xxm-7.jpg?v=1673602563000",
-    images: [
-      "https://bizweb.dktcdn.net/100/438/408/products/apm3299-xxm-9.jpg?v=1673602563443",
-      "...",
-      "...",
-    ],
-  },
-  {
-    id: 12,
-    name: "Áo Polo Nam Airymax Thêu Panda",
-    description: "",
-    price: 120000,
-    discountPercentage: 12.96,
-    rating: 4.69,
-    sold: "112K",
-    stock: 94,
-    brand: "Yody",
-    category: "12345",
-    thumbnail:
-      "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/apm3299-xxm-7.jpg?v=1673602563000",
-    images: [
-      "https://bizweb.dktcdn.net/100/438/408/products/apm3299-xxm-9.jpg?v=1673602563443",
-      "...",
-      "...",
-    ],
-  },
-  {
-    id: 13,
-    name: "Áo Polo Nam Airymax Thêu Panda",
-    description: "",
-    price: 120000,
-    discountPercentage: 12.96,
-    rating: 4.69,
-    sold: "112K",
-    stock: 94,
-    brand: "Yody",
-    category: "12345",
-    thumbnail:
-      "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/apm3299-xxm-7.jpg?v=1673602563000",
-    images: [
-      "https://bizweb.dktcdn.net/100/438/408/products/apm3299-xxm-9.jpg?v=1673602563443",
-      "...",
-      "...",
-    ],
-  },
-  {
-    id: 14,
-    name: "Áo Polo Nam Airymax Thêu Panda",
-    description: "",
-    price: 120000,
-    discountPercentage: 12.96,
-    rating: 4.69,
-    sold: "112K",
-    stock: 94,
-    brand: "Yody",
-    category: "12345",
-    thumbnail:
-      "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/apm3299-xxm-7.jpg?v=1673602563000",
-    images: [
-      "https://bizweb.dktcdn.net/100/438/408/products/apm3299-xxm-9.jpg?v=1673602563443",
-      "...",
-      "...",
-    ],
-  },
-  {
-    id: 15,
-    name: "Áo Polo Nam Airymax Thêu Panda",
-    description: "",
-    price: 120000,
-    discountPercentage: 12.96,
-    rating: 4.69,
-    sold: "112K",
-    stock: 94,
-    brand: "Yody",
-    category: "12345",
-    thumbnail:
-      "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/apm3299-xxm-7.jpg?v=1673602563000",
-    images: [
-      "https://bizweb.dktcdn.net/100/438/408/products/apm3299-xxm-9.jpg?v=1673602563443",
-      "...",
-      "...",
-    ],
-  },
-  {
-    id: 16,
-    name: "Áo Polo Nam Airymax Thêu Panda",
-    description: "",
-    price: 120000,
-    discountPercentage: 12.96,
-    rating: 4.69,
-    sold: "112K",
-    stock: 94,
-    brand: "Yody",
-    category: "12345",
-    thumbnail:
-      "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/apm3299-xxm-7.jpg?v=1673602563000",
-    images: [
-      "https://bizweb.dktcdn.net/100/438/408/products/apm3299-xxm-9.jpg?v=1673602563443",
-      "...",
-      "...",
-    ],
-  },
-  // {
-  //   "id": 17,
-  //   "name": "Áo Polo Nam Airymax Thêu Panda",
-  //   "description": "",
-  //   "price": 120000,
-  //   "discountPercentage": 12.96,
-  //   "rating": 4.69,
-  //   "stock": 94,
-  //   "brand": "Yody",
-  //   "category": "12345",
-  //   "thumbnail": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/apm3299-xxm-7.jpg?v=1673602563000",
-  //   "images": [
-  //     "...",
-  //     "...",
-  //     "..."
-  //   ]
-  // },{
-  //   "id": 18,
-  //   "name": "Áo Polo Nam Airymax Thêu Panda",
-  //   "description": "",
-  //   "price": 120000,
-  //   "discountPercentage": 12.96,
-  //   "rating": 4.69,
-  //   "stock": 94,
-  //   "brand": "Yody",
-  //   "category": "12345",
-  //   "thumbnail": "https://bizweb.dktcdn.net/thumb/large/100/438/408/products/apm3299-xxm-7.jpg?v=1673602563000",
-  //   "images": [
-  //     "...",
-  //     "...",
-  //     "..."
-  //   ]
-  // },
-];
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProductList } from "../../../stores/actions/product.action";
+import { changePagination } from "../../../stores/slice/products.slice";
 
 function Product() {
+  const dispatch = useDispatch();
+  const productList = useSelector((state) => state.product.product);
+  console.log(productList);
+  const productPagination = useSelector((state) => state.product.pagination);
+
+  useEffect(() => {
+    dispatch(fetchProductList({ page: 1, limit: 10 }));
+  }, []);
+
   return (
     <MainLayout>
       <div className="product">
@@ -358,11 +30,11 @@ function Product() {
               <div className="product-filter"></div>
               <div className="product-list">
                 <Row justify="space-between" gutter={[16, 16]}>
-                  {products.map((item, index) => (
+                  {productList.map((item, index) => (
                     <Col key={item.id} lg={6} md={8} sm={12} xs={12}>
                       <div data-id={item.id} className="product-item">
                         <Link to={`/product-detail/${item.id}`}>
-                          <div className="product-item__raiting-sold">
+                          {/* <div className="product-item__raiting-sold">
                             <div className="product-item__raiting">
                               <img
                                 width="10"
@@ -391,7 +63,7 @@ function Product() {
                               src={item.images[0]}
                               alt=""
                             />
-                          </div>
+                          </div> */}
 
                           <div className="product-item__info">
                             <h3 className="product-item__name">{item.name}</h3>
@@ -407,7 +79,17 @@ function Product() {
                   ))}
                 </Row>
                 <Row justify="center" className="product-list__pagination">
-                  <Pagination defaultCurrent={1} total={50} />
+                  <Pagination
+                    onChange={(page, pageSize) => {
+                      dispatch(
+                        fetchProductList({ page: page, limit: pageSize })
+                      );
+                      dispatch(changePagination({ page, limit: pageSize }));
+                    }}
+                    current={Number(productPagination.page)}
+                    total={Number(productPagination.total)}
+                    pageSize={Number(productPagination.limit)}
+                  />
                 </Row>
               </div>
             </Col>

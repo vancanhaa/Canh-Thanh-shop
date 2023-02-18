@@ -1,73 +1,42 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { notification } from "antd";
-import { localStorageUlti } from "../../utils/localStorage";
-import {
-  addNewProduct,
-  deleteProduct,
-  getAllProduct,
-  getSingleProduct,
-  updateProduct,
-} from "../actions/product.action";
-
-const initialState = {
-  productsState: {
-    allProduct: localStorageUlti("all_product", []).get(),
-    singleProduct: localStorageUlti("single_product", {}),
-    loading: false,
-    error: null,
+import { fetchProductList } from "../actions/product.action";
+const productInitialState = {
+  product: [],
+  fetchingProductList: true,
+  pagination: {
+    page: 1,
+    limit: 10,
+    total: 0,
   },
 };
 
 const productSlice = createSlice({
-  name: "auth",
-  initialState,
-  extraReducers: {
-    //set get all product
-    [getAllProduct.pending]: (state) => {
-      state.loading = true;
-    },
-    [getAllProduct.fulfilled]: (state, { payload }) => {
-      state.loading = false;
-      state.products = payload;
-    },
-    [getAllProduct.rejected]: (state) => {
-      state.loading = false;
-    },
-
-    //set get product Id
-    [getSingleProduct.pending]: (state) => {
-      state.isFetchProductID = true;
-    },
-    [getSingleProduct.fulfilled]: (state, { payload }) => {
-      state.isFetchProductID = false;
-      state.product = payload;
-    },
-    [getSingleProduct.rejected]: (state) => {
-      state.isFetchProductID = false;
-    },
-
-    //set post Product
-    [addNewProduct.fulfilled]: (state, { payload }) => {
-      state.products.push(payload);
-    },
-
-    //set update Product
-    [updateProduct.fulfilled]: (state, { payload }) => {
-      const index = state.products.findIndex(
-        (product) => product.id === payload.id
-      );
-      //console.log(index)
-      // console.log(payload)
-      state.products[index] = payload;
-    },
-
-    //set delete Product
-    [deleteProduct.fulfilled]: (state, { payload }) => {
-      const index = state.products.findIndex(
-        (product) => product.id === payload.id
-      );
-      state.products.splice(index, 1);
+  name: "product",
+  initialState: productInitialState,
+  reducers: {
+    changePagination: (state, action) => {
+      state.pagination.page = action.payload.page;
+      state.pagination.limit = action.payload.limit;
     },
   },
+  extraReducers: (builder) => {
+    builder.addCase(fetchProductList.pending, (state, action) => {
+      state.fetchingProductList = true;
+    });
+    // [getAllProduct.pending]: (state) => {
+    //   state.fetchingProductList = true;
+    // },
+    builder.addCase(fetchProductList.fulfilled, (state, action) => {
+      state.fetchingProductList = false;
+      state.product = action.payload.product;
+      state.pagination.total = action.payload.total;
+    });
+    builder.addCase(fetchProductList.rejected, (state, action) => {
+      state.fetchingProductList = false;
+    });
+  },
 });
+
 export const productReducer = productSlice.reducer;
+
+export const { changePagination } = productSlice.actions;

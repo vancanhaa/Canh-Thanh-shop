@@ -5,7 +5,7 @@ import { productReducer } from "./slice/products.slice";
 
 const rootReducer = {
   user: authReducer,
-  products: productReducer,
+  product: productReducer,
 };
 
 export const rootStore = configureStore({
