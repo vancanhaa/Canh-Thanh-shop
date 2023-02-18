@@ -5,17 +5,21 @@ import { Col, Pagination, Row } from "antd";
 import Menubar from "./components/Menubar";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProductList } from "../../../stores/actions/product.action";
-import { changePagination } from "../../../stores/slice/products.slice";
+import {
+  fetchAllProductList,
+  fetchCategoryProductList,
+} from "../../../stores/actions/product.action";
+import { changePagination } from "../../../stores/slice/product.slice";
+import { v4 } from "uuid";
 
 function Product() {
   const dispatch = useDispatch();
-  const productList = useSelector((state) => state.product.product);
-  console.log(productList);
+  const productList = useSelector((state) => state.product.products);
   const productPagination = useSelector((state) => state.product.pagination);
+  const category = useSelector((state) => state.product.category);
 
   useEffect(() => {
-    dispatch(fetchProductList({ page: 1, limit: 10 }));
+    dispatch(fetchAllProductList({ page: 1, limit: 12 }));
   }, []);
 
   return (
@@ -29,12 +33,12 @@ function Product() {
             <Col lg={20} md={18}>
               <div className="product-filter"></div>
               <div className="product-list">
-                <Row justify="space-between" gutter={[16, 16]}>
+                <Row justify="start" gutter={[16, 16]}>
                   {productList.map((item, index) => (
-                    <Col key={item.id} lg={6} md={8} sm={12} xs={12}>
+                    <Col key={v4()} lg={6} md={8} sm={12} xs={12}>
                       <div data-id={item.id} className="product-item">
                         <Link to={`/product-detail/${item.id}`}>
-                          {/* <div className="product-item__raiting-sold">
+                          <div className="product-item__raiting-sold">
                             <div className="product-item__raiting">
                               <img
                                 width="10"
@@ -60,10 +64,10 @@ function Product() {
                             />
                             <img
                               className="product-thumbnail--hover"
-                              src={item.images[0]}
+                              src={item.options[1]["image_url"]}
                               alt=""
                             />
-                          </div> */}
+                          </div>
 
                           <div className="product-item__info">
                             <h3 className="product-item__name">{item.name}</h3>
@@ -81,9 +85,19 @@ function Product() {
                 <Row justify="center" className="product-list__pagination">
                   <Pagination
                     onChange={(page, pageSize) => {
-                      dispatch(
-                        fetchProductList({ page: page, limit: pageSize })
-                      );
+                      if (category === "all") {
+                        dispatch(
+                          fetchAllProductList({ page: page, limit: pageSize })
+                        );
+                      } else {
+                        dispatch(
+                          fetchCategoryProductList({
+                            page,
+                            limit: pageSize,
+                            category,
+                          })
+                        );
+                      }
                       dispatch(changePagination({ page, limit: pageSize }));
                     }}
                     current={Number(productPagination.page)}

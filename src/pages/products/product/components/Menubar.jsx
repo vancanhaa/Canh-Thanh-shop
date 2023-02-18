@@ -1,7 +1,10 @@
 import { Menu } from "antd";
+import { useDispatch } from "react-redux";
+import { fetchAllProductList, fetchCategoryProductList } from "../../../../stores/actions/product.action";
 import "./menubar.scss"
 
 function Menubar() {
+  const dispatch = useDispatch()
     function getItem(label, key, icon, children, type) {
         return {
           key,
@@ -14,19 +17,23 @@ function Menubar() {
       const items = [
         getItem("Loại sản phẩm", "category", null, [
           getItem("Tất cả", "all"),
-          getItem("Áo Polo", "Áo Polo"),
-          getItem("Áo thun", "Áo thun"),
-          getItem("Áo khoác", "Áo khoác"),
-          getItem("Quần jean", "Quần jean"),
+          getItem("Áo Polo", "polo"),
+          getItem("Áo thun", "t-shirt"),
+          getItem("Áo khoác", "jacket"),
+          getItem("Quần jean", "jeans"),
         ]),
       ];
-      const onClick = (e) => {
-        console.log("click", e);
+      const handleChangeCategory = (e) => {
+        if(e.key === "all") {
+          dispatch(fetchAllProductList({ page: 1, limit: 12 }))
+        } else {
+          dispatch(fetchCategoryProductList({page: 1, limit: 12, category: e.key}))
+        }
       };
     return (
         <div className="menu-bar">
                 <Menu
-                  onClick={onClick}
+                  onClick={handleChangeCategory}
                   style={{
                     width: "100%",
                   }}
