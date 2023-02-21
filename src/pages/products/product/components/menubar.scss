@@ -6,13 +6,12 @@
         color: var(--primary-color);
     }
     .ant-menu-submenu-title {
-        padding-left: 10px !important;
+        padding-left: 8px !important;
     }
     li.ant-menu-item.ant-menu-item-only-child {
-        padding-left: 24px !important;
+        padding-left: 12px !important;
     }
     span.ant-menu-title-content {
-        font-size: 1.6rem;
-        // color: #000;
+        font-size: 1.4rem;
     }
 }

@@ -1,32 +1,23 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { productsApi } from "../../api";
 
-export const fetchAllProductList = createAsyncThunk(
-  "product/fetchAllProductList",
+export const fetchProductList = createAsyncThunk(
+  "product/fetchProductList",
   async (payload, thunkApi) => {
-    const { page, limit } = payload;
-
-    const response = await productsApi.getAllProductList(page, limit);
-
-    console.log(response.headers["x-total-count"]);
-    console.log(response)
-
+    const { textSearch, filter, page, limit} = payload;
+    
+    const response = await productsApi.getProductList(
+      page, limit, filter, textSearch
+    );
     return {
       products: response.data,
-      total: response.headers["x-total-count"],
+      textSearch: textSearch,
+      filter: filter,
+      pagination: {
+        page,
+        limit,
+        total: response.headers["x-total-count"]
+      }
     };
   }
-)
-
-export const fetchCategoryProductList = createAsyncThunk(
-  "product/fetchCategoryProductList",
-  async (payload, thunkApi) => {
-    const { page, limit, category } = payload;
-    const response = await productsApi.getCategoryProductList(page, limit, category);
-    return {
-      products: response.data,
-      total: response.headers["x-total-count"],
-      category: category
-    };
-  }
-)
+);

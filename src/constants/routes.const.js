@@ -6,6 +6,6 @@ export const ROUTE = {
     CART: "/cart",
     LOGIN: "/login",
     REGISTER: "/register",
-    PRODUCTLIST: "/products",
+    PRODUCT: "/product",
     FORGOT_PASSWORD: "/forgot-password"
 }

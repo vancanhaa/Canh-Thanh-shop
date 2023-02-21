@@ -1,20 +1,35 @@
 import { Col, Row, Input } from "antd";
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import "./header.scss";
+import { Link, useNavigate } from "react-router-dom";
 import { ImLocation } from "react-icons/im";
 import { AiTwotonePhone, AiOutlineUser } from "react-icons/ai";
 import { BsHandbag } from "react-icons/bs";
-import { ROUTE } from "../../../constants";
 import { useDispatch, useSelector } from "react-redux";
+import { useRef, useState } from "react";
+
+import "./header.scss";
+import { ROUTE } from "../../../constants";
 import { logOut } from "../../../stores/slice/auth.slice";
+import { fetchProductList } from "../../../stores/actions/product.action";
+import { changeTextSearch } from "../../../stores/slice/product.slice";
 function Header() {
+  const [valueSearch, setValueSearch] = useState("");
+  const searchRef = useRef();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { Search } = Input;
   const userInfo = useSelector((state) => state.user.userInfoState.data);
-  const onSearch = () => {};
+  const handleSearch = (value) => {
+    let textSearch = value;
+    if (value) {
+      dispatch(fetchProductList({ page: 1, limit: 12, textSearch }))
+      dispatch(changeTextSearch(textSearch))
+    };
+    setValueSearch("");
+    searchRef.current.blur();
+    if (value) navigate(ROUTE.PRODUCT);
+  };
 
-  function AccountComponent({userInfo}) {
+  function AccountComponent({ userInfo }) {
     const handleLogOut = () => {
       dispatch(logOut());
     };
@@ -27,7 +42,7 @@ function Header() {
           <div className="header-account__body">
             <p>{`${userInfo["last_name"]} ${userInfo["first_name"]}`}</p>
           </div>
-          <div class="header-account__menu">
+          <div className="header-account__menu">
             <ul>
               <li>
                 <a href="#!">Tài khoản của tôi</a>
@@ -44,7 +59,7 @@ function Header() {
               <li>
                 <a href="#!">Sản phẩm yêu thích</a>
               </li>
-              <li class="logout" onClick={handleLogOut}>
+              <li className="logout" onClick={handleLogOut}>
                 <a href="/">Đăng xuất</a>
               </li>
             </ul>
@@ -64,26 +79,28 @@ function Header() {
     );
   }
 
-  function HeaderCartComponent () {
+  function HeaderCartComponent() {
     return (
       <div className="header-cart">
         <Link to={ROUTE.CART}>
-        <div className="header-cart__icon">
-                    <BsHandbag />
-                    {/* <div className="header-cart__number-item">0</div> */}
-                  </div>
-                  <p>GIỎ HÀNG</p>
+          <div className="header-cart__icon">
+            <BsHandbag />
+            {/* <div className="header-cart__number-item">0</div> */}
+          </div>
+          <p>GIỎ HÀNG</p>
         </Link>
         <div className="header-cart__body">
-        <div className="header-cart__empty">
-          <img src="https://bizweb.dktcdn.net/100/438/408/themes/894085/assets/blank_cart.svg?1676350489702" alt="" />
-          <p>Giỏ hàng của bạn trống</p>
-          <Link to={ROUTE.SHOP}>Mua ngay</Link>
+          <div className="header-cart__empty">
+            <img
+              src="https://bizweb.dktcdn.net/100/438/408/themes/894085/assets/blank_cart.svg?1676350489702"
+              alt=""
+            />
+            <p>Giỏ hàng của bạn trống</p>
+            <Link to={ROUTE.PRODUCT}>Mua ngay</Link>
+          </div>
         </div>
-        </div>
-                </div>
-                  
-    )
+      </div>
+    );
   }
 
   return (
@@ -104,9 +121,12 @@ function Header() {
                 <Col flex="auto">
                   <div className="header-search_bar">
                     <Search
+                      ref={searchRef}
                       placeholder="Tìm kiếm"
-                      onSearch={onSearch}
+                      onSearch={handleSearch}
                       enterButton
+                      value={valueSearch}
+                      onChange={(e) => setValueSearch(e.target.value)}
                     />
                   </div>
                 </Col>
@@ -161,7 +181,7 @@ function Header() {
               <div className="bottombar-right">
                 {HeaderCartComponent()}
 
-                {AccountComponent({userInfo})}
+                {AccountComponent({ userInfo })}
               </div>
             </Col>
           </Row>

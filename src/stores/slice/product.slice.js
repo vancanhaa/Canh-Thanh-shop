@@ -1,14 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchAllProductList, fetchCategoryProductList } from "../actions/product.action";
+import { fetchProductList } from "../actions/product.action";
 const productInitialState = {
   products: [],
-  category: "all",
-  fetchingProductList: false,
+  textSearch: '',
+  filter: {},
   pagination: {
     page: 1,
     limit: 12,
     total: 0,
   },
+  fetchingProductList: false,
 };
 
 const productSlice = createSlice({
@@ -16,42 +17,34 @@ const productSlice = createSlice({
   initialState: productInitialState,
   reducers: {
     changePagination: (state, action) => {
-      state.pagination.page = action.payload.page;
-      state.pagination.limit = action.payload.limit;
+      state.page = action.payload.page;
+      state._limit = action.payload.limit;
     },
+    changeTextSearch: (state, action) => {
+      state.textSearch = action.payload
+    }
   },
   extraReducers: (builder) => {
-    //fetchAllProductList
-    builder.addCase(fetchAllProductList.pending, (state, action) => {
+    //fetchProductList
+    builder.addCase(fetchProductList.pending, (state, action) => {
       state.fetchingProductList = true;
     });
-    builder.addCase(fetchAllProductList.fulfilled, (state, action) => {
+    builder.addCase(fetchProductList.fulfilled, (state, action) => {
+      const { products, textSearch, filter, pagination} = action.payload;
+      
+      
       state.fetchingProductList = false;
-      state.products = action.payload.products;
-      state.pagination.total = action.payload.total;
-      state.category = "all"
+      state.products = products;
+      state.textSearch = textSearch;
+      state.filter = filter;
+      state.pagination = pagination
     });
-    builder.addCase(fetchAllProductList.rejected, (state, action) => {
-      state.fetchingProductList = false;
-    });
-
-    //fetchCategoryProduct
-    builder.addCase(fetchCategoryProductList.pending, (state, action) => {
-      state.fetchingProductList = true;
-    });
-    builder.addCase(fetchCategoryProductList.fulfilled, (state, action) => {
-      state.fetchingProductList = false;
-      state.products = action.payload.products;
-      state.pagination.total = action.payload.total;
-      state.category = action.payload.category
-    });
-    builder.addCase(fetchCategoryProductList.rejected, (state, action) => {
+    builder.addCase(fetchProductList.rejected, (state, action) => {
       state.fetchingProductList = false;
     });
-
   },
 });
 
 export const productReducer = productSlice.reducer;
 
-export const { changePagination } = productSlice.actions;
+export const { changePagination, changeTextSearch } = productSlice.actions;
