@@ -1,15 +1,16 @@
 import { Route, Routes } from "react-router-dom";
 
-import ProductDetail from "./routes/ProductDetail";
 import Checkout from "./routes/Checkout";
 import Cart from "./routes/Cart";
+import "./index.css";
 
 import ForgotPassword from "./routes/ForgotPassword";
-import {ROUTE} from "./constants"
+import { ROUTE } from "./constants";
 import UserLogin from "./pages/user-login/UserLogin";
 import UserRegister from "./pages/user-register/UserRegister";
-import Home from "./pages/home/Home"
+import Home from "./pages/home/Home";
 import Product from "./pages/products/product/Product";
+import ProductDetail from "./pages/products/product-detail/ProductDetail";
 
 function App() {
   return (
@@ -24,8 +25,6 @@ function App() {
         <Route path={ROUTE.REGISTER} element={<UserRegister />} />
         <Route path={ROUTE.FORGOT_PASSWORD} element={<ForgotPassword />} />
       </Routes>
-     
-      
     </div>
   );
 }
