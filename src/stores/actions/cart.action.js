@@ -9,3 +9,12 @@ export const fetchCart = createAsyncThunk(
         return response.data
     }
 )
+
+export const fetchChangeCart = createAsyncThunk(
+    "cart/fetchChangeCart",
+    async (payload, thunkApi) => {
+        const { idUser, data } = payload;
+        const response = await cartsApi.patchCart(idUser, data)
+        return response.data
+    }
+)

@@ -21,4 +21,6 @@ export const productsApi = {
 
     return API.get(`${BASE_URL}/api/products?${queryString}`);
   },
+
+  getAllProduct: () => API.get(`${BASE_URL}/api/products`)
 };

@@ -21,3 +21,11 @@ export const fetchProductList = createAsyncThunk(
     };
   }
 );
+
+export const fetchAllProduct = createAsyncThunk(
+  "product/fetchAllProduct",
+  async (payload, thunkApi) => {
+    const response = await productsApi.getAllProduct()
+    return response.data
+  }
+)

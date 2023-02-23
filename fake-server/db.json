@@ -21,6 +21,28 @@
       "phone": "5666582665",
       "createdAt": 1676466197728,
       "updateAt": 1676466197728
+    },
+    {
+      "email": "canhpham1997@gmail.com",
+      "password": "$2a$10$z22zIV7ng1ERJlWPgvGM9.AZtmiqrA2p51HuxD0h6ehE2Hk4YdUgW",
+      "id": "df15115e-b8ea-43dc-979f-edb4bd6db760",
+      "role": "user",
+      "first_name": "Cảnh",
+      "last_name": "Phạm",
+      "phone": "092363916",
+      "createdAt": 1676877111299,
+      "updateAt": 1676877111299
+    },
+    {
+      "email": "phuonglinh@gmail.com",
+      "password": "$2a$10$95mtO9d/GZxo23jnWm9MwePKUWWwvYc68a2X3ifMky0Mdj0IMg6RO",
+      "id": "aaa2d361-9f05-4da2-824c-bbacd1672538",
+      "role": "user",
+      "first_name": "Linh",
+      "last_name": "Phương",
+      "phone": "16374294",
+      "createdAt": 1677172056871,
+      "updateAt": 1677172056871
     }
   ],
   "products": [
@@ -69,7 +91,7 @@
         "XL",
         "XXL"
       ],
-      "price": 299000,
+      "price": 600000,
       "discountPercentage": 40,
       "rating": 4.9,
       "stock": 94,
@@ -114,7 +136,7 @@
         "L",
         "XL"
       ],
-      "price": 199000,
+      "price": 100000,
       "discountPercentage": 10,
       "rating": 4.9,
       "stock": 94,
@@ -618,7 +640,7 @@
         "L",
         "XL"
       ],
-      "price": 179000,
+      "price": 119000,
       "discountPercentage": 10,
       "rating": 4.9,
       "stock": 94,
@@ -1058,7 +1080,8 @@
       "brand": "Yody",
       "category": "polo",
       "thumbnail": "https://bizweb.dktcdn.net/100/438/408/products/apm3299-xxm-7.jpg?v=1673602563443"
-    },{
+    },
+    {
       "id": 11,
       "name": "Áo Polo Nam Pique Mắt Chim Basic Co Giãn Thoáng Khí",
       "description": [
@@ -2044,7 +2067,7 @@
       "name": "Áo Polo Nam Pique Mắt Chim Basic Co Giãn Thoáng Khí",
       "description": [
         "Chất liệu: Pique mắt chim với thành phần 60% Cotton USA + 35% Polyester + 5% Spandex",
-        "Sử dụng Cotton USA - sợi cotton tốt nhất trên thế giới",
+        "Sử dụng Cotton USA - sợi cotton tốt nhất              trên thế giới",
         "Công nghệ nhuộm Solid Dyed tạo nên hiệu ứng bắt mắt",
         "Chất liệu vải độc đáo với hiệu ứng mắt chim độc đáo, mới lạ và trẻ trung",
         "Vải pique thông thoáng, thấm hút tốt có độ bền cao",
@@ -2092,6 +2115,59 @@
       "brand": "Yody",
       "category": "polo",
       "thumbnail": "https://bizweb.dktcdn.net/100/438/408/products/apm3299-xxm-7.jpg?v=1673602563443"
+    }
+  ],
+  "carts": [
+    {
+      "id": "dc6b7ac5-cdb8-4947-aa42-5876ee376683",
+      "products": [
+        {
+          "id": 1,
+          "size": "XXL",
+          "quantity": 4,
+          "color": "Đỏ mận"
+        }
+      ]
+    },
+    {
+      "id": "726a34f1-3cad-460b-988e-bc5f67c7c22e",
+      "products": [
+        {
+          "id": 1,
+          "size": "XXL",
+          "quantity": 4,
+          "color": "Đỏ mận"
+        },
+        {
+          "id": 132,
+          "size": "XL",
+          "quantity": 4,
+          "color": "Vàng"
+        },
+        {
+          "id": 4,
+          "size": "XL",
+          "quantity": 9,
+          "color": "Vàng"
+        }
+      ]
+    },
+    {
+      "id": "aaa2d361-9f05-4da2-824c-bbacd1672538",
+      "products": [
+        {
+          "id": 132,
+          "size": "XL",
+          "quantity": 5,
+          "color": "Vàng"
+        },
+        {
+          "id": 4,
+          "size": "XL",
+          "quantity": 5,
+          "color": "Vàng"
+        }
+      ]
     }
   ]
 }
