@@ -3,6 +3,9 @@
   height: 100px;
   background: linear-gradient(#feedc8, #fff);
   box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.05);
+  position: fixed;
+  z-index: 100;
+  top: 0;
   .header-container {
     max-width: 1240px;
     margin-left: auto;

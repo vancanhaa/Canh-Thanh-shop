@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProductList } from "../../../stores/actions/product.action";
 import { v4 } from "uuid";
+import common from "../../../utils/common"
 
 function Product() {
   const dispatch = useDispatch();
@@ -117,8 +118,8 @@ function Product() {
                           <div className="product-item__info">
                             <h3 className="product-item__name">{item.name}</h3>
                             <div className="product-item__prices">
-                              <ins>{item.price}đ</ins>
-                              <del>{item.price}đ</del>
+                              <ins>{common.formatPrice(item.price)}đ</ins>
+                              <del>{common.formatPrice(item.price)}đ</del>
                               <span>-{item.discountPercentage}%</span>
                             </div>
                           </div>
