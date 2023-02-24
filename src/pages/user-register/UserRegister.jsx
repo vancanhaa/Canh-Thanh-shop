@@ -36,7 +36,7 @@ const userInfo = useSelector((state) => state.user.userInfoState.data);
   return (
     <FullLayout>
       <div className="user-register-container">
-        <Row align="middle" justify="center">
+        <Row align="middle" justify="center"> 
           <Col xs={24} sm={24} md={24} lg={24}>
             <div className="user-register-center">
               <div className="user-register-logo">

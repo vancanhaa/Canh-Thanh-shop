@@ -4,10 +4,13 @@ import { productsApi } from "../../api";
 export const fetchProductList = createAsyncThunk(
   "product/fetchProductList",
   async (payload, thunkApi) => {
-    const { textSearch, filter, page, limit} = payload;
-    
+    const { textSearch, filter, page, limit } = payload;
+
     const response = await productsApi.getProductList(
-      page, limit, filter, textSearch
+      page,
+      limit,
+      filter,
+      textSearch
     );
     return {
       products: response.data,
@@ -16,8 +19,18 @@ export const fetchProductList = createAsyncThunk(
       pagination: {
         page,
         limit,
-        total: response.headers["x-total-count"]
-      }
+        total: response.headers["x-total-count"],
+      },
+    };
+  }
+);
+
+export const fetchProductById = createAsyncThunk(
+  "product/fetchProductDetail",
+  async (payload, thunkApi) => {
+    const response = await productsApi.getProductDetail(payload);
+    return {
+      product: response.data,
     };
   }
 );

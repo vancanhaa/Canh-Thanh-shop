@@ -1,11 +1,11 @@
 export const ROUTE = {
-    HOME_PAGE: "/",
-    SHOP: "/shop",
-    PRODUCT_DETAIL: "/product-detail",
-    CHECK_OUT: "/checkout",
-    CART: "/cart",
-    LOGIN: "/login",
-    REGISTER: "/register",
-    PRODUCT: "/product",
-    FORGOT_PASSWORD: "/forgot-password"
-}
+  HOME_PAGE: "/",
+  SHOP: "/shop",
+  PRODUCT_DETAIL: "/product-detail/:id",
+  CHECK_OUT: "/checkout",
+  CART: "/cart",
+  LOGIN: "/login",
+  REGISTER: "/register",
+  PRODUCT: "/product",
+  FORGOT_PASSWORD: "/forgot-password",
+};

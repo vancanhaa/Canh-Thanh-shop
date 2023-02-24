@@ -6,7 +6,7 @@ export const productsApi = {
 
     const filterString = Object.keys(filter)
       .map((key) => {
-        if(filter[key] && filter !== "") return `${key}=${filter[key]}`
+        if (filter[key] && filter !== "") return `${key}=${filter[key]}`;
       })
       .join("&");
 
@@ -16,11 +16,11 @@ export const productsApi = {
     const queryString = [
       paginationString,
       ...(textSearchString !== "" ? [textSearchString] : []),
-      ...filterString !== "" ? [filterString] : [],
+      ...(filterString !== "" ? [filterString] : []),
     ].join("&");
 
     return API.get(`${BASE_URL}/api/products?${queryString}`);
   },
-
-  getAllProduct: () => API.get(`${BASE_URL}/api/products`)
+  getProductDetail: (id) => API.get(`${BASE_URL}/api/products/${id}`),
+  getAllProduct: () => API.get(`${BASE_URL}/api/products`),
 };
