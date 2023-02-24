@@ -4,13 +4,19 @@ import { ImLocation } from "react-icons/im";
 import { AiTwotonePhone, AiOutlineUser } from "react-icons/ai";
 import { BsHandbag } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
-import { useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 
 import "./header.scss";
 import { ROUTE } from "../../../constants";
 import { logOut } from "../../../stores/slice/auth.slice";
 import { fetchProductList } from "../../../stores/actions/product.action";
 import { changeTextSearch } from "../../../stores/slice/product.slice";
+import { DeleteOutlined } from "@ant-design/icons";
+import common from "../../../utils/common";
+import { CustomerContext } from "../../../providers/CustomerContext";
+import { fetchCart } from "../../../stores/actions/cart.action";
+import { v4 } from "uuid";
+import { localStorageUlti } from "../../../utils/localStorage";
 function Header() {
   const [valueSearch, setValueSearch] = useState("");
   const searchRef = useRef();
@@ -18,12 +24,40 @@ function Header() {
   const dispatch = useDispatch();
   const { Search } = Input;
   const userInfo = useSelector((state) => state.user.userInfoState.data);
+  const cart = useSelector((state) => state.cart.cart);
+  useEffect(() => {
+    if (userInfo) dispatch(fetchCart({ idUser: userInfo.id }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  const { allProductList, listItem, setListItem } = useContext(CustomerContext);
+
+  console.log(allProductList);
+  console.log(listItem);
+
+  useEffect(() => {
+    let newListItem = cart.products?.map((item, index) => {
+      let newItem = allProductList?.find(
+        (product, index) => product.id === item.id
+      );
+      return {
+        id: newItem.id,
+        imageUrl: newItem.thumbnail,
+        price: newItem.price,
+        name: newItem.name,
+        size: item.size,
+        color: item.color,
+        quantity: item.quantity,
+      };
+    });
+    setListItem(newListItem);
+  }, [cart]);
+
   const handleSearch = (value) => {
     let textSearch = value;
     if (value) {
-      dispatch(fetchProductList({ page: 1, limit: 12, textSearch }))
-      dispatch(changeTextSearch(textSearch))
-    };
+      dispatch(fetchProductList({ page: 1, limit: 12, textSearch }));
+      dispatch(changeTextSearch(textSearch));
+    }
     setValueSearch("");
     searchRef.current.blur();
     if (value) navigate(ROUTE.PRODUCT);
@@ -90,14 +124,90 @@ function Header() {
           <p>GIỎ HÀNG</p>
         </Link>
         <div className="header-cart__body">
-          <div className="header-cart__empty">
-            <img
-              src="https://bizweb.dktcdn.net/100/438/408/themes/894085/assets/blank_cart.svg?1676350489702"
-              alt=""
-            />
-            <p>Giỏ hàng của bạn trống</p>
-            <Link to={ROUTE.PRODUCT}>Mua ngay</Link>
-          </div>
+          {cart.products?.length === 0 || !cart ? (
+            <div className="header-cart__empty">
+              <img
+                src="https://bizweb.dktcdn.net/100/438/408/themes/894085/assets/blank_cart.svg?1676350489702"
+                alt=""
+              />
+              <p>Giỏ hàng của bạn trống</p>
+              <Link to={ROUTE.PRODUCT}>Mua ngay</Link>
+            </div>
+          ) : (
+            <div className="header-cart__availabel">
+              <div className="header-cart__inner">
+                {listItem.map((item, index) => {
+                  return (
+                    <div className="header-cart__item" key={v4()}>
+                      <img src={`${item.imageUrl}`} alt="" width={80} />
+                      <div className="header-cart__item-body">
+                        <div className="description-item-wrap">
+                          <div className="cart-item">
+                            <Link to={"#!"}>{item.name}</Link>
+                            <div className="cart-item__price">
+                              {common.formatPrice(item.price)}đ
+                            </div>
+                            <div className="cart-item__options">
+                              {item.color
+                                ? `${item.color} / ${item.size}`
+                                : `${item.size}`}
+                            </div>
+                          </div>
+                          <div className="btn--delete-item">
+                            <DeleteOutlined />
+                          </div>
+                        </div>
+                        <div className="header-cart__item-bottom">
+                          <div className="cart-item__quantity">
+                            <button
+                              className="item-quantity__btn--minus"
+                              // onClick={() => handleDecreaseQuantity(index)}
+                            >
+                              -
+                            </button>
+                            <input
+                              type="number"
+                              value={item.quantity}
+                              min="1"
+                              className="item-quantity__input"
+                              disabled
+                            />
+                            <button
+                              className="item-quantity__btn--plus"
+                              // onClick={() => handleIncreaseQuantity(index)}
+                            >
+                              +
+                            </button>
+                          </div>
+                          <div className="cart-item__total-price">
+                            Tổng cộng:{" "}
+                            <span>
+                              {common.formatPrice(item.price * item.quantity)}đ
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+              <p className="header-cart__total-price">
+                Tổng đơn hàng:{" "}
+                <span>
+                  {common.formatPrice(
+                    listItem.reduce(
+                      (arg, cur) => arg + cur.price * cur.quantity,
+                      0
+                    )
+                  )}
+                  đ
+                </span>
+              </p>
+              <Link className="header-cart__btn" to={ROUTE.CART}>
+                Xem giỏ hàng
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     );

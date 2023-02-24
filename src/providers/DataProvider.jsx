@@ -7,7 +7,7 @@ function DataProvider({ children }) {
   useEffect(() => {
     setAllProductList(localStorageUlti("all_product_list", []).get());
   }, []);
-  const [listItem, setListItem] = useState([]);
+  const [listItem, setListItem] = useState(localStorageUlti("list_item", []).get());
 
   const dataContextValue = {
     allProductList,
