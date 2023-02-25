@@ -2133,22 +2133,22 @@
       "id": "726a34f1-3cad-460b-988e-bc5f67c7c22e",
       "products": [
         {
-          "id": 1,
-          "size": "XXL",
-          "quantity": 4,
-          "color": "Đỏ mận"
-        },
-        {
           "id": 132,
           "size": "XL",
-          "quantity": 4,
-          "color": "Vàng"
+          "quantity": 3,
+          "color": "Vàng",
+          "image_url": "https://bizweb.dktcdn.net/100/438/408/products/apm3299-dod-1-of-2.jpg?v=1673602563443",
+          "name": "Áo Polo Nam Pique Mắt Chim Basic Co Giãn Thoáng Khí",
+          "price": 100000
         },
         {
           "id": 4,
           "size": "XL",
           "quantity": 9,
-          "color": "Vàng"
+          "color": "Vàng",
+          "image_url": "https://bizweb.dktcdn.net/100/438/408/products/apm3299-dod-1-of-2.jpg?v=1673602563443",
+          "name": "Áo Polo Nam Pique Mắt Chim Basic Co Giãn Thoáng Khí",
+          "price": 100000
         }
       ]
     },
@@ -2159,13 +2159,19 @@
           "id": 132,
           "size": "XL",
           "quantity": 5,
-          "color": "Vàng"
+          "color": "Vàng",
+          "image_url": "https://bizweb.dktcdn.net/100/438/408/products/apm3299-dod-1-of-2.jpg?v=1673602563443",
+          "name": "Áo Polo Nam Pique Mắt Chim Basic Co Giãn Thoáng Khí",
+          "price": 100000
         },
         {
           "id": 4,
           "size": "XL",
           "quantity": 5,
-          "color": "Vàng"
+          "color": "Vàng",
+          "image_url": "https://bizweb.dktcdn.net/100/438/408/products/apm3299-dod-1-of-2.jpg?v=1673602563443",
+          "name": "Áo Polo Nam Pique Mắt Chim Basic Co Giãn Thoáng Khí",
+          "price": 100000
         }
       ]
     }

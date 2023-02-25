@@ -1,11 +1,10 @@
 import { Row, Col } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
 
 import { fetchCart } from "../../stores/actions/cart.action";
 import { localStorageUlti } from "../../utils/localStorage";
 import common from "../../utils/common";
-import { CustomerContext } from "../../providers/CustomerContext";
 import CartInner from "./components/CartInner";
 import "./cart.scss";
 import MainLayout from "../../layouts/main-layout/MainLayout";
@@ -14,7 +13,6 @@ import { Link } from "react-router-dom";
 
 function Cart() {
   const dispatch = useDispatch();
-  const { listItem } = useContext(CustomerContext);
   const userInfo = localStorageUlti("user_info", null).get();
   const cart = useSelector((state) => state.cart.cart);
   useEffect(() => {
@@ -44,7 +42,7 @@ function Cart() {
     );
   }
 
-  function UserCart({cart, listItem, userInfo}) {
+  function UserCart({cart, userInfo}) {
 
     if(cart.products?.length === 0) return CartEmpty({userInfo})
 
@@ -95,7 +93,7 @@ function Cart() {
               </span>
               <span className="total-order__money">
                 {common.formatPrice(
-                  listItem.reduce(
+                  cart.products?.reduce(
                     (arg, cur) => arg + cur.price * cur.quantity,
                     0
                   )
@@ -114,7 +112,7 @@ function Cart() {
     <MainLayout>
       <div className="cart">
         <div className="cart-container">
-          {!userInfo ? CartEmpty({ userInfo }) : UserCart({cart, listItem, userInfo})}
+          {!userInfo ? CartEmpty({ userInfo }) : UserCart({cart, userInfo})}
         </div>
       </div>
     </MainLayout>

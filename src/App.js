@@ -10,15 +10,11 @@ import UserRegister from "./pages/user-register/UserRegister";
 import Home from "./pages/home/Home";
 import Product from "./pages/products/product/Product";
 import ProductDetail from "./pages/products/product-detail/ProductDetail";
-import DataProvider from "./providers/DataProvider";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { fetchAllProduct } from "./stores/actions/product.action";
+
 
 
 function App() {
   return (
-    <DataProvider>
       <div className="App">
         <Routes>
           <Route path={ROUTE.HOME_PAGE} element={<Home />} />
@@ -31,7 +27,6 @@ function App() {
           <Route path={ROUTE.FORGOT_PASSWORD} element={<ForgotPassword />} />
         </Routes>
       </div>
-    </DataProvider>
 
   );
 }

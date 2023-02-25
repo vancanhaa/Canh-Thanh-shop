@@ -5,6 +5,7 @@ export const productsApi = {
     const paginationString = `_page=${page}&_limit=${limit}`;
 
     const filterString = Object.keys(filter)
+      // eslint-disable-next-line array-callback-return
       .map((key) => {
         if (filter[key] && filter !== "") return `${key}=${filter[key]}`;
       })
@@ -21,6 +22,5 @@ export const productsApi = {
 
     return API.get(`${BASE_URL}/api/products?${queryString}`);
   },
-  getProductDetail: (id) => API.get(`${BASE_URL}/api/products/${id}`),
-  getAllProduct: () => API.get(`${BASE_URL}/api/products`),
+  getProductDetail: (id) => API.get(`${BASE_URL}/api/products/${id}`)
 };

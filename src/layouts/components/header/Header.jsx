@@ -1,20 +1,19 @@
-import { Col, Row, Input } from "antd";
+import { Col, Row, Input, Modal } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import { ImLocation } from "react-icons/im";
 import { AiTwotonePhone, AiOutlineUser } from "react-icons/ai";
 import { BsHandbag } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import "./header.scss";
 import { ROUTE } from "../../../constants";
 import { logOut } from "../../../stores/slice/auth.slice";
 import { fetchProductList } from "../../../stores/actions/product.action";
 import { changeTextSearch } from "../../../stores/slice/product.slice";
-import { DeleteOutlined } from "@ant-design/icons";
+import { DeleteOutlined, ExclamationCircleOutlined } from "@ant-design/icons";
 import common from "../../../utils/common";
-import { CustomerContext } from "../../../providers/CustomerContext";
-import { fetchCart } from "../../../stores/actions/cart.action";
+import { fetchCart, fetchChangeCart } from "../../../stores/actions/cart.action";
 import { v4 } from "uuid";
 import { localStorageUlti } from "../../../utils/localStorage";
 function Header() {
@@ -29,28 +28,8 @@ function Header() {
     if (userInfo) dispatch(fetchCart({ idUser: userInfo.id }));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  const { allProductList, listItem, setListItem } = useContext(CustomerContext);
 
-  console.log(allProductList);
-  console.log(listItem);
-
-  useEffect(() => {
-    let newListItem = cart.products?.map((item, index) => {
-      let newItem = allProductList?.find(
-        (product, index) => product.id === item.id
-      );
-      return {
-        id: newItem.id,
-        imageUrl: newItem.thumbnail,
-        price: newItem.price,
-        name: newItem.name,
-        size: item.size,
-        color: item.color,
-        quantity: item.quantity,
-      };
-    });
-    setListItem(newListItem);
-  }, [cart]);
+  console.log(cart);
 
   const handleSearch = (value) => {
     let textSearch = value;
@@ -113,6 +92,52 @@ function Header() {
     );
   }
 
+  const [modal, contextHolder] = Modal.useModal();
+
+  const confirm = (index) => {
+    modal.confirm({
+      className: "confirm-delete-item",
+      title: "Bạn có chắc chắn muốn xoá sản phẩm này?",
+      icon: <ExclamationCircleOutlined />,
+      content: `${cart.products[index].name}`,
+      okText: "Đồng ý",
+      cancelText: "Không",
+      onOk: () => handleDeleteItem(index),
+    });
+  };
+  const handleDeleteItem = (index) => {
+    let newProducts = [...cart.products]
+    newProducts.splice(index, 1)
+    let data = {
+      products: newProducts
+    }
+    dispatch(fetchChangeCart({idUser: cart.id, data}))
+  };
+  
+  
+  const handleIncreaseQuantity = (index) => {
+    const newProducts = [...cart.products]
+    newProducts[index] = {...newProducts[index], quantity: newProducts[index].quantity + 1}
+    let data = {
+      products: newProducts
+    }
+    dispatch(fetchChangeCart({idUser: cart.id, data}))
+  };
+
+  const handleDecreaseQuantity = (index) => {
+    let newProducts = [...cart.products]
+    if(newProducts[index].quantity <= 1) {
+      confirm(index)
+    } else {
+      newProducts[index] = {...newProducts[index], quantity: newProducts[index].quantity -1}
+      let data = {
+        products: newProducts
+      }
+      dispatch(fetchChangeCart({idUser: cart.id, data}))
+    }
+    
+  };
+
   function HeaderCartComponent() {
     return (
       <div className="header-cart">
@@ -124,22 +149,13 @@ function Header() {
           <p>GIỎ HÀNG</p>
         </Link>
         <div className="header-cart__body">
-          {cart.products?.length === 0 || !cart ? (
-            <div className="header-cart__empty">
-              <img
-                src="https://bizweb.dktcdn.net/100/438/408/themes/894085/assets/blank_cart.svg?1676350489702"
-                alt=""
-              />
-              <p>Giỏ hàng của bạn trống</p>
-              <Link to={ROUTE.PRODUCT}>Mua ngay</Link>
-            </div>
-          ) : (
+          {cart.products[0]?.id ? (
             <div className="header-cart__availabel">
               <div className="header-cart__inner">
-                {listItem.map((item, index) => {
+                {cart.products?.map((item, index) => {
                   return (
                     <div className="header-cart__item" key={v4()}>
-                      <img src={`${item.imageUrl}`} alt="" width={80} />
+                      <img src={`${item["image_url"]}`} alt="" width={80} />
                       <div className="header-cart__item-body">
                         <div className="description-item-wrap">
                           <div className="cart-item">
@@ -161,7 +177,7 @@ function Header() {
                           <div className="cart-item__quantity">
                             <button
                               className="item-quantity__btn--minus"
-                              // onClick={() => handleDecreaseQuantity(index)}
+                              onClick={() => handleDecreaseQuantity(index)}
                             >
                               -
                             </button>
@@ -174,7 +190,7 @@ function Header() {
                             />
                             <button
                               className="item-quantity__btn--plus"
-                              // onClick={() => handleIncreaseQuantity(index)}
+                              onClick={() => handleIncreaseQuantity(index)}
                             >
                               +
                             </button>
@@ -191,11 +207,12 @@ function Header() {
                   );
                 })}
               </div>
+              <div className="header-cart__bottom">
               <p className="header-cart__total-price">
                 Tổng đơn hàng:{" "}
                 <span>
                   {common.formatPrice(
-                    listItem.reduce(
+                    cart.products?.reduce(
                       (arg, cur) => arg + cur.price * cur.quantity,
                       0
                     )
@@ -206,9 +223,20 @@ function Header() {
               <Link className="header-cart__btn" to={ROUTE.CART}>
                 Xem giỏ hàng
               </Link>
+              </div>
+            </div>
+          ) : (
+            <div className="header-cart__empty">
+              <img
+                src="https://bizweb.dktcdn.net/100/438/408/themes/894085/assets/blank_cart.svg?1676350489702"
+                alt=""
+              />
+              <p>Giỏ hàng của bạn trống</p>
+              <Link to={ROUTE.PRODUCT}>Mua ngay</Link>
             </div>
           )}
         </div>
+        {contextHolder}
       </div>
     );
   }

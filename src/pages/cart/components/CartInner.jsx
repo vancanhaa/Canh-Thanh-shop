@@ -3,104 +3,62 @@ import { DeleteOutlined } from "@ant-design/icons";
 import { v4 } from "uuid";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
-import { useContext, useEffect } from "react";
-
 import common from "../../../utils/common";
 import { fetchChangeCart } from "../../../stores/actions/cart.action";
-import { CustomerContext } from "../../../providers/CustomerContext";
 import "./cart-inner.scss";
 
 function CartInner() {
+  const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cart.cart);
   const [modal, contextHolder] = Modal.useModal();
-  const handleDeleteItem = (index) => {
-    const newProductsToCart = {
-      products: listItem.map((item, index) => {
-        return {
-          id: item.id,
-          size: item.size,
-          quantity: item.quantity,
-          color: item.color,
-        };
-      }),
-    };
-    newProductsToCart.products.splice(index, 1);
-    dispatch(fetchChangeCart({ idUser: cart.id, data: newProductsToCart }));
-  };
+
   const confirm = (index) => {
     modal.confirm({
       className: "confirm-delete-item",
       title: "Bạn có chắc chắn muốn xoá sản phẩm này?",
       icon: <ExclamationCircleOutlined />,
-      content: `${listItem[index].name}`,
+      content: `${cart.products[index].name}`,
       okText: "Đồng ý",
       cancelText: "Không",
       onOk: () => handleDeleteItem(index),
     });
   };
-  const dispatch = useDispatch();
-  const cart = useSelector((state) => state.cart.cart);
-  const { allProductList, listItem, setListItem } = useContext(CustomerContext);
-  useEffect(() => {
-    let newListItem = cart.products?.map((item, index) => {
-      let newItem = allProductList.find(
-        (product, index) => product.id === item.id
-      );
-
-      return {
-        id: newItem.id,
-        imageUrl: newItem.thumbnail,
-        price: newItem.price,
-        name: newItem.name,
-        size: item.size,
-        color: item.color,
-        quantity: item.quantity,
-      };
-    });
-    setListItem(newListItem);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cart]);
-
+  const handleDeleteItem = (index) => {
+    let newProducts = [...cart.products]
+    newProducts.splice(index, 1)
+    let data = {
+      products: newProducts
+    }
+    dispatch(fetchChangeCart({idUser: cart.id, data}))
+  };
+  
+  
   const handleIncreaseQuantity = (index) => {
-    let newListItem = [...listItem];
-    newListItem[index].quantity = Number(newListItem[index].quantity) + 1;
-    setListItem(newListItem);
-    let newProductsToCart = {
-      products: newListItem.map((item, index) => {
-        return {
-          id: item.id,
-          size: item.size,
-          quantity: item.quantity,
-          color: item.color,
-        };
-      }),
-    };
-    dispatch(fetchChangeCart({ idUser: cart.id, data: newProductsToCart }));
+    const newProducts = [...cart.products]
+    newProducts[index] = {...newProducts[index], quantity: newProducts[index].quantity + 1}
+    let data = {
+      products: newProducts
+    }
+    dispatch(fetchChangeCart({idUser: cart.id, data}))
   };
 
   const handleDecreaseQuantity = (index) => {
-    let newListItem = [...listItem];
-    if (newListItem[index].quantity === 1) {
-      confirm(index);
+    let newProducts = [...cart.products]
+    if(newProducts[index].quantity <= 1) {
+      confirm(index)
     } else {
-      newListItem[index].quantity = Number(newListItem[index].quantity) - 1;
-      setListItem(newListItem);
-      let newProductsToCart = {
-        products: newListItem.map((item, index) => {
-          return {
-            id: item.id,
-            size: item.size,
-            quantity: item.quantity,
-            color: item.color,
-          };
-        }),
-      };
-      dispatch(fetchChangeCart({ idUser: cart.id, data: newProductsToCart }));
+      newProducts[index] = {...newProducts[index], quantity: newProducts[index].quantity -1}
+      let data = {
+        products: newProducts
+      }
+      dispatch(fetchChangeCart({idUser: cart.id, data}))
     }
+    
   };
 
   return (
     <div className="cart-inner__item-availabel">
-      {listItem?.map((item, index) => {
+      {cart.products?.map((item, index) => {
         return (
           <Row
             justify="space-between"
@@ -110,7 +68,7 @@ function CartInner() {
             <Col lg={12} md={12}>
               <Row>
                 <Col className="item-availabel__img">
-                  <img src={item.imageUrl} alt="" width={90} />
+                  <img src={item["image_url"]} alt="" width={90} />
                 </Col>
                 <Col flex="auto" className="item-availabel__description">
                   <div className="item-availabel__option-wrap">

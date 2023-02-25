@@ -1,6 +1,5 @@
 export const ROUTE = {
   HOME_PAGE: "/",
-  SHOP: "/shop",
   PRODUCT_DETAIL: "/product-detail/:id",
   CHECK_OUT: "/checkout",
   CART: "/cart",
