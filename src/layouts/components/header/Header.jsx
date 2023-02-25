@@ -15,7 +15,6 @@ import { DeleteOutlined, ExclamationCircleOutlined } from "@ant-design/icons";
 import common from "../../../utils/common";
 import { fetchCart, fetchChangeCart } from "../../../stores/actions/cart.action";
 import { v4 } from "uuid";
-import { localStorageUlti } from "../../../utils/localStorage";
 function Header() {
   const [valueSearch, setValueSearch] = useState("");
   const searchRef = useRef();
@@ -29,7 +28,6 @@ function Header() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  console.log(cart);
 
   const handleSearch = (value) => {
     let textSearch = value;
@@ -97,7 +95,7 @@ function Header() {
   const confirm = (index) => {
     modal.confirm({
       className: "confirm-delete-item",
-      title: "Bạn có chắc chắn muốn xoá sản phẩm này?",
+      title: "Bạn có chắc chắn muốn xoá sản phẩm này khỏi giỏ hàng?",
       icon: <ExclamationCircleOutlined />,
       content: `${cart.products[index].name}`,
       okText: "Đồng ý",
@@ -169,7 +167,7 @@ function Header() {
                                 : `${item.size}`}
                             </div>
                           </div>
-                          <div className="btn--delete-item">
+                          <div className="btn--delete-item" onClick={() => confirm(index)}>
                             <DeleteOutlined />
                           </div>
                         </div>

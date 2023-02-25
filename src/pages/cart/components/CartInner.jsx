@@ -15,7 +15,7 @@ function CartInner() {
   const confirm = (index) => {
     modal.confirm({
       className: "confirm-delete-item",
-      title: "Bạn có chắc chắn muốn xoá sản phẩm này?",
+      title: "Bạn có chắc chắn muốn xoá sản phẩm này khỏi giỏ hàng?",
       icon: <ExclamationCircleOutlined />,
       content: `${cart.products[index].name}`,
       okText: "Đồng ý",
