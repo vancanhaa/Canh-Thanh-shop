@@ -44,7 +44,7 @@ function Cart() {
 
   function UserCart({cart, userInfo}) {
 
-    if(cart.products?.length === 0) return CartEmpty({userInfo})
+    if(cart.products?.length === 0 || !cart.id) return CartEmpty({userInfo})
 
     return (
       <Row justify="space-between" gutter={[8, 16]}>

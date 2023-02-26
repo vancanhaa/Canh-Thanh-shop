@@ -38,7 +38,8 @@
             background: #fff;
             color: #7a7a9d;
             &:hover {
-              color: var(--primary-color);
+              color: #fff;
+              background-color: var(--primary-color);
               border-color: var(--primary-color);
             }
           }

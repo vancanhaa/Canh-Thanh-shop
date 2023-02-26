@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { fetchCart, fetchChangeCart } from "../actions/cart.action"
+import { fetchAddNewCart, fetchCart, fetchChangeCart } from "../actions/cart.action"
 
 const cartInitialState = {
     cart: {
@@ -40,18 +40,6 @@ const cartSlice = createSlice({
             state.fetchingCart = false
         })
 
-        //fetchAllProduct
-        // builder.addCase(fetchAllProduct.pending, (state, action) => {
-        //     state.fetchingCart = true
-        // })
-        // builder.addCase(fetchAllProduct.fulfilled, (state, action) => {
-        //     state.fetchingCart = false
-        //     localStorageUlti("all_product_list", []).set(action.payload)
-        // })
-        // builder.addCase(fetchAllProduct.rejected, (state, action) => {
-        //     state.fetchingCart = false
-        // })
-
         //fetchChangeCart
         builder.addCase(fetchChangeCart.pending, (state, action) => {
             state.fetchingCart = true
@@ -61,6 +49,18 @@ const cartSlice = createSlice({
             state.cart = action.payload
         })
         builder.addCase(fetchChangeCart, (state, action) => {
+            state.fetchingCart = false
+        })
+
+        //fetchAddNewCart
+        builder.addCase(fetchAddNewCart.pending, (state, action) => {
+            state.fetchingCart = true
+        });
+        builder.addCase(fetchAddNewCart.fulfilled, (state, action) => {
+            state.fetchingCart = false;
+            state.cart = action.payload
+        });
+        builder.addCase(fetchAddNewCart.rejected, (state, action) => {
             state.fetchingCart = false
         })
     }

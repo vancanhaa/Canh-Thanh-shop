@@ -9,10 +9,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchProductList } from "../../../stores/actions/product.action";
 import { v4 } from "uuid";
 import common from "../../../utils/common";
+import {
+  fetchAddNewCart,
+  fetchChangeCart,
+} from "../../../stores/actions/cart.action";
 
 function Product() {
   const dispatch = useDispatch();
   const productState = useSelector((state) => state.product);
+  const cart = useSelector((state) => state.cart.cart);
+  const userInfo = useSelector((state) => state.user.userInfoState.data);
+  console.log(cart);
   let { products, textSearch, filter, pagination } = productState;
   let { page, limit, total } = pagination;
   let sortValueSelect = filter?._order ? filter?._order : "default";
@@ -44,22 +51,72 @@ function Product() {
 
   const [openAddCartModal, setOpenAddCartModal] = useState(false);
   const [itemAddCart, setItemAddCart] = useState({});
-  const [options, setOptions] = useState({
-    color: "",
-    size: "",
-  });
+  const [options, setOptions] = useState({});
 
   const handleChangeOptions = (option) => {
     const newOptions = { ...options, ...option };
     setOptions(newOptions);
   };
-  console.log(options);
   const handleOpenAddCartModal = (index) => {
     setOpenAddCartModal(true);
     const newItemAddCart = { ...products[index] };
     setItemAddCart(newItemAddCart);
   };
-  console.log(itemAddCart);
+  const handleResetOption = () => {
+    setOpenAddCartModal(false);
+    setOptions({});
+    setValueQuantity(1);
+  };
+  const [valueQuantity, setValueQuantity] = useState(1);
+  const handleAddItemToCart = ({ itemAddCart, options, valueQuantity }) => {
+    const newItemAddCart = {
+      id: itemAddCart.id,
+      name: itemAddCart.name,
+      image_url: options.image_url,
+      quantity: valueQuantity,
+      price: itemAddCart.price,
+      color: options.color,
+      size: options.size,
+    };
+    const isProductAvailabel = cart.products.some((product) => {
+      return (
+        product.id === newItemAddCart.id &&
+        product.color === newItemAddCart.color &&
+        product.size === newItemAddCart.size
+      );
+    });
+    let newProductsInCart = [...cart.products];
+    if (isProductAvailabel) {
+      newProductsInCart = newProductsInCart.map((product) => {
+        product = {
+          ...product,
+          quantity: product.quantity + newItemAddCart.quantity,
+          image_url: newItemAddCart.image_url,
+        };
+        return product;
+      });
+    } else {
+      newProductsInCart = [newItemAddCart, ...newProductsInCart]
+    }
+
+    if (cart.id && cart.id !== "") {
+      console.log("availabel");
+      dispatch(
+        fetchChangeCart({
+          idUser: cart.id,
+          data: { products: newProductsInCart },
+        })
+      );
+    } else {
+      dispatch(
+        fetchAddNewCart({
+          idUser: userInfo.id,
+          data: { products: [newItemAddCart] },
+        })
+      );
+    }
+    handleResetOption();
+  };
 
   return (
     <MainLayout>
@@ -178,7 +235,7 @@ function Product() {
         <Modal
           open={openAddCartModal}
           title="Thêm vào giỏ hàng"
-          onCancel={() => setOpenAddCartModal(false)}
+          onCancel={handleResetOption}
           wrapClassName="modal__add-cart"
           width={860}
         >
@@ -278,26 +335,37 @@ function Product() {
                     <div className="item-quantity">
                       <button
                         className="item-quantity__btn--minus"
-                        // onClick={() => handleDecreaseQuantity(index)}
+                        onClick={() => setValueQuantity(valueQuantity - 1)}
+                        disabled={valueQuantity === 1}
                       >
                         -
                       </button>
                       <input
                         type="number"
-                        value={1}
+                        value={valueQuantity}
                         min="1"
                         className="item-quantity__input"
                         disabled
                       />
                       <button
                         className="item-quantity__btn--plus"
-                        // onClick={() => handleIncreaseQuantity(index)}
+                        onClick={() => setValueQuantity(valueQuantity + 1)}
                       >
                         +
                       </button>
                     </div>
                     <div className="submit-cart__btn-wrap">
-                      <button className="btn-submit-cart">
+                      <button
+                        className="btn-submit-cart"
+                        onClick={() =>
+                          handleAddItemToCart({
+                            itemAddCart,
+                            options,
+                            valueQuantity,
+                          })
+                        }
+                        disabled = {!options.color || !options.size}
+                      >
                         Thêm vào giỏ hàng
                       </button>
                     </div>
