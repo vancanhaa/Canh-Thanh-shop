@@ -3,8 +3,8 @@ import { DeleteOutlined } from "@ant-design/icons";
 import { v4 } from "uuid";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
-import common from "../../../utils/common";
-import { fetchChangeCart } from "../../../stores/actions/cart.action";
+import common from "../../../../utils/common";
+import { fetchChangeCart } from "../../../../stores/actions/cart.action";
 import "./cart-inner.scss";
 
 function CartInner() {

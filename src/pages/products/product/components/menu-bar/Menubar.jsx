@@ -4,8 +4,8 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 
 import "./menubar.scss";
-import { fetchProductList } from "../../../../stores/actions/product.action";
-import { SHOP_BY_PRICE } from "../../../../constants";
+import { fetchProductList } from "../../../../../stores/actions/product.action";
+import { SHOP_BY_PRICE } from "../../../../../constants";
 
 function Menubar() {
   const dispatch = useDispatch();

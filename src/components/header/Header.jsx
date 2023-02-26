@@ -7,13 +7,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useRef, useState } from "react";
 
 import "./header.scss";
-import { ROUTE } from "../../../constants";
-import { logOut } from "../../../stores/slice/auth.slice";
-import { fetchProductList } from "../../../stores/actions/product.action";
-import { changeTextSearch } from "../../../stores/slice/product.slice";
+import { ROUTE } from "../../constants";
+import { logOut } from "../../stores/slice/auth.slice";
+import { fetchProductList } from "../../stores/actions/product.action";
+import { changeTextSearch } from "../../stores/slice/product.slice";
 import { DeleteOutlined, ExclamationCircleOutlined } from "@ant-design/icons";
-import common from "../../../utils/common";
-import { fetchCart, fetchChangeCart } from "../../../stores/actions/cart.action";
+import common from "../../utils/common";
+import { fetchCart, fetchChangeCart } from "../../stores/actions/cart.action";
 import { v4 } from "uuid";
 function Header() {
   const [valueSearch, setValueSearch] = useState("");

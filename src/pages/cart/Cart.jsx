@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { fetchCart } from "../../stores/actions/cart.action";
 import { localStorageUlti } from "../../utils/localStorage";
 import common from "../../utils/common";
-import CartInner from "./components/CartInner";
+import CartInner from "./components/cart-inner/CartInner";
 import "./cart.scss";
 import MainLayout from "../../layouts/main-layout/MainLayout";
 import { ROUTE } from "../../constants";
