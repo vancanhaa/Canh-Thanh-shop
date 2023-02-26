@@ -76,13 +76,13 @@ function CartInner() {
                       <h4>{item.name}</h4>
                     </div>
                     <div className="item-availabel__option">
-                      {`${item.color} / ${item.size}`}
+                      {!item.color ? `${item.size}`: `${item.color} / ${item.size}`}
                     </div>
                   </div>
                 </Col>
               </Row>
             </Col>
-            <Col lg={4} md={4}>
+            <Col lg={4} md={4} >
               {common.formatPrice(item.price)}đ
             </Col>
             <Col lg={4} md={4}>

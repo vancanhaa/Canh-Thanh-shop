@@ -19,9 +19,12 @@
       background-color: transparent;
       svg {
         color: red;
+        stroke: red;
       }
     }
     svg {
+      stroke-width: 75;
+      stroke: #ff4d4f;
       font-size: 2.2rem;
       color: #ff4d4f;
     }

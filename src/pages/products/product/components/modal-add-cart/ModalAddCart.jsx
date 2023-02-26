@@ -34,7 +34,7 @@ function ModalAddCart({
   const handleResetOption = () => {
     setOpenAddCartModal(false);
     setOptions({});
-    // setValueQuantity(1);
+    setValueQuantity(1);
   };
   const [valueQuantity, setValueQuantity] = useState(1);
   const handleAddItemToCart = ({ itemAddCart, options, valueQuantity }) => {
