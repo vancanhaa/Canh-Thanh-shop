@@ -28,6 +28,19 @@ function Header() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const [modal, contextHolder] = Modal.useModal();
+
+  const confirm = (index) => {
+    modal.confirm({
+      className: "confirm-delete-item",
+      title: "Bạn có chắc chắn muốn xoá sản phẩm này khỏi giỏ hàng?",
+      icon: <ExclamationCircleOutlined />,
+      content: `${cart.products[index].name}`,
+      okText: "Đồng ý",
+      cancelText: "Không",
+      onOk: () => handleDeleteItem(index),
+    });
+  };
 
   const handleSearch = (value) => {
     let textSearch = value;
@@ -56,13 +69,10 @@ function Header() {
           <div className="header-account__menu">
             <ul>
               <li>
-                <a href="#!">Tài khoản của tôi</a>
-              </li>
-              <li>
                 <a href="#!">Đổi mật khẩu</a>
               </li>
               <li>
-                <a href="#!">Sổ địa chỉ</a>
+                <Link to={ROUTE.ADDRESS}>Sổ địa chỉ</Link>
               </li>
               <li>
                 <a href="#!">Đã xem gần đây</a>
@@ -90,50 +100,41 @@ function Header() {
     );
   }
 
-  const [modal, contextHolder] = Modal.useModal();
-
-  const confirm = (index) => {
-    modal.confirm({
-      className: "confirm-delete-item",
-      title: "Bạn có chắc chắn muốn xoá sản phẩm này khỏi giỏ hàng?",
-      icon: <ExclamationCircleOutlined />,
-      content: `${cart.products[index].name}`,
-      okText: "Đồng ý",
-      cancelText: "Không",
-      onOk: () => handleDeleteItem(index),
-    });
-  };
   const handleDeleteItem = (index) => {
-    let newProducts = [...cart.products]
-    newProducts.splice(index, 1)
+    let newProducts = [...cart.products];
+    newProducts.splice(index, 1);
     let data = {
-      products: newProducts
-    }
-    dispatch(fetchChangeCart({idUser: cart.id, data}))
+      products: newProducts,
+    };
+    dispatch(fetchChangeCart({ idUser: cart.id, data }));
   };
-  
-  
+
   const handleIncreaseQuantity = (index) => {
-    const newProducts = [...cart.products]
-    newProducts[index] = {...newProducts[index], quantity: newProducts[index].quantity + 1}
+    const newProducts = [...cart.products];
+    newProducts[index] = {
+      ...newProducts[index],
+      quantity: newProducts[index].quantity + 1,
+    };
     let data = {
-      products: newProducts
-    }
-    dispatch(fetchChangeCart({idUser: cart.id, data}))
+      products: newProducts,
+    };
+    dispatch(fetchChangeCart({ idUser: cart.id, data }));
   };
 
   const handleDecreaseQuantity = (index) => {
-    let newProducts = [...cart.products]
-    if(newProducts[index].quantity <= 1) {
-      confirm(index)
+    let newProducts = [...cart.products];
+    if (newProducts[index].quantity <= 1) {
+      confirm(index);
     } else {
-      newProducts[index] = {...newProducts[index], quantity: newProducts[index].quantity -1}
+      newProducts[index] = {
+        ...newProducts[index],
+        quantity: newProducts[index].quantity - 1,
+      };
       let data = {
-        products: newProducts
-      }
-      dispatch(fetchChangeCart({idUser: cart.id, data}))
+        products: newProducts,
+      };
+      dispatch(fetchChangeCart({ idUser: cart.id, data }));
     }
-    
   };
 
   function HeaderCartComponent() {
@@ -142,7 +143,18 @@ function Header() {
         <Link to={ROUTE.CART}>
           <div className="header-cart__icon">
             <BsHandbag />
-            {/* <div className="header-cart__number-item">0</div> */}
+            <div
+              className={
+                cart.products?.length > 0
+                  ? "header-cart__number-item is-cart"
+                  : "header-cart__number-item"
+              }
+            >
+              {cart.products?.reduce(
+                (agr, cur, index) => agr + cur.quantity,
+                0
+              )}
+            </div>
           </div>
           <p>GIỎ HÀNG</p>
         </Link>
@@ -153,11 +165,18 @@ function Header() {
                 {cart.products?.map((item, index) => {
                   return (
                     <div className="header-cart__item" key={v4()}>
-                      <img src={`${item["image_url"]}`} alt="" width={80} />
+                      <Link
+                        to={`/product-detail/${item.id}`}
+                        className="header-cart__image"
+                      >
+                        <img src={`${item["image_url"]}`} alt="" width={80} />
+                      </Link>
                       <div className="header-cart__item-body">
                         <div className="description-item-wrap">
                           <div className="cart-item">
-                            <Link to={"#!"}>{item.name}</Link>
+                            <Link to={`/product-detail/${item.id}`}>
+                              {item.name}
+                            </Link>
                             <div className="cart-item__price">
                               {common.formatPrice(item.price)}đ
                             </div>
@@ -167,7 +186,10 @@ function Header() {
                                 : `${item.size}`}
                             </div>
                           </div>
-                          <div className="btn--delete-item" onClick={() => confirm(index)}>
+                          <div
+                            className="btn--delete-item"
+                            onClick={() => confirm(index)}
+                          >
                             <DeleteOutlined />
                           </div>
                         </div>
@@ -206,21 +228,21 @@ function Header() {
                 })}
               </div>
               <div className="header-cart__bottom">
-              <p className="header-cart__total-price">
-                Tổng đơn hàng:{" "}
-                <span>
-                  {common.formatPrice(
-                    cart.products?.reduce(
-                      (arg, cur) => arg + cur.price * cur.quantity,
-                      0
-                    )
-                  )}
-                  đ
-                </span>
-              </p>
-              <Link className="header-cart__btn" to={ROUTE.CART}>
-                Xem giỏ hàng
-              </Link>
+                <p className="header-cart__total-price">
+                  Tổng đơn hàng:{" "}
+                  <span>
+                    {common.formatPrice(
+                      cart.products?.reduce(
+                        (arg, cur) => arg + cur.price * cur.quantity,
+                        0
+                      )
+                    )}
+                    đ
+                  </span>
+                </p>
+                <Link className="header-cart__btn" to={ROUTE.CART}>
+                  Xem giỏ hàng
+                </Link>
               </div>
             </div>
           ) : (

@@ -23,20 +23,19 @@ function ModalAddCart({
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart.cart);
   const userInfo = useSelector((state) => state.user.userInfoState.data);
-
   const [options, setOptions] = useState({});
+  const [valueQuantity, setValueQuantity] = useState(1);
 
   const handleChangeOptions = (option) => {
     const newOptions = { ...options, ...option };
     setOptions(newOptions);
   };
-
   const handleResetOption = () => {
     setOpenAddCartModal(false);
     setOptions({});
     setValueQuantity(1);
   };
-  const [valueQuantity, setValueQuantity] = useState(1);
+
   const handleAddItemToCart = ({ itemAddCart, options, valueQuantity }) => {
     const newItemAddCart = {
       id: itemAddCart.id,
@@ -47,6 +46,7 @@ function ModalAddCart({
       color: options.color,
       size: options.size,
     };
+
     const isProductAvailabel = cart.products.some((product) => {
       return (
         product.id === newItemAddCart.id &&
@@ -54,6 +54,7 @@ function ModalAddCart({
         product.size === newItemAddCart.size
       );
     });
+    
     let newProductsInCart = [...cart.products];
     if (isProductAvailabel) {
       newProductsInCart = newProductsInCart.map((product) => {

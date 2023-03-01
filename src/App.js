@@ -10,6 +10,7 @@ import UserRegister from "./pages/user-register/UserRegister";
 import Home from "./pages/home/Home";
 import Product from "./pages/products/product/Product";
 import ProductDetail from "./pages/products/product-detail/ProductDetail";
+import Address from "./pages/address/Address";
 
 
 
@@ -25,6 +26,7 @@ function App() {
           <Route path={ROUTE.LOGIN} element={<UserLogin />} />
           <Route path={ROUTE.REGISTER} element={<UserRegister />} />
           <Route path={ROUTE.FORGOT_PASSWORD} element={<ForgotPassword />} />
+          <Route path={ROUTE.ADDRESS} element={<Address />}/>
         </Routes>
       </div>
 
