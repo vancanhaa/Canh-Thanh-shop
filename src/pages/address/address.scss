@@ -68,6 +68,10 @@
               font-weight: 500;
               padding: 4px;
               width: 55px;
+              &:hover {
+                cursor: pointer;
+                opacity: 0.8;
+              }
               span {
                 margin-right: 6px;
               }
@@ -81,6 +85,10 @@
               font-size: 1.6rem;
               width: 55px;
               font-weight: 500;
+              &:hover {
+                cursor: pointer;
+                color: red;
+              }
               span {
                 margin-right: 6px;
               }

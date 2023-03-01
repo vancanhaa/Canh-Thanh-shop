@@ -15,33 +15,40 @@ import {
 } from "../../stores/actions/address.action";
 import { AddressUlti } from "../../utils/address";
 import { v4 } from "uuid";
+import ModalEditAddress from "./modal-edit-address/ModalEditAddress";
 
 function Address() {
+  const dispatch = useDispatch();
   const provinceUref = useRef();
   const districtUref = useRef();
   const wardUref = useRef();
-  const dispatch = useDispatch();
   const userInfo = localStorageUlti("user_info", null).get();
   const addressState = useSelector((state) => state.address);
   const { address, provinces, districts, wards } = addressState;
   const [form] = Form.useForm();
-
-  console.log(address);
-
+  const [openModalAddAddress, setOpenModalAddAddress] = useState(false);
+  const [openModalEditAddress, setOpenModalEditAddress] = useState(false);
   const [newAddress, setNewAddress] = useState({
     province: {},
     district: {},
     ward: {},
   });
+  const [indexAddressEdit, setIndexAddressEdit] = useState();
+  const handleEditAddress = (index) => {
+    dispatch(fetchListProvinces());
+    dispatch(fetchListDistricts(address.list_address[index].province.code));
+    dispatch(fetchListWards(address.list_address[index].district.code));
+    setIndexAddressEdit(index);
+    setOpenModalEditAddress(true);
+  };
 
   useEffect(() => {
     if (userInfo) dispatch(fetchAddress({ id: userInfo.id }));
   }, []);
 
-  const [openModal, setOpenModal] = useState(false);
-
   const handleCancel = (e) => {
-    setOpenModal(false);
+    form.resetFields();
+    setOpenModalAddAddress(false);
   };
 
   const handleSelectProvice = (value) => {
@@ -79,17 +86,17 @@ function Address() {
 
   const handleClickAddAddress = () => {
     dispatch(fetchListProvinces());
-    setOpenModal(true);
+    setOpenModalAddAddress(true);
   };
 
-  const handleAddNewAddress = (value) => {
+  const handleSave = (value) => {
     const newAddressFromForm = {
       full_name: value.full_name,
       phone_number: value.phone_number,
       specific_address: value.specific_address,
       ...newAddress,
     };
-    if (address.id && address.id !=="") {
+    if (address.id && address.id !== "") {
       dispatch(
         fetchChangeAddress({
           id: address.id,
@@ -100,13 +107,25 @@ function Address() {
       dispatch(
         fetchCreateAddress({
           id: userInfo.id,
-          list_address: [newAddressFromForm]
+          list_address: [newAddressFromForm],
         })
-      )
+      );
     }
     form.resetFields();
-    setOpenModal(false);
+    setOpenModalAddAddress(false);
   };
+
+  const handleDeleteAddress = (index) => {
+    const newListAddress = [...address.list_address];
+    newListAddress.splice(index, 1);
+    dispatch(
+      fetchChangeAddress({
+        id: address.id,
+        data: { list_address: newListAddress },
+      })
+    );
+  };
+
   return (
     <MainLayout>
       <div className="address">
@@ -123,62 +142,72 @@ function Address() {
               </button>
             </div>
             <div className="address-body__content">
-              {address.id && address.id !== "" && address.list_address.length > 0 ? address.list_address?.map((item, index) => {
-                let {
-                  full_name,
-                  province,
-                  district,
-                  ward,
-                  specific_address,
-                  phone_number,
-                } = item;
-                return (
-                  <Row key={v4()}>
-                    <Col span={18} className="address-body__description">
-                      <p>
-                        <strong>Họ tên: </strong>
-                        <span>{full_name}</span>
-                      </p>
-                      <p>
-                        <strong>Địa chỉ: </strong>
-                        <span>
-                          {AddressUlti(
-                            specific_address,
-                            ward.name,
-                            district.name,
-                            province.name
-                          ).get()}
-                        </span>
-                      </p>
-                      <p>
-                        <strong>Số điện thoại</strong>
-                        <span>{phone_number}</span>
-                      </p>
-                    </Col>
-                    <Col span={6} className="address-body__action">
-                      <div className="address-body__btn-edit">
-                        <EditOutlined />
-                        Sửa
-                      </div>
-                      <div className="address-body__btn-delete">
-                        <DeleteOutlined />
-                        Xóa
-                      </div>
-                    </Col>
-                  </Row>
-                );
-              }) : ""}
+              {address.id &&
+              address.id !== "" &&
+              address.list_address.length > 0
+                ? address.list_address?.map((item, index) => {
+                    let {
+                      full_name,
+                      province,
+                      district,
+                      ward,
+                      specific_address,
+                      phone_number,
+                    } = item;
+                    return (
+                      <Row key={v4()}>
+                        <Col span={18} className="address-body__description">
+                          <p>
+                            <strong>Họ tên: </strong>
+                            <span>{full_name}</span>
+                          </p>
+                          <p>
+                            <strong>Địa chỉ: </strong>
+                            <span>
+                              {AddressUlti(
+                                specific_address,
+                                ward.name,
+                                district.name,
+                                province.name
+                              ).get()}
+                            </span>
+                          </p>
+                          <p>
+                            <strong>Số điện thoại</strong>
+                            <span>{phone_number}</span>
+                          </p>
+                        </Col>
+                        <Col span={6} className="address-body__action">
+                          <div
+                            className="address-body__btn-edit"
+                            onClick={() => handleEditAddress(index)}
+                          >
+                            <EditOutlined />
+                            Sửa
+                          </div>
+                          <div
+                            className="address-body__btn-delete"
+                            onClick={() => handleDeleteAddress(index)}
+                          >
+                            <DeleteOutlined />
+                            Xóa
+                          </div>
+                        </Col>
+                      </Row>
+                    );
+                  })
+                : ""}
             </div>
           </div>
         </div>
         <Modal
           forceRender
-          open={openModal}
+          open={openModalAddAddress}
           title="Thêm địa chỉ mới"
           onCancel={handleCancel}
           wrapClassName="modal-add-address"
         >
-          <Form form={form} onFinish={handleAddNewAddress}>
+          <Form form={form} onFinish={handleSave}>
             <Row align="top" justify="space-between" gutter={[16, 16]}>
               <Col lg={12} md={12} sm={24} xs={24}>
                 <Form.Item
@@ -359,6 +388,12 @@ function Address() {
             </Row>
           </Form>
         </Modal>
+
+        <ModalEditAddress
+          openModalEditAddress={openModalEditAddress}
+          setOpenModalEditAddress={setOpenModalEditAddress}
+          indexAddressEdit={indexAddressEdit}
+        />
       </div>
     </MainLayout>
   );
