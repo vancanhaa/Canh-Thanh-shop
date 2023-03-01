@@ -7,41 +7,41 @@ import { registerAction } from "../../stores/actions/auth.action";
 import "./user-register.scss";
 import { ROUTE } from "../../constants/index";
 
-
 function UserRegister() {
+  const dispatch = useDispatch();
+  const userInfo = useSelector((state) => state.user.userInfoState.data);
 
-const dispatch = useDispatch()
-const userInfo = useSelector((state) => state.user.userInfoState.data);
-
-  const isRegisterSuccess = useSelector((state)=> state.user.userInfoState.isRegisterSuccess)
+  const isRegisterSuccess = useSelector(
+    (state) => state.user.userInfoState.isRegisterSuccess
+  );
   const onRegister = (values) => {
     const payload = {
       id: v4(),
       role: "user",
       email: values.email,
       password: values.password,
-      "first_name": values.firstName,
-      "last_name": values.lastName,
-      phone: values.phone
-    }
-    dispatch(registerAction(payload))
+      first_name: values.firstName,
+      last_name: values.lastName,
+      phone: values.phone,
+    };
+    dispatch(registerAction(payload));
   };
 
   if (isRegisterSuccess) {
     return <Navigate to={ROUTE.LOGIN} />;
-  };
+  }
 
   if (userInfo) return <Navigate to={ROUTE.HOME_PAGE} />;
 
   return (
     <FullLayout>
       <div className="user-register-container">
-        <Row align="middle" justify="center"> 
+        <Row align="middle" justify="center">
           <Col xs={24} sm={24} md={24} lg={24}>
             <div className="user-register-center">
               <div className="user-register-logo">
                 <Row justify="center">
-                <Link to="/">CT-shop</Link>
+                  <Link to="/">CT-shop</Link>
                 </Row>
               </div>
 
@@ -64,7 +64,7 @@ const userInfo = useSelector((state) => state.user.userInfoState.data);
                         rules={[
                           {
                             required: true,
-                            message: "Họ của bạn là gì?"
+                            message: "Họ của bạn là gì?",
                           },
                         ]}
                       >
@@ -77,42 +77,60 @@ const userInfo = useSelector((state) => state.user.userInfoState.data);
                         rules={[
                           {
                             required: true,
-                            message: "Tên của bạn là gì?"
+                            message: "Tên của bạn là gì?",
                           },
                         ]}
                       >
-                        <Input size="large" placeholder="Tên" prefix/>
+                        <Input size="large" placeholder="Tên" prefix />
                       </Form.Item>
                     </Col>
                   </Row>
-                  
+
                   <Row justify="center" gutter={16}>
                     <Col xs={22} sm={20} md={12} xl={12}>
                       <Form.Item
                         name="email"
                         rules={[
                           {
-                            type: "email",
                             required: true,
+                            message: "Vui lòng nhập email của bạn!"
+                          },
+                          {
+                            type: "email",
                             message: "Email không hợp lệ!",
                           },
                         ]}
                       >
-                        <Input size="large" placeholder="Email" prefix/>
+                        <Input size="large" placeholder="Email" prefix />
                       </Form.Item>
                     </Col>
                     <Col xs={22} sm={20} md={12} xl={12}>
                       <Form.Item
                         name="phone"
+                        type="number"
                         rules={[
                           {
-                            type: "tel",
                             required: true,
-                            message: "Số điện thoại không hợp lệ!",
+                            message: "Nhập số điện thoại của bạn!"
+                          },
+                          {
+                            validator: (_, value) => {
+                              if (!value || /(84|0[3|5|7|8|9])+([0-9]{8})\b/g.test(value)) {
+                                return Promise.resolve();
+                              }
+                              return Promise.reject(
+                                new Error("Số điện thoại không hợp lệ")
+                              );
+                            },
                           },
                         ]}
                       >
-                        <Input size="large" placeholder="SĐT" type="tel"  prefix/>
+                        <Input
+                          size="large"
+                          placeholder="SĐT"
+                          type="tel"
+                          prefix
+                        />
                       </Form.Item>
                     </Col>
                   </Row>
@@ -123,8 +141,7 @@ const userInfo = useSelector((state) => state.user.userInfoState.data);
                         rules={[
                           {
                             required: true,
-                            message: "Vui lòng nhập mật khẩu!"
-
+                            message: "Vui lòng nhập mật khẩu!",
                           },
                         ]}
                       >
@@ -139,9 +156,9 @@ const userInfo = useSelector((state) => state.user.userInfoState.data);
                         rules={[
                           {
                             required: true,
-                            message: "Vui lòng nhập lại mật khẩu!"
-
+                            message: "Vui lòng nhập lại mật khẩu!",
                           },
+                          
                           ({ getFieldValue }) => ({
                             validator(_, value) {
                               if (
@@ -180,7 +197,8 @@ const userInfo = useSelector((state) => state.user.userInfoState.data);
                   </Row>
                   <Row justify="center">
                     <span>
-                      Bạn đã có tài khoản? <Link to="/login"> Đăng nhập ngay!</Link>
+                      Bạn đã có tài khoản?{" "}
+                      <Link to="/login"> Đăng nhập ngay!</Link>
                     </span>
                   </Row>
                 </Form>

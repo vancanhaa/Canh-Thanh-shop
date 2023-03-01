@@ -1,0 +1,209 @@
+.address {
+  width: 100%;
+  height: auto;
+  background-color: #f8f8f8;
+
+  .address-container {
+    padding: 60px 10px;
+    width: 100%;
+    max-width: 1240px;
+    margin-left: auto;
+    margin-right: auto;
+
+    .address-title {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--primary-color);
+    }
+
+    .address-body {
+      margin-top: 30px;
+      padding: 20px 30px;
+      background-color: #fff;
+      border-radius: 8px;
+      min-height: 70vh;
+      .address-body__header {
+        font-size: 1.8rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 2px solid #d5d5d5;
+        padding-bottom: 10px;
+        .address-body__title {
+          font-weight: 500;
+          color: var(--primary-color);
+        }
+        .address-body__btn {
+          padding: 6px 12px;
+          color: #fff;
+          background-color: var(--primary-color);
+          border-radius: 6px;
+          font-size: 1.5rem;
+          border: none;
+          font-weight: 500;
+        }
+      }
+      .address-body__content {
+        .ant-row {
+          margin-top: 10px;
+          border-top: 2px solid #d5d5d5;
+          padding-top: 20px;
+          &:first-child {
+            margin-top: 0;
+            border: none;
+          }
+          .address-body__action {
+            text-align: right;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+
+            .address-body__btn-edit {
+              display: flex;
+              align-items: center;
+              justify-content: flex-end;
+              color: #7a7a9d;
+              font-size: 1.6rem;
+              font-weight: 500;
+              padding: 4px;
+              width: 55px;
+              &:hover {
+                cursor: pointer;
+                opacity: 0.8;
+              }
+              span {
+                margin-right: 6px;
+              }
+            }
+            .address-body__btn-delete {
+              display: flex;
+              align-items: center;
+              justify-content: flex-end;
+              color: #ff4d4f;
+              padding: 4px;
+              font-size: 1.6rem;
+              width: 55px;
+              font-weight: 500;
+              &:hover {
+                cursor: pointer;
+                color: red;
+              }
+              span {
+                margin-right: 6px;
+              }
+            }
+          }
+        }
+        .address-body__description {
+          p {
+            display: flex;
+            font-size: 1.4rem;
+            margin-bottom: 0.6rem;
+            strong {
+              display: block;
+              width: 120px;
+              color: #7a7a9d;
+              font-weight: 500;
+            }
+            span {
+              display: block;
+              color: #000;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+.ant-modal-wrap.modal-add-address {
+  input,
+  .ant-select-selector {
+    border: 2px solid #d5d5d5;
+    border-radius: 6px;
+    margin: 0;
+    background: transparent !important;
+    min-height: 48px;
+    font-size: 1.4rem;
+    padding-right: 30px;
+    text-overflow: ellipsis;
+    // box-shadow: none;
+  }
+  .ant-select-arrow {
+    font-size: 1.4rem;
+  }
+  .ant-select-selection-item {
+    min-height: 48px;
+    font-size: 1.4rem;
+    position: absolute;
+    top: 0;
+    line-height: 48px;
+  }
+
+  input {
+    &::placeholder {
+      color: #7a7a9d;
+      opacity: 1;
+      font-size: 1.4rem;
+      font-weight: 500;
+    }
+    &:focus,
+    &:hover {
+      border-color: #4096ff;
+    }
+  }
+  .ant-select-selection-placeholder {
+    height: 48px;
+    line-height: 48px;
+    color: #7a7a9d;
+    font-size: 1.4rem;
+    font-weight: 500;
+  }
+
+  .ant-modal {
+    width: 100% !important;
+    max-width: 800px !important;
+  }
+  .ant-modal-header {
+    border-bottom: 1px solid #d5d5d5;
+    padding-bottom: 15px;
+    margin-bottom: 30px;
+    .ant-modal-title {
+      color: var(--primary-color);
+      font-size: 1.8rem;
+      font-weight: 600;
+    }
+  }
+  .ant-form-item {
+    margin-bottom: 0;
+  }
+  .ant-modal-footer {
+    display: none;
+  }
+  button.ant-modal-close {
+    display: none;
+  }
+  .default-address {
+    margin-top: 20px;
+  }
+  button {
+    margin-top: 10px;
+    width: 100%;
+    height: 48px;
+    font-weight: 600;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.8rem;
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+  .btn--cancel-address {
+    background-color: #feeeea;
+    color: var(--primary-color);
+  }
+  .btn--save-address {
+    background-color: var(--primary-color);
+    color: #fff;
+  }
+}

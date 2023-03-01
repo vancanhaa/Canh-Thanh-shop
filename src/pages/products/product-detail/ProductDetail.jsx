@@ -179,15 +179,20 @@ function ProductDetail() {
                   </div>
 
                   <div className="users-rat">
-                    <input className="user-comment" type="text" value={'Sản phẩm tốt rất ổn '} disabled/>
-                    <div className="raiting">
-                    <StarsRating
-                      value={value}
-                      onChange={(value) => {
-                        setValue(value);
-                      }}
+                    <input
+                      className="user-comment"
+                      type="text"
+                      value={"Sản phẩm tốt rất ổn "}
+                      disabled
                     />
-                  </div>
+                    <div className="raiting">
+                      <StarsRating
+                        value={value}
+                        onChange={(value) => {
+                          setValue(value);
+                        }}
+                      />
+                    </div>
                   </div>
                 </div>
               </div>

@@ -2,17 +2,21 @@
 import React, { useEffect, useState } from "react";
 import MainLayout from "../../../layouts/main-layout/MainLayout";
 import "./product.scss";
-import { Col, Pagination, Row, Select } from "antd";
+import { Col, notification, Pagination, Row, Select } from "antd";
 import Menubar from "./components/menu-bar/Menubar";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProductList } from "../../../stores/actions/product.action";
 import { v4 } from "uuid";
 import common from "../../../utils/common";
 import ModalAddCart from "./components/modal-add-cart/ModalAddCart";
+import { ROUTE } from "../../../constants";
+import confirm from "antd/es/modal/confirm";
 
 function Product() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const userInfo = useSelector((state) => state.user.userInfoState.data);
   const productState = useSelector((state) => state.product);
   let { products, textSearch, filter, pagination } = productState;
   let { page, limit, total } = pagination;
@@ -47,6 +51,15 @@ function Product() {
   const [indexProduct, setIndexProduct] = useState(0);
 
   const handleOpenAddCartModal = (index) => {
+    if (!userInfo) {
+      notification.warning({
+        message: "Bạn cần đăng nhập trước khi mua hàng!",
+        style: { border: "3px solid #fcaf17" },
+        duration: 2
+      })
+      navigate(ROUTE.LOGIN);
+      return;
+    }
     setOpenAddCartModal(true);
     setIndexProduct(index);
   };
