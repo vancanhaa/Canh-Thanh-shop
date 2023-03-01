@@ -23,6 +23,7 @@ function CartInner() {
       onOk: () => handleDeleteItem(index),
     });
   };
+  
   const handleDeleteItem = (index) => {
     let newProducts = [...cart.products]
     newProducts.splice(index, 1)

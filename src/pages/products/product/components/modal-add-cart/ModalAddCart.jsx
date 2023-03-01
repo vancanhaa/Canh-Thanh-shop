@@ -1,4 +1,5 @@
-import { Col, Modal, Row } from "antd";
+import { CheckOutlined } from "@ant-design/icons";
+import { Col, Modal, notification, Row } from "antd";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { v4 } from "uuid";
@@ -21,7 +22,9 @@ function ModalAddCart({
   },
 }) {
   const dispatch = useDispatch();
+
   const cart = useSelector((state) => state.cart.cart);
+
   const userInfo = useSelector((state) => state.user.userInfoState.data);
 
   const [options, setOptions] = useState({});
@@ -36,7 +39,18 @@ function ModalAddCart({
     setOptions({});
     setValueQuantity(1);
   };
+
   const [valueQuantity, setValueQuantity] = useState(1);
+  const showMessage = ({ itemAddCart, options, valueQuantity }) => {
+    // message.success("Success!");
+    notification.info({
+      message: `Đã thêm thành công ${valueQuantity} sản phẩm`,
+      description: `${itemAddCart.name}`,
+      placement: "topRight",
+      icon: <CheckOutlined />,
+    });
+    addCart: handleAddItemToCart({ itemAddCart, options, valueQuantity });
+  };
   const handleAddItemToCart = ({ itemAddCart, options, valueQuantity }) => {
     const newItemAddCart = {
       id: itemAddCart.id,
@@ -55,6 +69,7 @@ function ModalAddCart({
       );
     });
     let newProductsInCart = [...cart.products];
+
     if (isProductAvailabel) {
       newProductsInCart = newProductsInCart.map((product) => {
         product = {
@@ -69,7 +84,6 @@ function ModalAddCart({
     }
 
     if (cart.id && cart.id !== "") {
-      console.log("availabel");
       dispatch(
         fetchChangeCart({
           idUser: cart.id,
@@ -91,7 +105,7 @@ function ModalAddCart({
     <Modal
       open={openAddCartModal}
       title="Thêm vào giỏ hàng"
-      onCancel={handleResetOption}
+      onCancel={() => setOpenAddCartModal(false)}
       wrapClassName="modal__add-cart"
       width={860}
     >
@@ -208,7 +222,7 @@ function ModalAddCart({
                   <button
                     className="btn-submit-cart"
                     onClick={() =>
-                      handleAddItemToCart({
+                      showMessage({
                         itemAddCart,
                         options,
                         valueQuantity,

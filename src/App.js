@@ -25,6 +25,7 @@ function App() {
           <Route path={ROUTE.LOGIN} element={<UserLogin />} />
           <Route path={ROUTE.REGISTER} element={<UserRegister />} />
           <Route path={ROUTE.FORGOT_PASSWORD} element={<ForgotPassword />} />
+          
         </Routes>
       </div>
 
