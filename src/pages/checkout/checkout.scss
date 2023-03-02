@@ -1,0 +1,33 @@
+.checkout {
+    width: 100%;
+    min-height: 100vh;
+    background-color: #f8f8f8;
+    .checkout-container {
+        width: 100%;
+        max-width: 1240px;
+        margin-left: auto;
+        margin-right: auto;
+        padding-top: 30px;
+        .checkout__header {
+            a {
+                display: block;
+                font-size: 3.6rem;
+                color: var(--primary-color);
+                font-weight: 800;
+                &:hover {
+                    opacity: 0.8;
+                }
+            }
+        }
+        .checkout__body {
+            padding: 0 10px;
+            margin-top: 30px;
+            h3 {
+                font-size: 1.8rem;
+                color: var(--title-color);
+                font-weight: 500;
+                margin-bottom: 15px;
+            }   
+        }
+    }
+}
