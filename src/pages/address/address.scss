@@ -127,7 +127,6 @@
     font-size: 1.4rem;
     padding-right: 30px;
     text-overflow: ellipsis;
-    // box-shadow: none;
   }
   .ant-select-arrow {
     font-size: 1.4rem;
@@ -159,7 +158,9 @@
     font-size: 1.4rem;
     font-weight: 500;
   }
-
+  .ant-form-item {
+    margin-bottom: 0;
+  }
   .ant-modal {
     width: 100% !important;
     max-width: 800px !important;
@@ -173,9 +174,6 @@
       font-size: 1.8rem;
       font-weight: 600;
     }
-  }
-  .ant-form-item {
-    margin-bottom: 0;
   }
   .ant-modal-footer {
     display: none;

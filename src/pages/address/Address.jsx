@@ -295,7 +295,7 @@ function Address() {
                     >
                       <Select
                         ref={districtUref}
-                        placeholder="Quận, huyện, thị xã"
+                        placeholder="Quận, huyện"
                         showSearch
                         optionFilterProp="children"
                         onChange={handleSelectDistrict}

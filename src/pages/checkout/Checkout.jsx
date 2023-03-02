@@ -1,15 +1,19 @@
 import { Checkbox, Col, Form, Input, Row, Select } from "antd";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { v4 } from "uuid";
 import { ROUTE } from "../../constants";
 import FullLayout from "../../layouts/full-layout/FullLayout";
 import {
   fetchListDistricts,
   fetchListWards,
 } from "../../stores/actions/address.action";
+import { fetchCart } from "../../stores/actions/cart.action";
+import common from "../../utils/common";
 import "./checkout.scss";
 function Checkout() {
+  const userInfo = useSelector((state) => state.user.userInfoState.data);
   const { TextArea } = Input;
   const dispatch = useDispatch();
   const provinceUref = useRef();
@@ -17,6 +21,11 @@ function Checkout() {
   const wardUref = useRef();
   const [form] = Form.useForm();
   const addressState = useSelector((state) => state.address);
+  const cart = useSelector((state) => state.cart.cart);
+  useEffect(() => {
+    if (userInfo) dispatch(fetchCart({ idUser: userInfo.id }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const { address, provinces, districts, wards } = addressState;
 
@@ -25,6 +34,27 @@ function Checkout() {
     district: {},
     ward: {},
   });
+
+  const paymentMethods = [
+    {
+      value: 1,
+      label: "Thanh toán qua thẻ thanh toán, ứng dụng ngân hàng VNPAY",
+      url_icon:
+        "https://bizweb.dktcdn.net/assets/themes_support/payment_icon_vnpay.png",
+    },
+    {
+      value: 2,
+      label: "Thanh toán qua mã QR - VNPAY",
+      url_icon:
+        "https://bizweb.dktcdn.net/assets/themes_support/vnpayqr-icon.png",
+    },
+    {
+      value: 3,
+      label: "Thanh toán khi nhận hàng (COD)",
+      url_icon:
+        "https://png.pngtree.com/png-clipart/20200224/original/pngtree-pack-cash-icon-cartoon-style-png-image_5208194.jpg",
+    },
+  ];
 
   const handleSelectProvice = (value) => {
     const provinceSelect = provinces.find((item) => item.code === value);
@@ -63,6 +93,10 @@ function Checkout() {
     form.resetFields();
   };
 
+  const handleOrder = () => {
+    form.submit()
+  }
+
   return (
     <FullLayout>
       <div className="checkout">
@@ -73,12 +107,16 @@ function Checkout() {
             </Row>
           </div>
           <div className="checkout__body">
-            <Row justify="space-between" gutter={[16, 16]}>
-              <Col lg={15} md={15} sm={24} xs={24}>
+            <Row justify="center" align="top" gutter={[16, 16]}>
+              <Col lg={14} md={20} sm={24} xs={24}>
                 <Row>
-                  <Col span={24}>
+                  <Col span={24} className="checkout-info-container">
                     <h3>Thông tin giao hàng</h3>
-                    <Form form={form} onFinish={handleSave}>
+                    <Form
+                      form={form}
+                      onFinish={handleSave}
+                      className="checkout-info-form"
+                    >
                       <Row
                         align="top"
                         justify="space-between"
@@ -195,7 +233,7 @@ function Checkout() {
                               >
                                 <Select
                                   ref={districtUref}
-                                  placeholder="Quận, huyện, thị xã"
+                                  placeholder="Quận, huyện"
                                   showSearch
                                   optionFilterProp="children"
                                   onChange={handleSelectDistrict}
@@ -272,16 +310,158 @@ function Checkout() {
                   </Col>
                 </Row>
                 <Row>
-                  <Col lg={12} md={12} sm={24} xs={24}>
-                    <h3>Thanh toán</h3>
-                  </Col>
-                  <Col lg={12} md={12} sm={24} xs={24}>
-                    <h3>Vận chuyển</h3>
+                  <Col span={24} className="checkout-payments-container">
+                    <Row justify="space-between" align="top" gutter={[8, 16]} type="flex">
+                      <Col lg={24} md={24} sm={24} xs={24}>
+                        <div className="checkout-payments">
+                          <h3>Thanh toán</h3>
+                          <div className="payments-wrap">
+                            {paymentMethods.map((payment, index) => {
+                              return (
+                                <div className="payments">
+                                  <div className="radio-wrap">
+                                    <div className="radio-input">
+                                      <input
+                                        type="radio"
+                                        className="input-radio"
+                                      />
+                                    </div>
+                                  </div>
+                                  <label className="radio-label">
+                                    <span className="radio-label__title">
+                                      {payment.label}
+                                    </span>
+                                    <span className="radio-label__accessory">
+                                      <i
+                                        className="payment-icon"
+                                        style={{
+                                          backgroundImage: `url(${payment.url_icon})`,
+                                        }}
+                                      ></i>
+                                    </span>
+                                  </label>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        </div>
+                      </Col>
+                      <Col lg={24} md={24} sm={24} xs={24}>
+                        <div className="checkout-transportation_cost">
+                          <h3>Vận chuyển</h3>
+                          <div className="transportation_cost">
+                            <div className="radio-wrap">
+                              <div className="radio-input">
+                                <input
+                                  type="radio"
+                                  className="input-radio"
+                                  checked
+                                />
+                              </div>
+                            </div>
+                            <label className="radio-label">
+                              <span className="radio-label__title">
+                                Phí vận chuyển
+                              </span>
+                              <span className="radio-label__accessory">
+                                30.000đ
+                              </span>
+                            </label>
+                          </div>
+                        </div>
+                      </Col>
+                    </Row>
                   </Col>
                 </Row>
               </Col>
-              <Col lg={9} md={9} sm={24} xs={24}>
-                <h3>Đơn hàng</h3>
+              <Col
+                lg={10}
+                md={20}
+                sm={24}
+                xs={24}
+                className="checkout-cart-container"
+              >
+                <div className="checkout-cart-wrap">
+                  <h3>Đơn hàng</h3>
+                  <div className="cart__availabel">
+                    <div className="cart__inner">
+                      {cart.products?.map((item, index) => {
+                        return (
+                          <div className="cart__item" key={v4()}>
+                            <img
+                              src={`${item["image_url"]}`}
+                              alt=""
+                              width={55}
+                            />{" "}
+                            <div className="cart__item-body">
+                              <div className="description-item-wrap">
+                                <div className="cart-item">
+                                  <div className="cart-item__name-options">
+                                    <div className="cart-item__name">
+                                      {item.name}
+                                    </div>
+                                    <div className="cart-item__options">
+                                      {item.color
+                                        ? `${item.color} / ${item.size}`
+                                        : `${item.size}`}
+                                    </div>
+                                  </div>
+                                  <div className="cart-item__price">
+                                    {common.formatPrice(item.price)}đ
+                                  </div>
+                                </div>
+                              </div>
+                              <div className="cart__item-bottom">
+                                <div className="cart-item__quantity">
+                                  SL: {item.quantity}
+                                </div>
+                                <div className="cart-item__total-price">
+                                  Tổng cộng:{" "}
+                                  <span>
+                                    {common.formatPrice(
+                                      item.price * item.quantity
+                                    )}
+                                    đ
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                    <div className="cart__bottom">
+                      <p className="cart__total-price">
+                        <span>Tạm tính:</span>
+                        <strong>
+                          {common.formatPrice(
+                            cart.products?.reduce(
+                              (arg, cur) => arg + cur.price * cur.quantity,
+                              0
+                            )
+                          )}
+                          đ
+                        </strong>
+                      </p>
+                      <p className="cart__shipping">
+                        <span>Phí vận chuyển:</span>
+                        <strong>30.000đ</strong>
+                      </p>
+                      <p className="checkout-total-price">
+                        <span>Tổng đơn hàng:</span>
+                        <strong>
+                          {common.formatPrice(
+                            cart.products?.reduce(
+                              (arg, cur) => arg + cur.price * cur.quantity,
+                              0
+                            ) + 30000
+                          )}đ
+                        </strong>
+                      </p>
+                      <button className="order-btn" onClick={handleOrder}>Đặt hàng</button>
+                    </div>
+                  </div>
+                </div>
               </Col>
             </Row>
           </div>
