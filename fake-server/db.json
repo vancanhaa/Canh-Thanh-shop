@@ -9,12 +9,7 @@
       "last_name": "pham",
       "phone": "123456789",
       "createdAt": 1676033311499,
-      "updateAt": 1676033311499,
-      "address": [
-        {
-          "province": "Quang Nam"
-        }
-      ]
+      "updateAt": 1676033311499
     },
     {
       "email": "haihoang@gmail.com",
@@ -139,8 +134,23 @@
           "image_url": "https://bizweb.dktcdn.net/100/438/408/products/apm3299-hog-5.jpg?v=1673602563443"
         }
       ],
+      "riviews": [
+        {
+          "idUser": "1",
+          "first_name": "hoang",
+          "last_name": "hai",
+          "rating": "4",
+          "comment": "Sản phẩm chât lượng"
+        },
+        {
+          "idUser": "2",
+          "first_name": "tien",
+          "last_name": "thanh",
+          "rating": "5",
+          "comment": "Sản phẩm quá tệ"
+        }
+      ],
       "size": [
-        "XS",
         "S",
         "M",
         "L",

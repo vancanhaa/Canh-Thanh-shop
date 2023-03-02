@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { fetchProductById, fetchProductList } from "../actions/product.action";
 const productInitialState = {
   products: [],
-  product: [],
+  product: {},
   textSearch: "",
   filter: {},
   pagination: {

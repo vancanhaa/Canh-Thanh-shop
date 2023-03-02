@@ -15,6 +15,97 @@
                     border-radius: 25px;
                }
           }
+          .riview-product {
+            width: 100%;
+            background-color: #f2f2f2;
+            margin: 24px 0;
+            border: 2px solid #c4cdd5;
+            border-radius: 8px;
+            padding: 0 16px 16px;
+            .form-riview {
+              margin-bottom: 24px;
+              .title-riview {
+                font-style: normal;
+                font-weight: 600;
+                font-size: 22px;
+                line-height: 22px;
+                line-height: 23px;
+                text-transform: uppercase;
+                padding: 12px 9px;
+                margin-top: 12px;
+                margin-bottom: 8px;
+              }
+  
+              .raiting {
+                width: 100%;
+                text-align: center;
+                margin: 8px 0;
+              }
+  
+              .input-riview {
+                width: 70%;
+                height: 40px;
+                display: inline;
+                border-radius: 4px;
+                border: none;
+                padding: 4px 8px;
+                outline: none;
+                font-size: 16px;
+              }
+  
+              .btn-riview {
+                height: 50px;
+                display: inline;
+                border-radius: 4px;
+                border: none;
+                padding: 8px 24px;
+                outline: none;
+                font-size: 14px;
+                background-color: #030d78;
+                color: #fff;
+                margin-left: 12px;
+                cursor: pointer;
+              }
+
+            }
+            hr {
+              border: 2px solid #62676d;
+            }
+
+            //
+            .users-riview {
+              margin-top: 24px;
+              border: 1px solid #030d78;
+              background-color: #c9ccd3;
+              padding: 12px 12px;
+              border-radius: 12px;
+              .info-user {
+                display: flex;
+                align-items: center;
+                width: 100%;
+                .name-user {
+                  margin-left: 12px;
+                  font-size: 16px;
+                  font-style: oblique;
+                  font-weight: bold;
+                  color: #000;
+                }
+              }
+
+              .users-rat {
+                margin: 8px 0;
+                display: flex;
+                justify-content: space-between;
+                .user-comment {
+                  width: 50%;
+                  padding: 12px ;
+                  border-radius: 8px;
+                  background-color: #fff;
+                  color: #191818;
+                }
+              }
+            }
+          }
 
           .product-grid-item-info {
                width: 100%;
@@ -57,6 +148,8 @@
                          .option-title {
                               font-size: 14px;
                               font-weight: 400;
+                              color: #17191C;
+                              margin-bottom: 12px;
                               span {
                                    font-weight: 500;
                                    font-size: 14px;
@@ -65,10 +158,55 @@
                                    margin: 0;
                                    width: 100%;
                                    color: #17191C;
+                                   margin-left: 8px;
+
                               }
                          }
-                         .swacth-img {
-                         }
+                         .options-color {
+                          .option-color__label {
+                            position: relative;
+                            border-radius: 6px;
+                            width: 50px;
+                            height: 50px;
+                 
+                            input {
+                              width: 50px;
+                              max-height: 50;
+                              cursor: pointer;
+                              &[type="radio"] {
+                                display: inline;
+                                margin: 0;
+                                padding: 0;
+                                height: 50px;
+                                position: absolute;
+                                top: 0;
+                                left: 0;
+                                background: transparent;
+                                outline: none;
+                                opacity: 0;
+                              }
+                              &:hover + label {
+                                border: 2px solid var(--primary-color);
+                              }
+                              &:checked + label {
+                                border: 2px solid var(--primary-color);
+                              }
+                            }
+                            label {
+                              border: 2px solid transparent;
+                              padding: 2px;
+                              max-height: 50px;
+                              max-width: 50px;
+                              border-radius: 6px;
+                              span {
+                                display: block;
+                                width: 40px;
+                                height: 40px;
+                                border-radius: 4px;
+                              }
+                            }
+                          }
+                        }
                     }
                     .swacth-size {
                          font-size: 14px;
@@ -77,73 +215,149 @@
                               margin: 10px 0;
                               font-weight: 400;
                               span {
-                                   
-                              }
-                         }
-                         button {
-                              width: 50px;
-                              height: 50px;
-                              margin-right: 12px;
-                              border: none;
-                              border-radius: 8px;
-                              cursor: pointer;
-                              font-size: 18px;
-                              font-weight: bold;
-                         }
-                         button:hover {
-                              background-color: #feecc7;
-                              color: #fcaf17;
-                         }
-                    }
-                    .from-action-addcart {
-                         padding: 9px 0;
-                         display: flex;
-                         .qty-ant {
-                              display: flex;
-                              margin-right: 24px;
-                              button {
-                                   width: 40px;
-                                   height: 40px;
-                                   outline: none;
-                                   background-color: #fff;
-                                   border: 1px solid #ccc;
-                                   font-size: 14px;
-                                   border-radius: 4px;
-                                   cursor: pointer;
-                                   font-size: 20px;
+                                   font-size: 16px;
                                    font-weight: 500;
-                              }
-                              .qty-input {
-                                   width: 40px;
-                                   max-height: 40px;
-                                   text-align: center;
-                                   border-top: 1px solid #ccc;
-                                   border-bottom: 1px solid #ccc;
-                                   background-color: #fff;
-                                   font-size: 20px;
-                                   font-weight: 500;
-                                   border-radius: 4px;
-                                   border-left: none;
-                                   border-right: none;
+                                   color: #17191C;
+                                   margin-left: 8px;
                               }
                          }
-
-                         .btn-add__cart {
-                              color: #fff;
-                              background-color: #fcaf17;
-                              font-weight: 500;
-                              border-radius: 4px;
+                         .option-size__label {
+                          text-align: center;
+                          border-radius: 6px;
+                          background-color: #f6f6f6;
+                          color: #62676d;
+                          font-weight: 500;
+                          font-size: 1.8rem;
+                          position: relative;
+                          overflow: hidden;
+                          input {
+                            width: 80px;
+                            height: 50px;
+                            cursor: pointer;
+                            &[type="radio"] {
+                              display: inline;
+                              margin: 0;
+                              padding: 0;
+                              position: absolute;
+                              top: 0;
+                              left: 0;
+                              background: transparent;
                               outline: none;
-                              border: none;
-                              width: 350px;
-                              font-size: 16px;
-                              font-weight: bold;
-                         }
-                         .btn-add__cart:hover {
+                              opacity: 0;
+                            }
+                            &:hover + label {
+                              color: var(--primary-color);
                               background-color: #feecc7;
-                              color: #fcaf17;
-                         }
+                            }
+                            &:checked + label {
+                              color: #fff;
+                              background-color: var(--primary-color);
+                            }
+                          }
+                          label {
+                            width: 100%;
+                            height: 100%;
+                            margin: 0;
+                            padding: 6px 0;
+                          }
+                        }
                     }
+
+                    .submit-cart {
+                      margin-top: 30px;
+                      display: flex;
+                      align-items: center;
+                      .item-quantity {
+                        display: inline-flex;
+                        .item-quantity__input {
+                          display: inline-block;
+                          padding: 0;
+                          text-align: center;
+                          width: 40px;
+                          min-height: 26px;
+                          border: 1px solid #d9d9d9;
+                          height: 40px;
+                          margin: 0;
+                          border-left: none;
+                          border-right: none;
+                          font-style: normal;
+                          font-weight: 700;
+                          font-size: 16px;
+                          line-height: 18px;
+                          color: #62676d;
+                          background-color: #fff;
+                          &::-webkit-outer-spin-button,
+                          &::-webkit-inner-spin-button {
+                            -webkit-appearance: none;
+                            margin: 0;
+                          }
+                          &[type="number"] {
+                            -moz-appearance: textfield;
+                          }
+                          &:focus-visible {
+                            border: 2px solid #000;
+                          }
+                        }
+                        button {
+                          line-height: 24px;
+                          padding: 0;
+                          margin: 0;
+                          width: 40px;
+                          background-color: #fff;
+                          height: 40px;
+                          border: 1px solid #d9d9d9;
+                          display: inline-flex;
+                          align-items: center;
+                          justify-content: center;
+                          color: #62676d;
+                          font-size: 20px;
+                          &.item-quantity__btn--minus {
+                            border-radius: 4px 0 0 4px;
+                            &:disabled {
+                              color: #dedddd;
+                              cursor: not-allowed;
+                              &:hover {
+                                background-color: #fff;
+                              }
+                            }
+                          }
+                          &.item-quantity__btn--plus {
+                            border-radius: 0 4px 4px 0;
+                          }
+                          &:hover {
+                            background-color: var(--primary-color);
+                            color: #fff;
+                          }
+                        }
+                      }
+                      .submit-cart__btn-wrap {
+                        flex: 1;
+                        margin-left: 30px;
+                        .btn-submit-cart {
+                          width: 100%;
+                          min-height: 48px;
+                          background-color: var(--primary-color);
+                          color: #fff;
+                          font-size: 1.6rem;
+                          font-weight: 600;
+                          border: none;
+                          outline: none;
+                          border-radius: 6px;
+                          &:hover {
+                            cursor: pointer;
+                            opacity: 0.8;
+                          }
+                          &:disabled {
+                            cursor: not-allowed;
+                            opacity: 0.5;
+                            &:hover {
+                              opacity: 0.5;
+                            }
+                          }
+                        }
+                      }
+                    }
+                    
                     // ship icon
                     .product-policy {
                          display: flex;

@@ -1,8 +1,7 @@
+import { Link } from "react-router-dom";
 import MainLayout from "../../layouts/main-layout/MainLayout";
 
 function Home() {
-
-
   return (
     <MainLayout>
       <div className="home-container">
@@ -23,9 +22,9 @@ function Home() {
                     <h1 className="mt-2 mb-5 light-color">
                       <span className="gray-color">Winter </span>Collection
                     </h1>
-                    <a href="#" className="btn btn-main">
+                    <Link to={`/product`} className="btn btn-main">
                       Shop Now
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -37,7 +36,11 @@ function Home() {
             <div className="row">
               <div className="col-lg-4 col-sm-12 col-md-6">
                 <div className="cat-item mb-4 mb-lg-0">
-                  <img src="assets/images/cat-1.jpg" alt="" className="img-fluid" />
+                  <img
+                    src="assets/images/cat-1.jpg"
+                    alt=""
+                    className="img-fluid"
+                  />
                   <div className="item-info">
                     <p className="mb-0">Stylish Leather watch</p>
                     <h4 className="mb-4">
@@ -53,7 +56,11 @@ function Home() {
 
               <div className="col-lg-4 col-sm-12 col-md-6">
                 <div className="cat-item mb-4 mb-lg-0">
-                  <img src="assets/images/cat-2.jpg" alt="" className="img-fluid" />
+                  <img
+                    src="assets/images/cat-2.jpg"
+                    alt=""
+                    className="img-fluid"
+                  />
 
                   <div className="item-info">
                     <p className="mb-0">Ladies hand bag</p>
@@ -70,7 +77,11 @@ function Home() {
 
               <div className="col-lg-4 col-sm-12 col-md-6">
                 <div className="cat-item">
-                  <img src="assets/images/cat-3.jpg" alt="" className="img-fluid" />
+                  <img
+                    src="assets/images/cat-3.jpg"
+                    alt=""
+                    className="img-fluid"
+                  />
                   <div className="item-info">
                     <p className="mb-0">Trendy shoe</p>
                     <h4 className="mb-4">
