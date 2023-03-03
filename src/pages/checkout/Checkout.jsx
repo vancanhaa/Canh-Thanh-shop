@@ -1,18 +1,26 @@
-import { Checkbox, Col, Form, Input, Row, Select } from "antd";
+import { Checkbox, Col, Form, Input, notification, Row, Select } from "antd";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { v4 } from "uuid";
 import { ROUTE } from "../../constants";
+import {
+  PAYMENTS_METHOD,
+  SHIPPING_PRICE,
+} from "../../constants/checkout.const";
 import FullLayout from "../../layouts/full-layout/FullLayout";
 import {
+  fetchAddress,
   fetchListDistricts,
+  fetchListProvinces,
   fetchListWards,
 } from "../../stores/actions/address.action";
-import { fetchCart } from "../../stores/actions/cart.action";
+import { fetchCart, fetchChangeCart } from "../../stores/actions/cart.action";
+import { fetchAddOrder } from "../../stores/actions/order.action";
 import common from "../../utils/common";
 import "./checkout.scss";
 function Checkout() {
+  const navigate = useNavigate()
   const userInfo = useSelector((state) => state.user.userInfoState.data);
   const { TextArea } = Input;
   const dispatch = useDispatch();
@@ -22,39 +30,62 @@ function Checkout() {
   const [form] = Form.useForm();
   const addressState = useSelector((state) => state.address);
   const cart = useSelector((state) => state.cart.cart);
-  useEffect(() => {
-    if (userInfo) dispatch(fetchCart({ idUser: userInfo.id }));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const { address, provinces, districts, wards } = addressState;
-
   const [newAddress, setNewAddress] = useState({
     province: {},
     district: {},
     ward: {},
   });
+  const totalOrderNotShipping = cart.products.reduce(
+    (agr, cur, index) => agr + cur.price * cur.quantity,
+    0
+  );
+  useEffect(() => {
+    if (userInfo) dispatch(fetchCart({ idUser: userInfo.id }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  const paymentMethods = [
-    {
-      value: 1,
-      label: "Thanh toán qua thẻ thanh toán, ứng dụng ngân hàng VNPAY",
-      url_icon:
-        "https://bizweb.dktcdn.net/assets/themes_support/payment_icon_vnpay.png",
-    },
-    {
-      value: 2,
-      label: "Thanh toán qua mã QR - VNPAY",
-      url_icon:
-        "https://bizweb.dktcdn.net/assets/themes_support/vnpayqr-icon.png",
-    },
-    {
-      value: 3,
-      label: "Thanh toán khi nhận hàng (COD)",
-      url_icon:
-        "https://png.pngtree.com/png-clipart/20200224/original/pngtree-pack-cash-icon-cartoon-style-png-image_5208194.jpg",
-    },
-  ];
+  useEffect(() => {
+    dispatch(fetchListProvinces());
+  }, []);
+
+  const { address, provinces, districts, wards } = addressState;
+  useEffect(() => {
+    dispatch(fetchAddress({ id: userInfo.id }));
+  }, []);
+  let listAddressOptions = [];
+  if (address.id && address.id !== "" && address.list_address[0]) {
+    listAddressOptions = address.list_address.map((address, index) => {
+      return {
+        value: index,
+        label: `${address.specific_address}, ${address.ward.name}, ${address.district.name}, ${address.province.name}, Việt Nam`,
+      };
+    });
+  }
+  const fetchProvincesVietNam = (provinceCode, districtCode) => {
+    dispatch(fetchListProvinces());
+    dispatch(fetchListDistricts(provinceCode));
+    dispatch(fetchListWards(districtCode));
+  };
+  const handleSetInitValue = (value) => {
+    const addressSelector = address.list_address[value];
+    fetchProvincesVietNam(
+      addressSelector.province.code,
+      addressSelector.district.code
+    );
+    form.setFieldsValue({
+      full_name: addressSelector.full_name,
+      phone_number: addressSelector.phone_number,
+      specific_address: addressSelector.specific_address,
+      provinces: addressSelector.province.code,
+      districts: addressSelector.district.code,
+      wards: addressSelector.ward.code,
+    });
+    setNewAddress({
+      province: { ...addressSelector.province },
+      district: { ...addressSelector.district },
+      ward: { ...addressSelector.ward },
+    });
+  };
 
   const handleSelectProvice = (value) => {
     const provinceSelect = provinces.find((item) => item.code === value);
@@ -84,19 +115,81 @@ function Checkout() {
     });
     wardUref.current.blur();
   };
-  const onSearch = (value) => {
-    console.log("search:", value);
+
+  const onSearch = (value) => {};
+  const handleSave = (value) => {
+    console.log(value);
   };
-  const handleSave = () => {};
 
   const handleCancel = (e) => {
     form.resetFields();
   };
 
   const handleOrder = () => {
-    form.submit()
-  }
-
+    form.validateFields();
+    const valueForm = form.getFieldsValue();
+    const {
+      full_name,
+      note_shipping,
+      phone_number,
+      provinces,
+      districts,
+      wards,
+      specific_address,
+    } = valueForm;
+    if (
+      !full_name ||
+      !phone_number ||
+      !provinces ||
+      !districts ||
+      !wards ||
+      !specific_address
+    )
+      return;
+    if (!paymentMethod) {
+      notification.error({
+        message: "Vui lòng chọn phương thức thanh toán!",
+        style: { border: "2px solid #ff623d" },
+        duration: 2,
+      });
+      return;
+    }
+    const address_shipping = `${specific_address}, ${newAddress.ward.name}, ${newAddress.district.name}, ${newAddress.province.name}`;
+    const paymentOrder = PAYMENTS_METHOD.find(
+      (method, index) => method.value === paymentMethod
+    );
+    const payload = {
+      id: v4(),
+      id_user: userInfo.id,
+      time_create: new Date().toLocaleString(),
+      cart: cart.products,
+      checkout_address: {
+        full_name,
+        address: address_shipping,
+        phone_number,
+        note_shipping,
+      },
+      payment_method: paymentMethod,
+      status_order: "Chưa vận chuyển",
+      status_payment: false
+    };
+    dispatch(fetchAddOrder(payload))
+    const data = {
+      products: []
+    }
+    dispatch(fetchChangeCart({idUser: userInfo.id, data}))
+    navigate(ROUTE.ADDRESS)
+  };
+  const [paymentMethod, setPaymentMethod] = useState();
+  const [shippingPrice, setShippingPrice] = useState(30000);
+  useEffect(() => {
+    if (totalOrderNotShipping > 499000) {
+      setShippingPrice(0);
+    } else {
+      setShippingPrice(30000);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cart]);
   return (
     <FullLayout>
       <div className="checkout">
@@ -125,19 +218,15 @@ function Checkout() {
                         <Col span={24}>
                           <Form.Item name="default_address">
                             <Select
-                              placeholder="Sổ địa chỉ"
-                              //   optionFilterProp="children"
-                              //   filterOption={(input, option) =>
-                              //     (option?.label ?? "")
-                              //       .toLowerCase()
-                              //       .includes(input.toLowerCase())
-                              //   }
-                              //   options={districts.map((item) => {
-                              //     return {
-                              //       value: item.code,
-                              //       label: item.name,
-                              //     };
-                              //   })}
+                              onChange={handleSetInitValue}
+                              placeholder="Chọn địa chỉ từ sổ địa chỉ của bạn"
+                              optionFilterProp="children"
+                              filterOption={(input, option) =>
+                                (option?.label ?? "")
+                                  .toLowerCase()
+                                  .includes(input.toLowerCase())
+                              }
+                              options={listAddressOptions}
                             />
                           </Form.Item>
                         </Col>
@@ -195,7 +284,7 @@ function Checkout() {
                                 rules={[
                                   {
                                     required: true,
-                                    message: "this is err",
+                                    message: "Chọn tỉnh, thành phố!",
                                   },
                                 ]}
                               >
@@ -227,7 +316,7 @@ function Checkout() {
                                 rules={[
                                   {
                                     required: true,
-                                    message: "this is err",
+                                    message: "Chọn quận, huyện, thị xã!",
                                   },
                                 ]}
                               >
@@ -259,7 +348,7 @@ function Checkout() {
                                 rules={[
                                   {
                                     required: true,
-                                    message: "this is err",
+                                    message: "Chọn xã, phường, thị trấn!",
                                   },
                                 ]}
                               >
@@ -311,23 +400,39 @@ function Checkout() {
                 </Row>
                 <Row>
                   <Col span={24} className="checkout-payments-container">
-                    <Row justify="space-between" align="top" gutter={[8, 16]} type="flex">
+                    <Row
+                      justify="space-between"
+                      align="top"
+                      gutter={[8, 16]}
+                      type="flex"
+                    >
                       <Col lg={24} md={24} sm={24} xs={24}>
                         <div className="checkout-payments">
                           <h3>Thanh toán</h3>
-                          <div className="payments-wrap">
-                            {paymentMethods.map((payment, index) => {
+                          <div className={`payments-wrap`}>
+                            {PAYMENTS_METHOD.map((payment, index) => {
                               return (
-                                <div className="payments">
+                                <div className="payments" key={v4()}>
                                   <div className="radio-wrap">
                                     <div className="radio-input">
                                       <input
                                         type="radio"
                                         className="input-radio"
+                                        onChange={() => {
+                                          setPaymentMethod(payment.value);
+                                        }}
+                                        value={payment.value}
+                                        checked={
+                                          payment.value === paymentMethod
+                                        }
+                                        id={`payment-${payment.value}`}
                                       />
                                     </div>
                                   </div>
-                                  <label className="radio-label">
+                                  <label
+                                    className="radio-label"
+                                    htmlFor={`payment-${payment.value}`}
+                                  >
                                     <span className="radio-label__title">
                                       {payment.label}
                                     </span>
@@ -343,31 +448,46 @@ function Checkout() {
                                 </div>
                               );
                             })}
+                            <p>Vui lòng chọn phương thức thanh toán</p>
                           </div>
                         </div>
                       </Col>
                       <Col lg={24} md={24} sm={24} xs={24}>
                         <div className="checkout-transportation_cost">
                           <h3>Vận chuyển</h3>
-                          <div className="transportation_cost">
-                            <div className="radio-wrap">
-                              <div className="radio-input">
-                                <input
-                                  type="radio"
-                                  className="input-radio"
-                                  checked
-                                />
+                          {SHIPPING_PRICE.map((shipping, index) => {
+                            return (
+                              <div
+                              key={v4()}
+                                className={
+                                  "transportation_cost " +
+                                  (shipping.value === shippingPrice
+                                    ? ""
+                                    : "not-checked")
+                                }
+                              >
+                                <div className="radio-wrap">
+                                  <div className="radio-input">
+                                    <input
+                                      type="radio"
+                                      className="input-radio"
+                                      value={shipping.value}
+                                      onChange={() => {}}
+                                      checked={shipping.value === shippingPrice}
+                                    />
+                                  </div>
+                                </div>
+                                <label className="radio-label">
+                                  <span className="radio-label__title">
+                                    {shipping.label.name}
+                                  </span>
+                                  <span className="radio-label__accessory">
+                                    {shipping.label.price}
+                                  </span>
+                                </label>
                               </div>
-                            </div>
-                            <label className="radio-label">
-                              <span className="radio-label__title">
-                                Phí vận chuyển
-                              </span>
-                              <span className="radio-label__accessory">
-                                30.000đ
-                              </span>
-                            </label>
-                          </div>
+                            );
+                          })}
                         </div>
                       </Col>
                     </Row>
@@ -434,31 +554,29 @@ function Checkout() {
                       <p className="cart__total-price">
                         <span>Tạm tính:</span>
                         <strong>
-                          {common.formatPrice(
-                            cart.products?.reduce(
-                              (arg, cur) => arg + cur.price * cur.quantity,
-                              0
-                            )
-                          )}
-                          đ
+                          {common.formatPrice(totalOrderNotShipping)}đ
                         </strong>
                       </p>
                       <p className="cart__shipping">
                         <span>Phí vận chuyển:</span>
-                        <strong>30.000đ</strong>
+                        <strong>
+                          {shippingPrice
+                            ? common.formatPrice(shippingPrice) + "đ"
+                            : "Miễn phí"}
+                        </strong>
                       </p>
                       <p className="checkout-total-price">
                         <span>Tổng đơn hàng:</span>
                         <strong>
                           {common.formatPrice(
-                            cart.products?.reduce(
-                              (arg, cur) => arg + cur.price * cur.quantity,
-                              0
-                            ) + 30000
-                          )}đ
+                            totalOrderNotShipping + shippingPrice
+                          )}
+                          đ
                         </strong>
                       </p>
-                      <button className="order-btn" onClick={handleOrder}>Đặt hàng</button>
+                      <button className="order-btn" onClick={handleOrder}>
+                        Đặt hàng
+                      </button>
                     </div>
                   </div>
                 </div>

@@ -9,9 +9,10 @@ import CartInner from "./components/cart-inner/CartInner";
 import "./cart.scss";
 import MainLayout from "../../layouts/main-layout/MainLayout";
 import { ROUTE } from "../../constants";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Cart() {
+  const navigate = useNavigate()
   const dispatch = useDispatch();
   const userInfo = localStorageUlti("user_info", null).get();
   const cart = useSelector((state) => state.cart.cart);
@@ -100,7 +101,9 @@ function Cart() {
                 )}{" "}
                 đ
               </span>
-              <button>Đặt hàng</button>
+              <button onClick={() => {
+                navigate(ROUTE.CHECK_OUT)
+              }}>Đặt hàng</button>
             </div>
           </div>
         </Col>
