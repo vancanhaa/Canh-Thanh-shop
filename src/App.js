@@ -11,7 +11,7 @@ import Product from "./pages/products/product/Product";
 import ProductDetail from "./pages/products/product-detail/ProductDetail";
 import Address from "./pages/address/Address";
 import Account from "./pages/account/Account";
-import Profile from "./pages/account/components/Profile";
+import Profile from "./pages/account/components/profile/Profile";
 import Order from "./pages/account/components/order/Order";
 
 function App() {

@@ -171,14 +171,15 @@ function Checkout() {
       },
       payment_method: paymentMethod,
       status_order: "Chưa vận chuyển",
-      status_payment: false
+      status_payment: false,
+      total_order: totalOrderNotShipping + shippingPrice
     };
     dispatch(fetchAddOrder(payload))
     const data = {
       products: []
     }
     dispatch(fetchChangeCart({idUser: userInfo.id, data}))
-    navigate(ROUTE.ADDRESS)
+    navigate(ROUTE.ORDER)
   };
   const [paymentMethod, setPaymentMethod] = useState();
   const [shippingPrice, setShippingPrice] = useState(30000);

@@ -16,10 +16,10 @@
     }
 
     .address-body {
-      padding: 20px 30px;
       background-color: #fff;
       border-radius: 8px;
-      min-height: 70vh;
+      min-height: calc(100vh - 270px);
+      padding: 20px 30px;
       .address-body__header {
         font-size: 1.8rem;
         display: flex;
@@ -99,7 +99,7 @@
             margin-bottom: 0.6rem;
             strong {
               display: block;
-              width: 120px;
+              min-width: 120px;
               color: #7a7a9d;
               font-weight: 500;
             }

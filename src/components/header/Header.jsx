@@ -68,6 +68,9 @@ function Header() {
           </div>
           <div className="header-account__menu">
             <ul>
+            <li>
+                <Link to={ROUTE.PROFILE}>Tài khoản của tôi</Link>
+              </li>
               <li>
                 <a href="#!">Đổi mật khẩu</a>
               </li>

@@ -9,6 +9,7 @@
         margin-left: auto;
         margin-right: auto;
         padding: 50px 10px;
+        min-height: calc(100vh - 100px);
         .account-header {
             text-align: center;
             color: var(--primary-color);
@@ -18,6 +19,9 @@
         }
         .account-menu_bar {
             background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 1px 2px rgba(0, 0, 0, 0.05);
+            min-height: calc(100vh - 270px);
             .menu_bar-header {
                 padding: 30px 20px 0 20px;
                 .menu_bar-avatar {
@@ -27,7 +31,7 @@
                         display: flex;
                         justify-content: center;
                         align-items: center;
-                        color: red;
+                        color: #ff4d4f;
                     span {
                         padding: 10px;
                         border-radius: 50%;
@@ -49,6 +53,7 @@
                     font-size: 1.8rem;
                     width: 100%;
                     font-weight: 600;
+                    margin-top: 10px;
                 }
             }
             .menu_bar-body {
@@ -61,8 +66,20 @@
                         color: var(--primary-color);
                         background-color: #feeeea;
                         font-weight: 500;
+                        
+                            svg {
+                                color: #ff4d4f;
+                            }
+                        
+                    }
+                    &:hover {
+                        color: var(--primary-color);
+                        svg {
+                            color: #ff4d4f;
+                        }
                     }
                 }
+
             }
         }
     }
