@@ -10,6 +10,9 @@ import Home from "./pages/home/Home";
 import Product from "./pages/products/product/Product";
 import ProductDetail from "./pages/products/product-detail/ProductDetail";
 import Address from "./pages/address/Address";
+import Account from "./pages/account/Account";
+import Profile from "./pages/account/components/Profile";
+import Order from "./pages/account/components/order/Order";
 
 function App() {
   return (
@@ -22,7 +25,12 @@ function App() {
         <Route path={ROUTE.CART} element={<Cart />} />
         <Route path={ROUTE.LOGIN} element={<UserLogin />} />
         <Route path={ROUTE.REGISTER} element={<UserRegister />} />
-        <Route path={ROUTE.ADDRESS} element={<Address />} />
+        <Route path={ROUTE.ACCOUNT} element={<Account />}>
+          <Route index element={<Profile />} />
+          <Route path={ROUTE.PROFILE} element={<Profile />} />
+          <Route path={ROUTE.ADDRESS} element={<Address />} />
+          <Route path={ROUTE.ORDER} element={<Order />} />
+        </Route>
       </Routes>
     </div>
   );

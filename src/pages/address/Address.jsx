@@ -1,6 +1,5 @@
 import { Checkbox, Col, Form, Input, Modal, Row, Select } from "antd";
 import React, { useEffect, useRef, useState } from "react";
-import MainLayout from "../../layouts/main-layout/MainLayout";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import "./address.scss";
 import { useDispatch, useSelector } from "react-redux";
@@ -127,10 +126,8 @@ function Address() {
   };
 
   return (
-    <MainLayout>
       <div className="address">
         <div className="address-container">
-          <div className="address-title">SỔ ĐỊA CHỈ</div>
           <div className="address-body">
             <div className="address-body__header">
               <div className="address-body__title">Địa chỉ của bạn</div>
@@ -395,7 +392,6 @@ function Address() {
           indexAddressEdit={indexAddressEdit}
         />
       </div>
-    </MainLayout>
   );
 }
 

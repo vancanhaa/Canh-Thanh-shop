@@ -43,14 +43,14 @@ function Header() {
   };
 
   const handleSearch = (value) => {
-    let textSearch = value;
-    if (value) {
+    let textSearch = value.trim();
+    if (textSearch) {
       dispatch(fetchProductList({ page: 1, limit: 12, textSearch }));
       dispatch(changeTextSearch(textSearch));
     }
     setValueSearch("");
     searchRef.current.blur();
-    if (value) navigate(ROUTE.PRODUCT);
+    if (textSearch) navigate(ROUTE.PRODUCT);
   };
 
   function AccountComponent({ userInfo }) {
