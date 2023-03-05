@@ -10,5 +10,6 @@ export const ROUTE = {
   ADDRESS: "/account/address",
   ACCOUNT: "/account",
   PROFILE: "/account/profile",
-  ORDER: "/account/order"
+  ORDER: "/account/order",
+  ORDER_DETAIL: "/account/order-detail/:idOrder"
 };

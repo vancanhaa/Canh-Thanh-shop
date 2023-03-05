@@ -35,11 +35,16 @@
                 opacity: 1;
             }
             .order-content__header {
-
+                font-weight: 500;
+                
             }
             .order-content__body {
                 .order-item {
                     margin-top: 15px;
+                    .order-item__price {
+                        color: var(--primary-color);
+                        font-weight: 500;
+                    }
                 }
             }
         }

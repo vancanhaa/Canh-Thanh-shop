@@ -1,6 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { notification } from "antd";
-import { fetchAddOrder, fetchOrder } from "../actions/order.action";
+import {
+  fetchAddOrder,
+  fetchOrder,
+  fetchOrderDetail,
+} from "../actions/order.action";
 
 const orderInitialState = {
   listOrder: [
@@ -15,6 +19,7 @@ const orderInitialState = {
       status_order: "",
     },
   ],
+  orderDetail: null,
   fetchingOrder: false,
 };
 
@@ -44,10 +49,21 @@ const orderSlice = createSlice({
     });
     builder.addCase(fetchOrder.fulfilled, (state, action) => {
       state.fetchingOrder = false;
-      state.listOrder = action.payload
-     
+      state.listOrder = action.payload;
     });
     builder.addCase(fetchOrder.rejected, (state, action) => {
+      state.fetchingOrder = false;
+    });
+
+    //fetchOrderDetail
+    builder.addCase(fetchOrderDetail.pending, (state, action) => {
+      state.fetchingOrder = true;
+    });
+    builder.addCase(fetchOrderDetail.fulfilled, (state, action) => {
+      state.fetchingOrder = false;
+      state.orderDetail = action.payload;
+    });
+    builder.addCase(fetchOrderDetail.rejected, (state, action) => {
       state.fetchingOrder = false;
     });
   },

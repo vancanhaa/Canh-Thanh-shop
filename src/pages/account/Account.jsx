@@ -15,8 +15,12 @@ function Account() {
         setTitle("ĐỊA CHỈ")
       } else if (location.pathname === "/account/order") {
         setTitle("ĐƠN HÀNG")
+      } else if (location.pathname.includes("/account/order-detail")) {
+        setTitle("CHI TIẾT ĐƠN HÀNG")
+      } else {
+        setTitle("TÀI KHOẢN")
       }
-  }, [])
+  }, [location.pathname])
   const navigate = useNavigate();
   const items = [
     getItem("Tài khoản của tôi", ROUTE.PROFILE, <UserOutlined />),
@@ -32,7 +36,7 @@ function Account() {
         <div className="account-container">
           <div className="account-header">{title}</div>
           <Row justify="space-between" align="top" gutter={[16, 16]}>
-            <Col lg={6} md={6}>
+            <Col lg={6} md={6} sm={0} xs={0}>
               <div className="account-menu_bar">
                 <div className="menu_bar-header">
                   <div className="menu_bar-avatar">
@@ -52,7 +56,7 @@ function Account() {
                 </div>
               </div>
             </Col>
-            <Col lg={18} md={18}>
+            <Col lg={18} md={18} sm={24}>
               <Outlet />
             </Col>
           </Row>

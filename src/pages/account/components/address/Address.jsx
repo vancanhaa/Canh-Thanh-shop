@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import "./address.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { localStorageUlti } from "../../utils/localStorage";
+import { localStorageUlti } from "../../../../utils/localStorage";
 import {
   fetchAddress,
   fetchChangeAddress,
@@ -11,8 +11,8 @@ import {
   fetchListDistricts,
   fetchListProvinces,
   fetchListWards,
-} from "../../stores/actions/address.action";
-import { AddressUlti } from "../../utils/address";
+} from "../../../../stores/actions/address.action";
+import { AddressUlti } from "../../../../utils/address";
 import { v4 } from "uuid";
 import ModalEditAddress from "./modal-edit-address/ModalEditAddress";
 

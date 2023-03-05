@@ -9,10 +9,11 @@ import UserRegister from "./pages/user-register/UserRegister";
 import Home from "./pages/home/Home";
 import Product from "./pages/products/product/Product";
 import ProductDetail from "./pages/products/product-detail/ProductDetail";
-import Address from "./pages/address/Address";
+import Address from "./pages/account/components/address/Address";
 import Account from "./pages/account/Account";
 import Profile from "./pages/account/components/profile/Profile";
 import Order from "./pages/account/components/order/Order";
+import OrderDetail from "./pages/account/components/order-detail/OrderDetail";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path={ROUTE.PROFILE} element={<Profile />} />
           <Route path={ROUTE.ADDRESS} element={<Address />} />
           <Route path={ROUTE.ORDER} element={<Order />} />
+          <Route path={ROUTE.ORDER_DETAIL} element={<OrderDetail />}/>
         </Route>
       </Routes>
     </div>

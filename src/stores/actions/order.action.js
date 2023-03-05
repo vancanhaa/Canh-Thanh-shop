@@ -4,8 +4,7 @@ import { orderApi } from "../../api/order.api";
 export const fetchOrder = createAsyncThunk(
     "order/fetchOrder",
     async (payload, thunkApi) => {
-        const { idUser } = payload
-        const reponse = await orderApi.getOrder(idUser)
+        const reponse = await orderApi.getOrder(payload)
         return reponse.data
     }
 )
@@ -22,6 +21,14 @@ export const fetchDeleteOrder = createAsyncThunk(
     "order/fetchDeleteOrder",
     async (payload, thunkApi) => {
         const response = await orderApi.deleteOrder(payload)
+        return response.data
+    }
+)
+
+export const fetchOrderDetail = createAsyncThunk(
+    "order/fetchOrderDetail",
+    async (payload, thunkApi) => {
+        const response = await orderApi.getOrderDetail(payload)
         return response.data
     }
 )

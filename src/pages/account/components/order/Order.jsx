@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchOrder } from "../../../../stores/actions/order.action";
 import common from "../../../../utils/common";
 import "./order.scss";
+import {ROUTE} from "../../../../constants"
+import { Link } from "react-router-dom";
 
 function Order() {
   const dispatch = useDispatch();
@@ -11,7 +13,7 @@ function Order() {
   const listOrder = useSelector((state) => state.order.listOrder);
 
   useEffect(() => {
-    dispatch(fetchOrder({ idUser: userInfo.id }));
+    dispatch(fetchOrder(userInfo.id));
   }, []);
 
   console.log(listOrder);
@@ -36,7 +38,7 @@ function Order() {
                 <Col lg={7} md={7}>
                   Địa chỉ giao hàng
                 </Col>
-                <Col lg={3} md={3}>
+                <Col lg={3} md={3} >
                   Giá trị đơn hàng
                 </Col>
                 <Col lg={4} md={4}>
@@ -65,7 +67,9 @@ function Order() {
                   <Col lg={24} md={24} sm={0} xs={0}>
                     <Row gutter={[8, 8]}>
                       <Col lg={3} md={3}>
+                        <Link to={`/account/order-detail/${id}`}>
                         #{id.slice(0, 5)}
+                        </Link>
                       </Col>
                       <Col lg={3} md={3}>
                         {time_create}
@@ -73,7 +77,7 @@ function Order() {
                       <Col lg={7} md={7}>
                         {checkout_address.address}
                       </Col>
-                      <Col lg={3} md={3}>
+                      <Col lg={3} md={3} className="order-item__price">
                         {common.formatPrice(total_order)}đ
                       </Col>
                       <Col lg={4} md={4}>

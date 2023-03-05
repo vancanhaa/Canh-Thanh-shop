@@ -1,0 +1,81 @@
+.order-detail {
+    width: 100%;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px 30px;
+    box-shadow: 0 0 1px 2px rgba(0, 0, 0, 0.05);
+    min-height: calc(100vh - 270px);
+    .order-detail-container {
+        .order-detail-header {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 2px solid #d5d5d5;
+            flex-wrap: wrap;
+
+            .order-detail-header__title {
+                color: var(--primary-color);
+                font-size: 1.6rem;
+                padding-bottom: 10px;
+                font-weight: 500;
+            }
+            .order-detail-header__time_create{
+                font-size: 1.6rem;
+                color: #7a7a9d;
+                font-weight: 500;
+                opacity: 0.8;
+
+            }
+        }
+        .order-detail-content {
+            padding-top: 20px;
+            .order-detail__status {
+                span {
+                    color: var(--primary-color);
+                    font-weight: 500;
+                }
+            }
+            .order-detail__address-payment {
+                margin-top: 10px;
+                .address-payment__header {
+                    font-weight: 500;
+                }
+                .address-payment__body {
+                    border: 1px solid #7a7a9d;
+                    min-height: 100px;
+                    padding: 5px 0 5px 10px;
+                    margin-top: 5px;
+                    border-radius: 4px;
+                    p {
+                        margin-bottom: 3px;
+                    }
+                }
+            }
+            .order-detail__cart {
+                .cart-header {
+                    font-weight: 500;
+                    margin: 10px 0 5px 0;
+                }
+                .cart-body {
+                    .cart-item {
+                        margin-top: 5px;
+                        .cart-item__wrap {
+                            display: flex;
+                            .cart-item__description {
+                                display: flex;
+                                flex-direction: column;
+                                justify-content: space-between;
+                            }
+                        }
+                        .cart-item__price {
+                            font-weight: 500;
+                        }
+                        .cart-item__total_price {
+                            font-weight: 500;
+                            color: var(--primary-color);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

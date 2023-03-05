@@ -64,20 +64,22 @@
           height: 40px;
           display: inline-block;
           a {
-            display: flex;
-            height: 100%;
-            align-items: center;
+            display: inline-block;
             font-size: 1.6rem;
             color: #000;
+            position: relative;
             &:hover {
               p {
                 color: var(--primary-color);
               }
             }
             .header-location__icon {
+              position: absolute;
+              top: 2px;
+              left: 0;
             }
             p {
-              margin: 0 0 0 4px;
+              margin: 0 0 0 18px;
               color: #000;
 
               font-weight: 600;
@@ -89,22 +91,23 @@
           display: inline-block;
           margin-left: 10px;
           a {
-            display: flex;
-            height: 100%;
-            align-items: center;
+            display: inline-block;
             font-size: 1.6rem;
             color: #000;
+            position: relative;
             &:hover {
               p {
                 color: var(--primary-color);
               }
             }
             .header-phone_number__icon {
+              position: absolute;
+              top: 2px;
+              left: 0;
             }
             p {
-              margin: 0 0 0 4px;
+              margin: 0 0 0 18px;
               color: #000;
-
               font-weight: 600;
             }
           }
