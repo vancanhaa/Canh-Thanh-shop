@@ -55,6 +55,8 @@ const productSlice = createSlice({
     builder.addCase(fetchProductById.rejected, (state, action) => {
       state.fetchingProductById = false;
     });
+
+    
   },
 });
 

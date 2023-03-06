@@ -88,17 +88,16 @@
           "idUser": "1",
           "first_name": "hoang",
           "last_name": "hai",
-          "rating": "4",
+          "rating": "4.0",
           "comment": "Sản phẩm chât lượng"
         },
         {
           "idUser": "2",
           "first_name": "tien",
           "last_name": "thanh",
-          "rating": "5",
+          "rating": "1.0",
           "comment": "Sản phẩm quá tệ"
         }
-        
       ],
       "size": [
         "S",
@@ -144,6 +143,50 @@
         {
           "color": "Tím than",
           "image_url": "https://bizweb.dktcdn.net/100/438/408/products/tsm5231-tit-3.jpg?v=1652520442737"
+        }
+      ],
+      "riviews": [
+        {
+          "idUser": "1",
+          "first_name": "hoang",
+          "last_name": "hai",
+          "rating": "4",
+          "comment": "xin chào bạn có thể đổi lại size không"
+        },
+        {
+          "idUser": "2",
+          "first_name": "tien",
+          "last_name": "thanh",
+          "rating": "5",
+          "comment": "Áo hơn nhỏ khonng vừa"
+        },
+        {
+          "idUser": "1",
+          "first_name": "Men ",
+          "last_name": "Black",
+          "rating": "4",
+          "comment": "xin chào bạn có thể đổi lại size không"
+        },
+        {
+          "idUser": "2",
+          "first_name": "Huỳnh ",
+          "last_name": "Phương",
+          "rating": "5",
+          "comment": "Áo hơn nhỏ khonng vừa"
+        },
+        {
+          "idUser": "1",
+          "first_name": "Black",
+          "last_name": "Bi",
+          "rating": "2",
+          "comment": "xin chào bạn có thể đổi lại size không"
+        },
+        {
+          "idUser": "2",
+          "first_name": "tien",
+          "last_name": "thanh",
+          "rating": "1",
+          "comment": "Áo hơn nhỏ khonng vừa"
         }
       ],
       "size": [
@@ -2195,19 +2238,10 @@
       "id": "287982ae-5c14-465e-9e99-5732c492f730",
       "products": [
         {
-          "id": 2,
-          "name": "Áo T-Shirt Nam Cotton USA Phiên Bản Premium",
-          "image_url": "https://bizweb.dktcdn.net/100/438/408/products/tsm5231-vag-3.jpg?v=1652520442737",
-          "quantity": 1,
-          "price": 100000,
-          "color": "Vàng",
-          "size": "S"
-        },
-        {
           "id": 1,
           "name": "Áo Polo Nam Pique Mắt Chim Basic Co Giãn Thoáng Khí",
           "image_url": "https://bizweb.dktcdn.net/100/438/408/products/apm3299-tra-6.jpg?v=1673602563443",
-          "quantity": 2,
+          "quantity": 6,
           "price": 600000,
           "color": "Trắng",
           "size": "S"

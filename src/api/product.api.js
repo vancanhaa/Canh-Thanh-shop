@@ -19,8 +19,8 @@ export const productsApi = {
       ...(textSearchString !== "" ? [textSearchString] : []),
       ...(filterString !== "" ? [filterString] : []),
     ].join("&");
-
     return API.get(`${BASE_URL}/api/products?${queryString}`);
   },
-  getProductDetail: (id) => API.get(`${BASE_URL}/api/products/${id}`)
+  getProductDetail: (id) => API.get(`${BASE_URL}/api/products/${id}`),
+  createRiview: (data) => API.patch(`${BASE_URL}/api/products`, data),
 };
