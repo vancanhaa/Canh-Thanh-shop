@@ -172,7 +172,9 @@ function Checkout() {
       payment_method: paymentMethod,
       status_order: "Chưa vận chuyển",
       status_payment: false,
-      total_order: totalOrderNotShipping + shippingPrice
+      total_order: totalOrderNotShipping + shippingPrice,
+      shipping_price: shippingPrice,
+      total_order_not_shipping: totalOrderNotShipping
     };
     dispatch(fetchAddOrder(payload))
     const data = {

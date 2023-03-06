@@ -75,6 +75,35 @@
                         }
                     }
                 }
+                .cart-footer {
+                    margin-top: 20px;
+                    span {
+                        min-width: 150px;
+                        display: inline-block;
+                        color: #000 ;
+                        font-weight: 400;
+                    }
+                    .total-order-not-shipping {
+                        color: var(--primary-color);
+                        font-weight: 500;
+                    }
+                    .total-order {
+                        color: #ff4d4f;
+                        font-weight: 500;
+                        margin-top: 10px;
+
+                    }
+                    button {
+                        margin-top: 10px;
+                        width: 100%;
+                        height: 36px;
+                        font-size: 1.6rem;
+                        border: none;
+                        border-radius: 4px;
+                        color: #fff;
+                        background-color: var(--primary-color);
+                    }
+                }
             }
         }
     }

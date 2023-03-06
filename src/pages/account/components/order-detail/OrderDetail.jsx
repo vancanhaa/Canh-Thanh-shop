@@ -12,10 +12,12 @@ import "./order-detail.scss";
 function OrderDetail() {
   const { idOrder } = useParams();
   const dispatch = useDispatch();
+  const navigate = useNavigate()
   const orderDetail = useSelector((state) => state.order.orderDetail);
   useEffect(() => {
     dispatch(fetchOrderDetail(idOrder));
   }, []);
+  console.log(orderDetail)
   if (orderDetail) {
     return (
       <div className="order-detail">
@@ -149,6 +151,15 @@ function OrderDetail() {
                     </Row>
                   );
                 })}
+              </div>
+              <div className="cart-footer">
+                <div className="total-order-not-shipping"><span>Tổng tiền &#40;Tạm tính&#41;</span>{common.formatPrice(orderDetail.total_order_not_shipping)}đ</div>
+                <div className="shipping-price"><span>Phí vận chuyển:</span>{orderDetail.shipping_price ? common.formatPrice(orderDetail.shipping_price)+"đ" : "Miễn phí"}</div>
+                <div className="total-order"><span>Tổng đơn hàng:</span>{common.formatPrice(orderDetail.total_order)}đ</div>
+                <Row justify="space-between" align="middle" gutter={[16, 16]}>
+                  <Col span={12}><button onClick={() => {navigate(-1)}}>Quay lại</button></Col>
+                  <Col span={12}></Col>
+                </Row>
               </div>
             </div>
           </div>
