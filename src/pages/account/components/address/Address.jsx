@@ -1,10 +1,9 @@
 import { Checkbox, Col, Form, Input, Modal, Row, Select } from "antd";
 import React, { useEffect, useRef, useState } from "react";
-import MainLayout from "../../layouts/main-layout/MainLayout";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import "./address.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { localStorageUlti } from "../../utils/localStorage";
+import { localStorageUlti } from "../../../../utils/localStorage";
 import {
   fetchAddress,
   fetchChangeAddress,
@@ -12,8 +11,8 @@ import {
   fetchListDistricts,
   fetchListProvinces,
   fetchListWards,
-} from "../../stores/actions/address.action";
-import { AddressUlti } from "../../utils/address";
+} from "../../../../stores/actions/address.action";
+import { AddressUlti } from "../../../../utils/address";
 import { v4 } from "uuid";
 import ModalEditAddress from "./modal-edit-address/ModalEditAddress";
 
@@ -127,10 +126,8 @@ function Address() {
   };
 
   return (
-    <MainLayout>
       <div className="address">
         <div className="address-container">
-          <div className="address-title">SỔ ĐỊA CHỈ</div>
           <div className="address-body">
             <div className="address-body__header">
               <div className="address-body__title">Địa chỉ của bạn</div>
@@ -295,7 +292,7 @@ function Address() {
                     >
                       <Select
                         ref={districtUref}
-                        placeholder="Quận, huyện, thị xã"
+                        placeholder="Quận, huyện"
                         showSearch
                         optionFilterProp="children"
                         onChange={handleSelectDistrict}
@@ -395,7 +392,6 @@ function Address() {
           indexAddressEdit={indexAddressEdit}
         />
       </div>
-    </MainLayout>
   );
 }
 

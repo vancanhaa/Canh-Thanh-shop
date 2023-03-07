@@ -1,0 +1,11 @@
+.home {
+    width: 100%;
+    min-height: calc(100% - 100px);
+    background-color: #f8f8f8;
+
+    .home-container {
+        width: 100%;
+        max-width: 1240px;
+        margin-left: auto;
+    }
+}

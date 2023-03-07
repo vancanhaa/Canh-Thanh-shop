@@ -7,8 +7,8 @@ import {
   fetchCreateAddress,
   fetchListDistricts,
   fetchListWards,
-} from "../../../stores/actions/address.action";
-import { localStorageUlti } from "../../../utils/localStorage";
+} from "../../../../../stores/actions/address.action";
+import { localStorageUlti } from "../../../../../utils/localStorage";
 
 function ModalEditAddress({
   openModalEditAddress,
