@@ -136,7 +136,7 @@ function ProductDetail() {
     dispatch(
       addProductRiviewId({
         id: id,
-        data: { riviews: newComment },
+        data: { riviews: [newComment] },
       })
     );
     console.log(newComment);

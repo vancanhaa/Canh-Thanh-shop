@@ -24,8 +24,8 @@ const riviewSlice = createSlice({
     });
     builder.addCase(addProductRiviewId.fulfilled, (state, action) => {
       state.fetchingRiview = false;
-      state.riviews = action.payload.riviews;
-      console.log(action.payload);
+      const { riviews } = action.payload.riviews;
+      state.riviews = riviews;
     });
     builder.addCase(addProductRiviewId.rejected, (state, action) => {
       state.fetchingRiview = false;
