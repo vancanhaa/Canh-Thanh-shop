@@ -35,3 +35,11 @@ export const fetchProductById = createAsyncThunk(
   }
 );
 
+export const fetchAllProducts = createAsyncThunk(
+  "product/fetchAllProducts",
+  async (payload, thunkApi) => {
+    const response = await productsApi.getAllProducts()
+    return response.data
+  }
+)
+

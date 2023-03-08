@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchProductList } from "../../../stores/actions/product.action";
 import { v4 } from "uuid";
 import common from "../../../utils/common";
-import ModalAddCart from "./components/modal-add-cart/ModalAddCart";
+import ModalAddCart from "../../../components/modal-add-cart/ModalAddCart";
 import { ROUTE } from "../../../constants";
 import ProductItem from "../../../components/product-item/ProductItem";
 function Product() {
@@ -47,9 +47,8 @@ function Product() {
   };
 
   const [openAddCartModal, setOpenAddCartModal] = useState(false);
-  const [indexProduct, setIndexProduct] = useState(null);
-
-  const handleOpenAddCartModal = (index) => {
+  const [idProduct, setIdProduct] = useState(null);
+  const handleOpenAddCartModal = (id) => {
     if (!userInfo) {
       notification.warning({
         message: "Bạn cần đăng nhập trước khi mua hàng!",
@@ -59,7 +58,7 @@ function Product() {
       navigate(ROUTE.LOGIN);
       return;
     }
-    setIndexProduct(index);
+    setIdProduct(id);
     setOpenAddCartModal(true);
   };
 
@@ -103,7 +102,7 @@ function Product() {
                 <Row justify="start" gutter={[16, 24]}>
                   {products.map((item, index) => (
                     <Col key={v4()} lg={6} md={8} sm={12} xs={12}>
-                      <ProductItem item={item} index={index} handleOpenAddCartModal={handleOpenAddCartModal}/>
+                      <ProductItem item={item} handleOpenAddCartModal={handleOpenAddCartModal}/>
                     </Col>
                   ))}
                 </Row>
@@ -133,7 +132,7 @@ function Product() {
           <ModalAddCart
             openAddCartModal={openAddCartModal}
             setOpenAddCartModal={setOpenAddCartModal}
-            itemAddCart={products[indexProduct]}
+            itemAddCart={products.find((item) => item.id === idProduct)}
           />
         )}
       </div>

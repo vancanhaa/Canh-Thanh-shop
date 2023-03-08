@@ -174,7 +174,7 @@ function ProductDetail() {
                   <div className="info-user">
                     <Avatar icon={<UserOutlined />} />
                     <div className="name-user">
-                      {`${userInfo["last_name"]} ${userInfo["first_name"]}`}
+                      {`${userInfo?.["last_name"]} ${userInfo?.["first_name"]}`}
                     </div>
                   </div>
 

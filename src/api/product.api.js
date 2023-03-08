@@ -22,5 +22,7 @@ export const productsApi = {
 
     return API.get(`${BASE_URL}/api/products?${queryString}`);
   },
-  getProductDetail: (id) => API.get(`${BASE_URL}/api/products/${id}`)
+  getProductDetail: (id) => API.get(`${BASE_URL}/api/products/${id}`),
+  getAllProducts: () => API.get(`${BASE_URL}/api/products`)
+
 };
