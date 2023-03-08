@@ -11,8 +11,7 @@ import { v4 } from "uuid";
 import common from "../../../utils/common";
 import ModalAddCart from "./components/modal-add-cart/ModalAddCart";
 import { ROUTE } from "../../../constants";
-import confirm from "antd/es/modal/confirm";
-
+import ProductItem from "../../../components/product-item/ProductItem";
 function Product() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -48,20 +47,20 @@ function Product() {
   };
 
   const [openAddCartModal, setOpenAddCartModal] = useState(false);
-  const [indexProduct, setIndexProduct] = useState(0);
+  const [indexProduct, setIndexProduct] = useState(null);
 
   const handleOpenAddCartModal = (index) => {
     if (!userInfo) {
       notification.warning({
         message: "Bạn cần đăng nhập trước khi mua hàng!",
         style: { border: "3px solid #fcaf17" },
-        duration: 2
-      })
+        duration: 2,
+      });
       navigate(ROUTE.LOGIN);
       return;
     }
-    setOpenAddCartModal(true);
     setIndexProduct(index);
+    setOpenAddCartModal(true);
   };
 
   return (
@@ -104,55 +103,7 @@ function Product() {
                 <Row justify="start" gutter={[16, 24]}>
                   {products.map((item, index) => (
                     <Col key={v4()} lg={6} md={8} sm={12} xs={12}>
-                      <div data-id={item.id} className="product-item">
-                        <div className="product-item__raiting-sold">
-                          <div className="product-item__raiting">
-                            <img
-                              width="10"
-                              height="10"
-                              src="https://bizweb.dktcdn.net/100/438/408/themes/894085/assets/icon_start.svg?1676625752773"
-                              alt=""
-                            />
-                            <span>{item.rating}</span>
-                          </div>
-                          <div className="product-item__sold">
-                            <div className="y-line"></div>
-                            Đã bán
-                            <span className="product-item__sold-number">
-                              {item.sold}
-                            </span>
-                          </div>
-                        </div>
-                        <div className="product-item__images">
-                          <Link to={`/product-detail/${item.id}`}>
-                            <img
-                              className="product-thumbnail"
-                              src={item.thumbnail}
-                              alt=""
-                            />
-                          </Link>
-                          <button
-                            className="btn-add-cart"
-                            onClick={() => handleOpenAddCartModal(index)}
-                          >
-                            Thêm vào giỏ hàng
-                          </button>
-                        </div>
-
-                        <div className="product-item__info">
-                          <h3 className="product-item__name">
-                            <Link to={`/product-detail/${item.id}`}>
-                              {item.name}
-                            </Link>
-                          </h3>
-
-                          <div className="product-item__prices">
-                            <ins>{common.formatPrice(item.price)}đ</ins>
-                            <del>{common.formatPrice(item.price)}đ</del>
-                            <span>-{item.discountPercentage}%</span>
-                          </div>
-                        </div>
-                      </div>
+                      <ProductItem item={item} index={index} handleOpenAddCartModal={handleOpenAddCartModal}/>
                     </Col>
                   ))}
                 </Row>
@@ -178,11 +129,13 @@ function Product() {
             </Col>
           </Row>
         </div>
-        <ModalAddCart
-          openAddCartModal={openAddCartModal}
-          setOpenAddCartModal={setOpenAddCartModal}
-          itemAddCart={products[indexProduct]}
-        />
+        {openAddCartModal && (
+          <ModalAddCart
+            openAddCartModal={openAddCartModal}
+            setOpenAddCartModal={setOpenAddCartModal}
+            itemAddCart={products[indexProduct]}
+          />
+        )}
       </div>
     </MainLayout>
   );

@@ -414,7 +414,7 @@ function ProductDetail() {
                             />
                             <img
                               className="product-thumbnail--hover"
-                              src={item.options[1]["image_url"]}
+                              src={item.options[1]?.["image_url"]}
                               alt=""
                             />
                           </div>
