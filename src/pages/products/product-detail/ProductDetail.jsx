@@ -1,5 +1,6 @@
 import "./product-detail.scss";
 import {
+  addProductRiviewId,
   fetchProductById,
   fetchProductList,
 } from "../../../stores/actions/product.action";
@@ -14,7 +15,7 @@ import { Avatar, Col, notification, Row } from "antd";
 import StarsRating from "react-star-rate";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import MainLayout from "../../../layouts/main-layout/MainLayout";
 import { CheckOutlined, UserOutlined } from "@ant-design/icons";
 
@@ -32,11 +33,11 @@ function ProductDetail() {
   // useEffect(() => {
   //   dispatch(fetchProductList({filter: {category: product.category}, limit = 4 page}))
   // })
-  console.log(product);
 
   const productState = useSelector((state) => state.product);
 
   let { products } = productState;
+
   useEffect(() => {
     dispatch(fetchProductList({ page: 1, limit: 4 }));
   }, []);
@@ -119,7 +120,27 @@ function ProductDetail() {
     handleResetOption();
   };
 
-  const [value, setValue] = useState(2);
+  const [rate, setRate] = useState(0);
+  const [review, setReview] = useState("");
+
+  const handleRiview = ({ rate, review }) => {
+    const newComment = {
+      idUser: userInfo.id,
+      firstName: userInfo.first_name,
+      lastName: userInfo.last_name,
+      idProduct: id,
+      rate: rate,
+      review: review,
+    };
+
+    dispatch(
+      addProductRiviewId({
+        id: id,
+        data: { products: newComment },
+      })
+    );
+    console.log(newComment);
+  };
 
   return (
     <MainLayout>
@@ -156,44 +177,54 @@ function ProductDetail() {
                   <h1 className="title-riview">Đánh giá sản phẩm </h1>
                   <div className="raiting">
                     <StarsRating
-                      value={value}
-                      onChange={(value) => {
-                        setValue(value);
+                      value={rate}
+                      onChange={(e) => {
+                        setRate(e);
                       }}
                     />
                   </div>
                   <input
                     className="input-riview"
                     type="text"
+                    value={review}
+                    onChange={(e) => setReview(e.target.value)}
                     placeholder="Viết đánh giá sản phẩm"
                   />
-                  <button className="btn-riview">Đánh giá</button>
+                  <button
+                    className="btn-riview"
+                    onClick={() =>
+                      handleRiview({
+                        rate,
+                        review,
+                      })
+                    }
+                  >
+                    Đánh giá
+                  </button>
                 </div>
                 <hr />
                 <div className="users-riview">
-                  <div className="info-user">
-                    <Avatar icon={<UserOutlined />} />
-                    <div className="name-user">
-                      {`${userInfo?.["last_name"]} ${userInfo?.["first_name"]}`}
-                    </div>
-                  </div>
-
-                  <div className="users-rat">
-                    <input
-                      className="user-comment"
-                      type="text"
-                      value={"Sản phẩm tốt rất ổn "}
-                      disabled
-                    />
-                    <div className="raiting">
-                      <StarsRating
-                        value={value}
-                        onChange={(value) => {
-                          setValue(value);
-                        }}
-                      />
-                    </div>
-                  </div>
+                  {product.riviews?.map((item, index) => (
+                    <Col key={v4()}>
+                      <div className="info-user">
+                        <Avatar icon={<UserOutlined />} />
+                        <div className="name-user">
+                          {`${item.first_name} ${item.last_name}`}
+                        </div>
+                      </div>
+                      <div className="users-rat">
+                        <input
+                          className="user-comment"
+                          type="text"
+                          value={item.comment}
+                          disabled
+                        />
+                        <div className="raiting">
+                          <StarsRating value={item.rating} disabled />
+                        </div>
+                      </div>
+                    </Col>
+                  ))}
                 </div>
               </div>
             </Col>

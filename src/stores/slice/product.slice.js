@@ -72,5 +72,4 @@ const productSlice = createSlice({
 });
 
 export const productReducer = productSlice.reducer;
-
 export const { changePagination, changeTextSearch } = productSlice.actions;
