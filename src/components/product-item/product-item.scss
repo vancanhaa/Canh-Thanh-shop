@@ -1,0 +1,108 @@
+.product-item {
+    position: relative;
+    .product-item__raiting-sold {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      width: auto;
+      z-index: 2;
+      padding: 0 4px 0 4px;
+      border-top-left-radius: 8px;
+      border-bottom-right-radius: 8px;
+      background: rgba(0, 0, 0, 0.6);
+      height: 24px;
+      font-size: 1.2rem;
+      color: #fff;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      .product-item__raiting {
+        display: flex;
+        align-items: center;
+        span {
+          margin-left: 2px;
+        }
+      }
+      .product-item__sold {
+        margin-left: 3px;
+        display: flex;
+        align-items: center;
+        .y-line {
+          width: 1px;
+          background-color: #fff;
+          height: 11px;
+          margin-right: 3px;
+        }
+        span {
+          margin-left: 2px;
+        }
+      }
+    }
+    .product-item__images {
+      position: relative;
+      &:hover {
+        .btn-add-cart {
+          display: block;
+        }
+      }
+      img.product-thumbnail {
+        width: 100%;
+        object-fit: cover;
+        border-radius: 8px;
+      }
+      .btn-add-cart {
+        position: absolute;
+        bottom: 0;
+        width: 75%;
+        left: 50%;
+        bottom: 12%;
+        transform: translateX(-50%);
+        padding: 8px;
+        border: none;
+        outline: none;
+        border-radius: 20px;
+        background-color: var(--btn-primary-color);
+        color: #fff;
+        display: none;
+      }
+    }
+    .product-item__info {
+      margin-top: 10px;
+      .product-item__name {
+        margin: 10px 10px 6px;
+        font-size: 1.4rem;
+        line-height: 1.8rem;
+        height: 36px;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        white-space: initial;
+        a {
+          color: #000;
+          font-weight: 400;
+          &:hover {
+            color: var(--primary-color);
+          }
+        }
+      }
+      .product-item__prices {
+        display: flex;
+        justify-content: flex-start;
+        font-size: 1.4rem;
+        font-weight: 500;
+        ins {
+          color: #ff3102;
+          margin: 0px 14px 0 10px;
+          text-decoration: none;
+        }
+        span {
+          color: #ff3102;
+          margin-left: 10px;
+        }
+        del {
+          color: #c4c4c4;
+        }
+      }
+    }
+  }

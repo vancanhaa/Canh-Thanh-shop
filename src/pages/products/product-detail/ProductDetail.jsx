@@ -136,7 +136,7 @@ function ProductDetail() {
     dispatch(
       addProductRiviewId({
         id: id,
-        data: { riviews: [newComment] },
+        data: { products: newComment },
       })
     );
     console.log(newComment);
@@ -446,7 +446,7 @@ function ProductDetail() {
                             />
                             <img
                               className="product-thumbnail--hover"
-                              src={item.options[1]["image_url"]}
+                              src={item.options[1]?.["image_url"]}
                               alt=""
                             />
                           </div>
