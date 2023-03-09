@@ -56,7 +56,7 @@
         font-size: 1.8rem;
         color: red;
         font-weight: 600;
-        margin-bottom: 0;
+        margin-bottom: 5px;
       }
       .detail-item__options {
         .detail-item__options-color {
@@ -71,6 +71,8 @@
             .option-color__label {
               position: relative;
               border-radius: 6px;
+              min-height: 60px;
+              margin-top: 10px;
 
               input {
                 width: 40px;
@@ -86,6 +88,7 @@
                   background: transparent;
                   outline: none;
                   opacity: 0;
+                  z-index: 5;
                 }
                 &:hover + label {
                   border: 2px solid var(--primary-color);
@@ -100,6 +103,7 @@
                 border-radius: 6px;
                 max-width: 50px;
                   max-height: 50px;
+                  position: absolute;
                 span {
                   display: block;
                   width: 40px;
@@ -119,6 +123,7 @@
             }
           }
           .options-size {
+            margin-top: 10px;
             .option-size__label {
               text-align: center;
               border-radius: 6px;
@@ -157,6 +162,7 @@
                 height: 100%;
                 margin: 0;
                 padding: 6px 0;
+                display: block;
               }
             }
           }

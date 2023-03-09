@@ -320,20 +320,17 @@ function Header() {
             <Col lg={16} md={16}>
               <nav className="header-nav">
                 <ul className="list-item-big">
-                  <li className="nav-item">
-                    <a href="/product">CỬA HÀNG</a>
+                <li className="nav-item">
+                    <a href="/">TRANG CHỦ</a>
                   </li>
                   <li className="nav-item">
-                    <a href="#!">NỮ</a>
+                    <a href="/product">SẢN PHẨM</a>
                   </li>
                   <li className="nav-item">
-                    <a href="#!">NAM</a>
+                    <a href="#!">LIÊN HỆ</a>
                   </li>
                   <li className="nav-item">
-                    <a href="#!">TRẺ EM</a>
-                  </li>
-                  <li className="nav-item">
-                    <a href="#!">BỘ SƯU TẬP</a>
+                    <a href="#!">VỀ CHÚNG TÔI</a>
                   </li>
                 </ul>
               </nav>

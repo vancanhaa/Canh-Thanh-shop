@@ -35,13 +35,23 @@ export const fetchProductById = createAsyncThunk(
   }
 );
 
+
+
+export const fetchAllProducts = createAsyncThunk(
+  "product/fetchAllProducts",
+  async (payload, thunkApi) => {
+    const response = await productsApi.getAllProducts()
+    return response.data
+  }
+)
+
 export const addProductRiviewId = createAsyncThunk(
   "product/fetchProductRiviewId",
   async (payload, thunkApi) => {
-    const { data } = payload;
-    console.log("payload:", data);
-    // console.log("id :", id);
-    const response = await productsApi.patchRiview(data);
+    const { id, data } = payload;
+    console.log("Data:", data);
+    console.log("id :", id);
+    const response = await productsApi.patchRiview(id, data);
     return response.data;
   }
 );

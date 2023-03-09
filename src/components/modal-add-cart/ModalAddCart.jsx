@@ -6,8 +6,8 @@ import { v4 } from "uuid";
 import {
   fetchAddNewCart,
   fetchChangeCart,
-} from "../../../../../stores/actions/cart.action";
-import common from "../../../../../utils/common";
+} from "../../stores/actions/cart.action";
+import common from "../../utils/common";
 import "./modal-add-cart.scss";
 function ModalAddCart({
   openAddCartModal,
@@ -22,7 +22,7 @@ function ModalAddCart({
   },
 }) {
   const dispatch = useDispatch();
-
+  console.log(itemAddCart);
   const cart = useSelector((state) => state.cart.cart);
 
   const userInfo = useSelector((state) => state.user.userInfoState.data);

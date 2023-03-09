@@ -12,8 +12,8 @@ const rootReducer = {
   product: productReducer,
   cart: cartReducer,
   address: addressReducer,
-  riviews: riviewReducer,
   order: orderReducer,
+  riviewReducer,
 };
 
 export const rootStore = configureStore({

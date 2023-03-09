@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchProductById, fetchProductList } from "../actions/product.action";
+import { fetchAllProducts, fetchProductById, fetchProductList } from "../actions/product.action";
 const productInitialState = {
+  allProducts: [],
   products: [],
   product: {},
   textSearch: "",
@@ -56,10 +57,19 @@ const productSlice = createSlice({
       state.fetchingProductById = false;
     });
 
-    
+    //fetchAllProducts
+    builder.addCase(fetchAllProducts.pending, (state, action) => {
+      state.fetchingProductList = true;
+    });
+    builder.addCase(fetchAllProducts.fulfilled, (state, action) => {
+      state.fetchingProductList = false;
+      state.allProducts = action.payload;
+    });
+    builder.addCase(fetchAllProducts.rejected, (state, action) => {
+      state.fetchingProductList = false;
+    });
   },
 });
 
 export const productReducer = productSlice.reducer;
-
 export const { changePagination, changeTextSearch } = productSlice.actions;

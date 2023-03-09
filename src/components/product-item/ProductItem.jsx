@@ -2,7 +2,7 @@ import common from "../../utils/common";
 import "./product-item.scss"
 import { Link } from "react-router-dom";
 
-function ProductItem({ item, index, handleOpenAddCartModal }) {
+function ProductItem({ item, handleOpenAddCartModal }) {
   return (
     <div data-id={item.id} className="product-item">
       <div className="product-item__raiting-sold">
@@ -27,7 +27,7 @@ function ProductItem({ item, index, handleOpenAddCartModal }) {
         </Link>
         <button
           className="btn-add-cart"
-          onClick={() => handleOpenAddCartModal(index)}
+          onClick={() => handleOpenAddCartModal(item.id)}
         >
           Thêm vào giỏ hàng
         </button>
@@ -40,8 +40,8 @@ function ProductItem({ item, index, handleOpenAddCartModal }) {
 
         <div className="product-item__prices">
           <ins>{common.formatPrice(item.price)}đ</ins>
-          <del>{common.formatPrice(item.price)}đ</del>
-          <span>-{item.discountPercentage}%</span>
+          {/* <del>{common.formatPrice(item.price)}đ</del>
+          <span>-{item.discountPercentage}%</span> */}
         </div>
       </div>
     </div>
