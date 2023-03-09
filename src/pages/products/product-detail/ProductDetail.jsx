@@ -15,12 +15,15 @@ import { Avatar, Col, notification, Row } from "antd";
 import StarsRating from "react-star-rate";
 import { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import MainLayout from "../../../layouts/main-layout/MainLayout";
 import { CheckOutlined, UserOutlined } from "@ant-design/icons";
+import { ROUTE } from "../../../constants";
 
 function ProductDetail() {
   const { id } = useParams();
+
+  const navigate = useNavigate();
 
   const product = useSelector((state) => state.product.product);
 
@@ -59,18 +62,22 @@ function ProductDetail() {
 
   const [valueQuantity, setValueQuantity] = useState(1);
 
-  const showMessage = ({ product, options, valueQuantity }) => {
-    // message.success("Success!");
-    notification.info({
-      message: `Đã thêm thành công ${valueQuantity} sản phẩm`,
-      description: `${product.name}`,
-      placement: "topRight",
-      icon: <CheckOutlined />,
-    });
-    addCart: handleAddItemToCart({ product, options, valueQuantity });
-  };
+  // const showMessage = ({ product, options, valueQuantity }) => {
+  //   // message.success("Success!");
+
+  //   addCart: handleAddItemToCart({ product, options, valueQuantity });
+  // };
 
   const handleAddItemToCart = ({ product, options, valueQuantity }) => {
+    if (!userInfo) {
+      notification.warning({
+        message: "Bạn cần đăng nhập trước khi mua hàng!",
+        style: { border: "3px solid #fcaf17" },
+        duration: 2,
+      });
+      navigate(ROUTE.LOGIN);
+      return;
+    }
     const newproduct = {
       id: product.id,
       name: product.name,
@@ -118,20 +125,35 @@ function ProductDetail() {
       );
     }
     handleResetOption();
+    notification.info({
+      message: `Đã thêm thành công ${valueQuantity} sản phẩm`,
+      description: `${product.name}`,
+      placement: "topRight",
+      icon: <CheckOutlined />,
+    });
   };
 
   const currentReviews = useMemo(
-    () => (product ? product.reviews : []),
+    () => (product ? product.riviews : []),
     [product]
   );
   const [rate, setRate] = useState(0);
   const [riview, setRiview] = useState("");
 
   const handleRiview = ({ rate, riview }) => {
+    if (!userInfo) {
+      notification.warning({
+        message: "Bạn cần đăng nhập trước khi đánh giá!",
+        style: { border: "3px solid #fcaf17" },
+        duration: 2,
+      });
+      navigate(ROUTE.LOGIN);
+      return;
+    }
     const newComment = {
       idUser: userInfo.id,
-      firstName: userInfo.first_name,
-      lastName: userInfo.last_name,
+      first_name: userInfo.first_name,
+      last_name: userInfo.last_name,
       idProduct: id,
       rate: rate,
       riview: riview,
@@ -144,25 +166,31 @@ function ProductDetail() {
     );
     console.log("id", id);
     console.log("data", newComment);
+    notification.info({
+      message: `Đánh giá thành công ${riview} sản phẩm`,
+      description: `${product.name}`,
+      placement: "topRight",
+      icon: <CheckOutlined />,
+    });
   };
 
   return (
     <MainLayout>
       <div className="product--detail--container">
         <div className="product--grid ">
-          <nav aria-label="breadcrumb">
-            <ol class="breadcrumb bg-transparent justify-content-center">
+          <div className="breadcrumb-bar">
+            <ol class="breadcrumb">
               <li class="breadcrumb-item">
-                <Link to={"/"}> Home</Link>
+                <Link to={"/"}> Home / </Link>
               </li>
               <li class="breadcrumb-item">
-                <Link to={"/product"}>Product</Link>
+                <Link to={"/product"}>Products / </Link>
               </li>
               <li class="breadcrumb-item active" aria-current="page">
                 Product Single
               </li>
             </ol>
-          </nav>
+          </div>
           <Row>
             <Col lg={12} md={14} sm={24} xs={24}>
               <div className="product--grid__img">
@@ -306,7 +334,7 @@ function ProductDetail() {
                               value={item}
                               checked={item === options.size}
                             />
-                            <label>{item}</label>
+                            <label className="option-label">{item}</label>
                           </div>
                         </Col>
                       ))}
@@ -339,7 +367,7 @@ function ProductDetail() {
                       <button
                         className="btn-submit-cart"
                         onClick={() =>
-                          showMessage({
+                          handleAddItemToCart({
                             product,
                             options,
                             valueQuantity,
