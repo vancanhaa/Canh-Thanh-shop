@@ -38,11 +38,10 @@ export const fetchProductById = createAsyncThunk(
 export const addProductRiviewId = createAsyncThunk(
   "product/fetchProductRiviewId",
   async (payload, thunkApi) => {
-    
-    const { id, data } = payload;
-    console.log("Data:", data);
-    console.log("id :", id);
-    const response = await productsApi.patchRiview(id, data);
+    const { data } = payload;
+    console.log("payload:", data);
+    // console.log("id :", id);
+    const response = await productsApi.patchRiview(data);
     return response.data;
   }
 );

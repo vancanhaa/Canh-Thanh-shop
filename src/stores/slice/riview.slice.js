@@ -5,10 +5,10 @@ const riviewInitialState = {
   riviews: [
     {
       idUser: "",
-      firstName: "",
-      lastName: "",
-      rate: 0,
-      review: "",
+      first_name: "",
+      last_name: "",
+      rate: "",
+      riview: "",
     },
   ],
   fetchingRiview: false,
@@ -24,8 +24,7 @@ const riviewSlice = createSlice({
     });
     builder.addCase(addProductRiviewId.fulfilled, (state, action) => {
       state.fetchingRiview = false;
-      const { riviews } = action.payload.riviews;
-      state.riviews = riviews;
+      state.riviews = action.payload.riviews;
     });
     builder.addCase(addProductRiviewId.rejected, (state, action) => {
       state.fetchingRiview = false;

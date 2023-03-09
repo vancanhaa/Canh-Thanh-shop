@@ -22,5 +22,5 @@ export const productsApi = {
     return API.get(`${BASE_URL}/api/products?${queryString}`);
   },
   getProductDetail: (id) => API.get(`${BASE_URL}/api/products/${id}`),
-  patchRiview: (id, data) => API.patch(`${BASE_URL}/api/products/${id}`, data),
+  patchRiview: (data) => API.patch(`${BASE_URL}/api/products`, data),
 };

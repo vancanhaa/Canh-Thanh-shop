@@ -13,9 +13,9 @@ import {
 } from "../../../stores/actions/cart.action";
 import { Avatar, Col, notification, Row } from "antd";
 import StarsRating from "react-star-rate";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import MainLayout from "../../../layouts/main-layout/MainLayout";
 import { CheckOutlined, UserOutlined } from "@ant-design/icons";
 
@@ -120,26 +120,30 @@ function ProductDetail() {
     handleResetOption();
   };
 
+  const currentReviews = useMemo(
+    () => (product ? product.reviews : []),
+    [product]
+  );
   const [rate, setRate] = useState(0);
-  const [review, setReview] = useState("");
+  const [riview, setRiview] = useState("");
 
-  const handleRiview = ({ rate, review }) => {
+  const handleRiview = ({ rate, riview }) => {
     const newComment = {
       idUser: userInfo.id,
       firstName: userInfo.first_name,
       lastName: userInfo.last_name,
       idProduct: id,
       rate: rate,
-      review: review,
+      riview: riview,
     };
-
     dispatch(
       addProductRiviewId({
         id: id,
-        data: { products: newComment },
+        data: { riviews: [...currentReviews, newComment] },
       })
     );
-    console.log(newComment);
+    console.log("id", id);
+    console.log("data", newComment);
   };
 
   return (
@@ -186,8 +190,8 @@ function ProductDetail() {
                   <input
                     className="input-riview"
                     type="text"
-                    value={review}
-                    onChange={(e) => setReview(e.target.value)}
+                    value={riview}
+                    onChange={(e) => setRiview(e.target.value)}
                     placeholder="Viết đánh giá sản phẩm"
                   />
                   <button
@@ -195,7 +199,7 @@ function ProductDetail() {
                     onClick={() =>
                       handleRiview({
                         rate,
-                        review,
+                        riview,
                       })
                     }
                   >
@@ -217,11 +221,11 @@ function ProductDetail() {
                         <input
                           className="user-comment"
                           type="text"
-                          value={item.comment}
+                          value={item.riview}
                           disabled
                         />
                         <div className="raiting">
-                          <StarsRating value={item.rating} disabled />
+                          <StarsRating value={item.rate} disabled />
                         </div>
                       </div>
                     </Col>

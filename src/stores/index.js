@@ -12,7 +12,7 @@ const rootReducer = {
   product: productReducer,
   cart: cartReducer,
   address: addressReducer,
-  riview: riviewReducer,
+  riviews: riviewReducer,
   order: orderReducer,
 };
 

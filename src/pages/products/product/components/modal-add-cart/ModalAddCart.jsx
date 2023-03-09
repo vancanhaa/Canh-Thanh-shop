@@ -50,7 +50,6 @@ function ModalAddCart({
     addCart: handleAddItemToCart({ itemAddCart, options, valueQuantity });
   };
 
-
   const handleAddItemToCart = ({ itemAddCart, options, valueQuantity }) => {
     const newItemAddCart = {
       id: itemAddCart.id,
@@ -69,7 +68,7 @@ function ModalAddCart({
         product.size === newItemAddCart.size
       );
     });
-    
+
     let newProductsInCart = [...cart.products];
 
     if (isProductAvailabel) {
