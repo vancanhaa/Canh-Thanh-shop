@@ -19,30 +19,39 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import MainLayout from "../../../layouts/main-layout/MainLayout";
 import { CheckOutlined, UserOutlined } from "@ant-design/icons";
 import { ROUTE } from "../../../constants";
+import ProductItem from "../../../components/product-item/ProductItem";
+import ModalAddCart from "../../../components/modal-add-cart/ModalAddCart";
 
 function ProductDetail() {
   const { id } = useParams();
-
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [valueQuantity, setValueQuantity] = useState(1);
+
+  const [rate, setRate] = useState(0);
+  const [riview, setRiview] = useState("");
+
+  const resetRiview = () => {
+    setRate(0);
+    setRiview("");
+  };
 
   const product = useSelector((state) => state.product.product);
-
-  const dispatch = useDispatch();
-
   useEffect(() => {
     dispatch(fetchProductById(id));
-  }, []);
-  // update products trong store thanh list cac san pham co cung category
-  // useEffect(() => {
-  //   dispatch(fetchProductList({filter: {category: product.category}, limit = 4 page}))
-  // })
+  }, [id, riview]);
 
   const productState = useSelector((state) => state.product);
-
   let { products } = productState;
 
   useEffect(() => {
-    dispatch(fetchProductList({ page: 1, limit: 4 }));
+    dispatch(
+      fetchProductList({
+        filter: { category: products.category },
+        page: 1,
+        limit: 4,
+      })
+    );
   }, []);
 
   const cart = useSelector((state) => state.cart.cart);
@@ -60,14 +69,7 @@ function ProductDetail() {
     setValueQuantity(1);
   };
 
-  const [valueQuantity, setValueQuantity] = useState(1);
-
-  // const showMessage = ({ product, options, valueQuantity }) => {
-  //   // message.success("Success!");
-
-  //   addCart: handleAddItemToCart({ product, options, valueQuantity });
-  // };
-
+  // add cart
   const handleAddItemToCart = ({ product, options, valueQuantity }) => {
     if (!userInfo) {
       notification.warning({
@@ -137,9 +139,6 @@ function ProductDetail() {
     () => (product ? product.riviews : []),
     [product]
   );
-  const [rate, setRate] = useState(0);
-  const [riview, setRiview] = useState("");
-
   const handleRiview = ({ rate, riview }) => {
     if (!userInfo) {
       notification.warning({
@@ -166,12 +165,29 @@ function ProductDetail() {
     );
     console.log("id", id);
     console.log("data", newComment);
+    resetRiview();
     notification.info({
       message: `Đánh giá thành công ${riview} sản phẩm`,
       description: `${product.name}`,
       placement: "topRight",
       icon: <CheckOutlined />,
     });
+  };
+
+  const [openAddCartModal, setOpenAddCartModal] = useState(false);
+  const [idProduct, setIdProduct] = useState(null);
+  const handleOpenAddCartModal = (id) => {
+    if (!userInfo) {
+      notification.warning({
+        message: "Bạn cần đăng nhập trước khi mua hàng!",
+        style: { border: "3px solid #fcaf17" },
+        duration: 2,
+      });
+      navigate(ROUTE.LOGIN);
+      return;
+    }
+    setIdProduct(id);
+    setOpenAddCartModal(true);
   };
 
   return (
@@ -450,6 +466,14 @@ function ProductDetail() {
                 <Row justify="start" gutter={[16, 16]}>
                   {products.map((item, index) => (
                     <Col key={v4()} lg={6} md={8} sm={12} xs={12}>
+                      <ProductItem
+                        item={item}
+                        handleOpenAddCartModal={handleOpenAddCartModal}
+                      />
+                    </Col>
+                  ))}
+                  {/* {products.map((item, index) => (
+                    <Col key={v4()} lg={6} md={8} sm={12} xs={12}>
                       <div data-id={item.id} className="product-item">
                         <Link to={`/product-detail/${item.id}`}>
                           <div className="product-item__raiting-sold">
@@ -494,7 +518,7 @@ function ProductDetail() {
                         </Link>
                       </div>
                     </Col>
-                  ))}
+                  ))} */}
                 </Row>
               </div>
             </div>
@@ -507,6 +531,13 @@ function ProductDetail() {
             // newProductCategory.map() => ui
           }
         </div>
+        {openAddCartModal && (
+          <ModalAddCart
+            openAddCartModal={openAddCartModal}
+            setOpenAddCartModal={setOpenAddCartModal}
+            itemAddCart={products.find((item) => item.id === idProduct)}
+          />
+        )}
       </div>
     </MainLayout>
   );
