@@ -13,33 +13,45 @@ import {
 } from "../../../stores/actions/cart.action";
 import { Avatar, Col, notification, Row } from "antd";
 import StarsRating from "react-star-rate";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import MainLayout from "../../../layouts/main-layout/MainLayout";
 import { CheckOutlined, UserOutlined } from "@ant-design/icons";
+import { ROUTE } from "../../../constants";
+import ProductItem from "../../../components/product-item/ProductItem";
+import ModalAddCart from "../../../components/modal-add-cart/ModalAddCart";
 
 function ProductDetail() {
   const { id } = useParams();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [valueQuantity, setValueQuantity] = useState(1);
+
+  const [rate, setRate] = useState(0);
+  const [riview, setRiview] = useState("");
+
+  const resetRiview = () => {
+    setRate(0);
+    setRiview("");
+  };
 
   const product = useSelector((state) => state.product.product);
-
-  const dispatch = useDispatch();
-
   useEffect(() => {
     dispatch(fetchProductById(id));
-  }, []);
-  // update products trong store thanh list cac san pham co cung category
-  // useEffect(() => {
-  //   dispatch(fetchProductList({filter: {category: product.category}, limit = 4 page}))
-  // })
+  }, [id, riview]);
 
   const productState = useSelector((state) => state.product);
-
   let { products } = productState;
 
   useEffect(() => {
-    dispatch(fetchProductList({ page: 1, limit: 4 }));
+    dispatch(
+      fetchProductList({
+        filter: { category: products.category },
+        page: 1,
+        limit: 4,
+      })
+    );
   }, []);
 
   const cart = useSelector((state) => state.cart.cart);
@@ -57,20 +69,17 @@ function ProductDetail() {
     setValueQuantity(1);
   };
 
-  const [valueQuantity, setValueQuantity] = useState(1);
-
-  const showMessage = ({ product, options, valueQuantity }) => {
-    // message.success("Success!");
-    notification.info({
-      message: `Đã thêm thành công ${valueQuantity} sản phẩm`,
-      description: `${product.name}`,
-      placement: "topRight",
-      icon: <CheckOutlined />,
-    });
-    addCart: handleAddItemToCart({ product, options, valueQuantity });
-  };
-
+  // add cart
   const handleAddItemToCart = ({ product, options, valueQuantity }) => {
+    if (!userInfo) {
+      notification.warning({
+        message: "Bạn cần đăng nhập trước khi mua hàng!",
+        style: { border: "3px solid #fcaf17" },
+        duration: 2,
+      });
+      navigate(ROUTE.LOGIN);
+      return;
+    }
     const newproduct = {
       id: product.id,
       name: product.name,
@@ -118,47 +127,86 @@ function ProductDetail() {
       );
     }
     handleResetOption();
+    notification.info({
+      message: `Đã thêm thành công ${valueQuantity} sản phẩm`,
+      description: `${product.name}`,
+      placement: "topRight",
+      icon: <CheckOutlined />,
+    });
   };
 
-  const [rate, setRate] = useState(0);
-  const [review, setReview] = useState("");
-
-  const handleRiview = ({ rate, review }) => {
+  const currentReviews = useMemo(
+    () => (product ? product.riviews : []),
+    [product]
+  );
+  const handleRiview = ({ rate, riview }) => {
+    if (!userInfo) {
+      notification.warning({
+        message: "Bạn cần đăng nhập trước khi đánh giá!",
+        style: { border: "3px solid #fcaf17" },
+        duration: 2,
+      });
+      navigate(ROUTE.LOGIN);
+      return;
+    }
     const newComment = {
       idUser: userInfo.id,
-      firstName: userInfo.first_name,
-      lastName: userInfo.last_name,
+      first_name: userInfo.first_name,
+      last_name: userInfo.last_name,
       idProduct: id,
       rate: rate,
-      review: review,
+      riview: riview,
     };
-
     dispatch(
       addProductRiviewId({
         id: id,
-        data: { products: newComment },
+        data: { riviews: [...currentReviews, newComment] },
       })
     );
-    console.log(newComment);
+    console.log("id", id);
+    console.log("data", newComment);
+    resetRiview();
+    notification.info({
+      message: `Đánh giá thành công ${riview} sản phẩm`,
+      description: `${product.name}`,
+      placement: "topRight",
+      icon: <CheckOutlined />,
+    });
+  };
+
+  const [openAddCartModal, setOpenAddCartModal] = useState(false);
+  const [idProduct, setIdProduct] = useState(null);
+  const handleOpenAddCartModal = (id) => {
+    if (!userInfo) {
+      notification.warning({
+        message: "Bạn cần đăng nhập trước khi mua hàng!",
+        style: { border: "3px solid #fcaf17" },
+        duration: 2,
+      });
+      navigate(ROUTE.LOGIN);
+      return;
+    }
+    setIdProduct(id);
+    setOpenAddCartModal(true);
   };
 
   return (
     <MainLayout>
       <div className="product--detail--container">
         <div className="product--grid ">
-          <nav aria-label="breadcrumb">
-            <ol class="breadcrumb bg-transparent justify-content-center">
+          <div className="breadcrumb-bar">
+            <ol class="breadcrumb">
               <li class="breadcrumb-item">
-                <Link to={"/"}> Home</Link>
+                <Link to={"/"}> Home / </Link>
               </li>
               <li class="breadcrumb-item">
-                <Link to={"/product"}>Product</Link>
+                <Link to={"/product"}>Products / </Link>
               </li>
               <li class="breadcrumb-item active" aria-current="page">
                 Product Single
               </li>
             </ol>
-          </nav>
+          </div>
           <Row>
             <Col lg={12} md={14} sm={24} xs={24}>
               <div className="product--grid__img">
@@ -186,8 +234,8 @@ function ProductDetail() {
                   <input
                     className="input-riview"
                     type="text"
-                    value={review}
-                    onChange={(e) => setReview(e.target.value)}
+                    value={riview}
+                    onChange={(e) => setRiview(e.target.value)}
                     placeholder="Viết đánh giá sản phẩm"
                   />
                   <button
@@ -195,7 +243,7 @@ function ProductDetail() {
                     onClick={() =>
                       handleRiview({
                         rate,
-                        review,
+                        riview,
                       })
                     }
                   >
@@ -212,15 +260,16 @@ function ProductDetail() {
                           {`${item.first_name} ${item.last_name}`}
                         </div>
                       </div>
+
                       <div className="users-rat">
                         <input
                           className="user-comment"
                           type="text"
-                          value={item.comment}
+                          value={item.riview}
                           disabled
                         />
                         <div className="raiting">
-                          <StarsRating value={item.rating} disabled />
+                          <StarsRating value={item.rate} disabled />
                         </div>
                       </div>
                     </Col>
@@ -301,7 +350,7 @@ function ProductDetail() {
                               value={item}
                               checked={item === options.size}
                             />
-                            <label>{item}</label>
+                            <label className="option-label">{item}</label>
                           </div>
                         </Col>
                       ))}
@@ -334,7 +383,7 @@ function ProductDetail() {
                       <button
                         className="btn-submit-cart"
                         onClick={() =>
-                          showMessage({
+                          handleAddItemToCart({
                             product,
                             options,
                             valueQuantity,
@@ -417,6 +466,14 @@ function ProductDetail() {
                 <Row justify="start" gutter={[16, 16]}>
                   {products.map((item, index) => (
                     <Col key={v4()} lg={6} md={8} sm={12} xs={12}>
+                      <ProductItem
+                        item={item}
+                        handleOpenAddCartModal={handleOpenAddCartModal}
+                      />
+                    </Col>
+                  ))}
+                  {/* {products.map((item, index) => (
+                    <Col key={v4()} lg={6} md={8} sm={12} xs={12}>
                       <div data-id={item.id} className="product-item">
                         <Link to={`/product-detail/${item.id}`}>
                           <div className="product-item__raiting-sold">
@@ -461,7 +518,7 @@ function ProductDetail() {
                         </Link>
                       </div>
                     </Col>
-                  ))}
+                  ))} */}
                 </Row>
               </div>
             </div>
@@ -474,6 +531,13 @@ function ProductDetail() {
             // newProductCategory.map() => ui
           }
         </div>
+        {openAddCartModal && (
+          <ModalAddCart
+            openAddCartModal={openAddCartModal}
+            setOpenAddCartModal={setOpenAddCartModal}
+            itemAddCart={products.find((item) => item.id === idProduct)}
+          />
+        )}
       </div>
     </MainLayout>
   );

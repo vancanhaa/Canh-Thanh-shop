@@ -2,7 +2,9 @@ import { CheckOutlined } from "@ant-design/icons";
 import { Col, Modal, notification, Row } from "antd";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { v4 } from "uuid";
+import { ROUTE } from "../../constants";
 import {
   fetchAddNewCart,
   fetchChangeCart,
@@ -22,6 +24,7 @@ function ModalAddCart({
   },
 }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   console.log(itemAddCart);
   const cart = useSelector((state) => state.cart.cart);
 
@@ -52,6 +55,7 @@ function ModalAddCart({
 
 
   const handleAddItemToCart = ({ itemAddCart, options, valueQuantity }) => {
+
     const newItemAddCart = {
       id: itemAddCart.id,
       name: itemAddCart.name,
@@ -69,7 +73,7 @@ function ModalAddCart({
         product.size === newItemAddCart.size
       );
     });
-    
+
     let newProductsInCart = [...cart.products];
 
     if (isProductAvailabel) {
@@ -101,6 +105,12 @@ function ModalAddCart({
       );
     }
     handleResetOption();
+    notification.info({
+      message: `Đã thêm thành công ${valueQuantity} sản phẩm`,
+      description: `${itemAddCart.name}`,
+      placement: "topRight",
+      icon: <CheckOutlined />,
+    });
   };
 
   return (
@@ -224,7 +234,7 @@ function ModalAddCart({
                   <button
                     className="btn-submit-cart"
                     onClick={() =>
-                      showMessage({
+                      handleAddItemToCart({
                         itemAddCart,
                         options,
                         valueQuantity,

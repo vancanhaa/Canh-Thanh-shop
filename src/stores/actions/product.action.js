@@ -35,6 +35,8 @@ export const fetchProductById = createAsyncThunk(
   }
 );
 
+
+
 export const fetchAllProducts = createAsyncThunk(
   "product/fetchAllProducts",
   async (payload, thunkApi) => {
@@ -46,7 +48,6 @@ export const fetchAllProducts = createAsyncThunk(
 export const addProductRiviewId = createAsyncThunk(
   "product/fetchProductRiviewId",
   async (payload, thunkApi) => {
-    
     const { id, data } = payload;
     console.log("Data:", data);
     console.log("id :", id);

@@ -15,11 +15,11 @@ const rootReducer = {
   product: productReducer,
   cart: cartReducer,
   address: addressReducer,
-  riview: riviewReducer,
   order: orderReducer,
   usersAdmin: usersAdminReducer,
   productsAdmin: productsAdminReducer,
-  ordersAdmin: ordersAdminReducer
+  ordersAdmin: ordersAdminReducer,
+  riviewReducer,
 };
 
 export const rootStore = configureStore({

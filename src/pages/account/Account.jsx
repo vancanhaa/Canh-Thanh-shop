@@ -11,16 +11,16 @@ function Account() {
   const [title, setTitle] = useState("TÀI KHOẢN");
   const location = useLocation();
   useEffect(() => {
-    if(location.pathname === "/account/address") {
-        setTitle("ĐỊA CHỈ")
-      } else if (location.pathname === "/account/order") {
-        setTitle("ĐƠN HÀNG")
-      } else if (location.pathname.includes("/account/order-detail")) {
-        setTitle("CHI TIẾT ĐƠN HÀNG")
-      } else {
-        setTitle("TÀI KHOẢN")
-      }
-  }, [location.pathname])
+    if (location.pathname === "/account/address") {
+      setTitle("ĐỊA CHỈ");
+    } else if (location.pathname === "/account/order") {
+      setTitle("ĐƠN HÀNG");
+    } else if (location.pathname.includes("/account/order-detail")) {
+      setTitle("CHI TIẾT ĐƠN HÀNG");
+    } else {
+      setTitle("TÀI KHOẢN");
+    }
+  }, [location.pathname]);
   const navigate = useNavigate();
   const items = [
     getItem("Tài khoản của tôi", ROUTE.PROFILE, <UserOutlined />),
