@@ -13,6 +13,7 @@ import Account from "./pages/account/Account";
 import Profile from "./pages/account/components/profile/Profile";
 import Order from "./pages/account/components/order/Order";
 import OrderDetail from "./pages/account/components/order-detail/OrderDetail";
+import ProtectedRouteUser from "./layouts/ProtectedRouteUser";
 
 function App() {
   return (
@@ -21,16 +22,36 @@ function App() {
         <Route path={ROUTE.HOME_PAGE} element={<Home />} />
         <Route path={ROUTE.PRODUCT} element={<Product />} />
         <Route path={ROUTE.PRODUCT_DETAIL} element={<ProductDetail />} />
-        <Route path={ROUTE.CHECK_OUT} element={<Checkout />} />
-        <Route path={ROUTE.CART} element={<Cart />} />
         <Route path={ROUTE.LOGIN} element={<UserLogin />} />
         <Route path={ROUTE.REGISTER} element={<UserRegister />} />
-        <Route path={ROUTE.ACCOUNT} element={<Account />}>
+
+        <Route
+          path={ROUTE.CHECK_OUT}
+          element={
+            <ProtectedRouteUser>
+              <Checkout />
+            </ProtectedRouteUser>
+          }
+        />
+        <Route
+          path={ROUTE.CART}
+          element={
+              <Cart />
+          }
+        />
+        <Route
+          path={ROUTE.ACCOUNT}
+          element={
+            <ProtectedRouteUser>
+              <Account />
+            </ProtectedRouteUser>
+          }
+        >
           <Route index element={<Profile />} />
           <Route path={ROUTE.PROFILE} element={<Profile />} />
           <Route path={ROUTE.ADDRESS} element={<Address />} />
           <Route path={ROUTE.ORDER} element={<Order />} />
-          <Route path={ROUTE.ORDER_DETAIL} element={<OrderDetail />}/>
+          <Route path={ROUTE.ORDER_DETAIL} element={<OrderDetail />} />
         </Route>
       </Routes>
     </div>

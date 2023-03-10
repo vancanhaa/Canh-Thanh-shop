@@ -67,7 +67,7 @@ function Order() {
                   <Col lg={24} md={24} sm={0} xs={0}>
                     <Row gutter={[8, 8]}>
                       <Col lg={3} md={3}>
-                        <Link to={`/account/order-detail/${id}`}>
+                        <Link to={`/account/order/${id}`}>
                         #{id.slice(0, 5)}
                         </Link>
                       </Col>

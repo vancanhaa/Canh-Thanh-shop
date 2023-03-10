@@ -11,5 +11,5 @@ export const ROUTE = {
   ACCOUNT: "/account",
   PROFILE: "/account/profile",
   ORDER: "/account/order",
-  ORDER_DETAIL: "/account/order-detail/:idOrder"
+  ORDER_DETAIL: "/account/order/:idOrder"
 };

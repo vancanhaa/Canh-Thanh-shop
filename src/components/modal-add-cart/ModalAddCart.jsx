@@ -40,12 +40,12 @@ function ModalAddCart({
   };
 
   const showMessage = ({ itemAddCart, options, valueQuantity }) => {
-    // message.success("Success!");
-    notification.info({
+    notification.success({
       message: `Đã thêm thành công ${valueQuantity} sản phẩm`,
       description: `${itemAddCart.name}`,
       placement: "topRight",
-      icon: <CheckOutlined />,
+      style: { border: "2px solid #71be34" },
+      duration: 2
     });
     addCart: handleAddItemToCart({ itemAddCart, options, valueQuantity });
   };
