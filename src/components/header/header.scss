@@ -161,6 +161,28 @@
       .bottombar-right {
         display: flex;
         justify-content: flex-end;
+        .header-admin {
+          position: relative;
+          margin-right: 12px;
+          a {
+            display: flex;
+            align-items: flex-start;
+            .header-admin__icon {
+              position: relative;
+              font-size: 2.4rem;
+              margin-top: -5px;
+              color: #000;
+            }
+            p {
+              margin-left: 2px;
+              font-size: 1.6rem;
+              font-weight: 600;
+              color: var(--title-color);
+            }
+          }
+          
+          
+        }
         .header-cart {
           position: relative;
           z-index: 5;
@@ -193,7 +215,7 @@
             }
 
             p {
-              margin: 0 0 0 10px;
+              margin: 0 0 0 8px;
               font-size: 1.6rem;
               font-weight: 600;
               color: var(--title-color);

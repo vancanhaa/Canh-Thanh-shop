@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Outlet, Route, Routes } from "react-router-dom";
 
 import Checkout from "./pages/checkout/Checkout";
 import Cart from "./pages/cart/Cart";
@@ -14,6 +14,12 @@ import Profile from "./pages/account/components/profile/Profile";
 import Order from "./pages/account/components/order/Order";
 import OrderDetail from "./pages/account/components/order-detail/OrderDetail";
 import ProtectedRouteUser from "./layouts/ProtectedRouteUser";
+import ProtectedRouteAdmin from "./layouts/ProtectedRouteAdmin";
+import Admin from "./admin-src/layouts/Admin";
+import Products from "./admin-src/pages/products/Products";
+import Orders from "./admin-src/pages/orders/Orders";
+import Users from "./admin-src/pages/users/Users";
+import Analysis from "./admin-src/pages/analysis/Analysis";
 
 function App() {
   return (
@@ -33,12 +39,7 @@ function App() {
             </ProtectedRouteUser>
           }
         />
-        <Route
-          path={ROUTE.CART}
-          element={
-              <Cart />
-          }
-        />
+        <Route path={ROUTE.CART} element={<Cart />} />
         <Route
           path={ROUTE.ACCOUNT}
           element={
@@ -52,6 +53,20 @@ function App() {
           <Route path={ROUTE.ADDRESS} element={<Address />} />
           <Route path={ROUTE.ORDER} element={<Order />} />
           <Route path={ROUTE.ORDER_DETAIL} element={<OrderDetail />} />
+        </Route>
+
+        <Route
+          path={ROUTE.ADMIN}
+          element={
+            <ProtectedRouteAdmin>
+              <Admin />
+            </ProtectedRouteAdmin>
+          }
+        >
+          <Route path={ROUTE.PRODUCTS_ADMIN} element={<Products />} />
+          <Route path={ROUTE.ORDERS_ADMIN} element={<Orders />} />
+          <Route path={ROUTE.USERS_ADMIN} element={<Users />} />
+          <Route path={ROUTE.ANALYSIS_ADMIN} element={<Analysis />} />
         </Route>
       </Routes>
     </div>

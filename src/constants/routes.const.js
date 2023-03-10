@@ -6,10 +6,15 @@ export const ROUTE = {
   LOGIN: "/login",
   REGISTER: "/register",
   PRODUCT: "/product",
-  FORGOT_PASSWORD: "/forgot-password",
   ADDRESS: "/account/address",
   ACCOUNT: "/account",
   PROFILE: "/account/profile",
   ORDER: "/account/order",
-  ORDER_DETAIL: "/account/order/:idOrder"
+  ORDER_DETAIL: "/account/order/:idOrder",
+  ADMIN: "/admin",
+  PRODUCTS_ADMIN: "/admin/products",
+  USERS_ADMIN: "/admin/users",
+  ORDERS_ADMIN: "/admin/orders",
+  ANALYSIS_ADMIN: "/admin/analysis"
+
 };

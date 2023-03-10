@@ -30,6 +30,7 @@ function Account() {
   const handleSelect = (value) => {
     navigate(value.key);
   };
+  console.log(location.pathname);
   return (
     <MainLayout>
       <div className="account">
@@ -48,7 +49,7 @@ function Account() {
                 <div className="menu_bar-body">
                   <Menu
                     defaultSelectedKeys={[ROUTE.PROFILE]}
-                    selectedKeys={[location.pathname]}
+                    selectedKeys={[location.pathname === "/account" ? ROUTE.PROFILE : location.pathname]}
                     mode="inline"
                     items={items}
                     onSelect={handleSelect}
