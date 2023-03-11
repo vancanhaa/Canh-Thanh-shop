@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./products.scss";
-import { Row, Col, Input, Menu } from "antd";
+import { Row, Col, Input, Menu, Pagination } from "antd";
 import { Navigate } from "react-router-dom";
 import { fetchProductsListAdmin } from "../../stores/actions/productsAdmin.action";
 import { changeTextSearch } from "../../stores/slice/productsAdmin.slice";
@@ -18,9 +18,15 @@ function Products() {
   useEffect(() => {
     dispatch(fetchProductsListAdmin({ page: 1, limit: 9 }));
   }, []);
-  const { listProducts, filter, textSearch } = productsAdminState;
 
-  console.log(listProducts);
+
+
+  const { listProducts, filter, textSearch, pagination } = productsAdminState;
+  const { page, limit, total } = pagination;
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [page])
 
   return (
     <div className="products">
@@ -51,7 +57,24 @@ function Products() {
             </Row>
           </div>
           <ProductsList />
-         
+        </div>
+        <div className="products-footer">
+          <Pagination
+            onChange={(page, pageSize) => {
+
+              dispatch(
+                fetchProductsListAdmin({
+                  textSearch,
+                  filter,
+                  page: page,
+                  limit: pageSize,
+                })
+              );
+            }}
+            current={Number(page)}
+            total={Number(total)}
+            pageSize={Number(limit)}
+          />
         </div>
       </div>
     </div>

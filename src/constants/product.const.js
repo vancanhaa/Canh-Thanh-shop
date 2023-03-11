@@ -12,6 +12,6 @@ export const SHOP_BY_CATEGORY = [
   {title: "Tất cả", value: ""},
   {title: "Áo Polo", value: "polo"},
   {title: "Áo thun", value: "t-shirt"},
-  {title: "Áo khoăc", value: "jacket"},
+  {title: "Áo khoác", value: "jacket"},
   {title: "Quần jean", value: "jeans"},
 ]

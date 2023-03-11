@@ -1,14 +1,36 @@
 import { useDispatch, useSelector } from "react-redux";
 import "./products-list.scss";
-import { Row, Col, Carousel } from "antd";
+import { Row, Col, Carousel, Modal } from "antd";
 import { v4 } from "uuid";
 import common from "../../../../../utils/common";
 import "antd/dist/antd";
+import { ExclamationCircleOutlined } from "@ant-design/icons";
+import { fetchDeleteProductAdmin, fetchProductsListAdmin } from "../../../../stores/actions/productsAdmin.action";
 
 function ProductsList() {
+  const dispatch = useDispatch()
   const productsAdminState = useSelector((state) => state.productsAdmin);
-  const { listProducts } = productsAdminState;
+  const { listProducts, pagination, textSearch, filter } = productsAdminState;
+  const {page, limit} = pagination
+  const indexItem = (page - 1) * 9
+  const [modal, contextHolder] = Modal.useModal();
 
+  const confirm = (id, index) => {
+    modal.confirm({
+      className: "confirm-delete-item",
+      title: "Quản trị viên có chắc chắn muốn xoá sản phẩm này khỏi danh sách sản phẩm?",
+      icon: <ExclamationCircleOutlined />,
+      content: `${listProducts[index].name}`,
+      okText: "Đồng ý",
+      cancelText: "Không",
+      onOk: () => handleDeleteProduct(id),
+    });
+  };
+
+  const handleDeleteProduct = (id) => {
+    dispatch(fetchDeleteProductAdmin(id))
+    dispatch(fetchProductsListAdmin({page: page, limit: limit, textSearch: textSearch, filter: {...filter}}))
+  };
   return (
     <div className="products-body__content">
       {listProducts.map((item, index) => {
@@ -22,17 +44,18 @@ function ProductsList() {
           description,
           options,
           size,
+          id
         } = item;
         const colors = options.map((colorItem) => {
           return colorItem.color;
         });
         const imagesUrl = options.map((urlItem) => urlItem.image_url);
-        console.log(imagesUrl);
+
         return (
           <div className="products-item" key={v4()}>
             <Row justify="space-between" align="middle" gutter={[16, 16]}>
               <Col span={1} className="center-text">
-                {index}
+                {indexItem + index + 1 }
               </Col>
               <Col span={2}>{name}</Col>
               <Col span={2} className="center-text">
@@ -76,12 +99,13 @@ function ProductsList() {
               </Col>
               <Col span={2} className="center-text">
                 <div className="edit-action">Sửa</div>
-                <div className="delete-action">Xóa</div>
+                <div className="delete-action" onClick={() => confirm(id, index)}>Xóa</div>
               </Col>
             </Row>
           </div>
         );
       })}
+       {contextHolder}
     </div>
   );
 }

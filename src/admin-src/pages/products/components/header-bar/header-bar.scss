@@ -5,18 +5,56 @@
   .header-bar__left {
     display: flex;
     align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    .ant-menu {
+      background-color: transparent;
+      border-color: transparent;
+    }
     .header-bar__category {
-      width: 140px;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      font-size: 1.4rem;
+      margin-right: 10px;
+      margin-top: 5px;
+      .category-label{
+        min-width: 90px;
+      }
     }
     .header-bar__price {
-      width: 160px;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      font-size: 1.4rem;
+      margin-right: 10px;
+      margin-top: 5px;
+
+      .price-label{
+        min-width: 90px;
+      }
+    }
+    .header-bar__sort {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      font-size: 1.4rem;
+      margin-top: 5px;
+
+      .sort-label{
+        min-width: 90px;
+      }
     }
   }
   .header-bar__right {
     display: flex;
     align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
     .header-bar__search {
-      width: 320px;
+      min-width: 200px;
+      margin-top: 5px;
+
       input {
         background-color: #fff;
         border-bottom-left-radius: 8px;
@@ -25,33 +63,28 @@
         &::placeholder {
           color: var(--title-color);
         }
-        &:hover {
-          border-color: var(--primary-color);
-        }
-        &:focus {
-          border-color: var(--primary-color);
-        }
+
       }
       span.ant-input-group-addon {
         border-bottom-right-radius: 8px;
         border-top-right-radius: 8px;
         overflow: hidden;
-        &:hover ~ span input {
-          border-color: var(--primary-color);
-        }
+
       }
       button {
         height: 36px;
-        width: 60px;
+        width: 45px;
         background-color: var(--primary-color);
         &:hover {
           opacity: 0.8;
         }
 
         span.anticon.anticon-search {
-          font-size: 2.2rem;
+          font-size: 1.8rem;
           color: var(--title-color);
           font-weight: 600;
+          display: block;
+
         }
       }
     }
@@ -60,6 +93,8 @@
       height: 36px;
       min-width: 120px;
       margin-left: 10px;
+      margin-top: 5px;
+
       button {
         width: 100%;
         height: 100%;

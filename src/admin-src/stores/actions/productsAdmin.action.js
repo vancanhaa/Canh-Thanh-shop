@@ -24,3 +24,11 @@ export const fetchProductsListAdmin = createAsyncThunk(
     };
   }
 );
+
+export const fetchDeleteProductAdmin = createAsyncThunk(
+  "product/fetchDeteteProductAdmin",
+  async (payload, thunkApi) => {
+    const response = await productsAdminApi.deleteProduct(payload)
+    return response.data
+  }
+)
