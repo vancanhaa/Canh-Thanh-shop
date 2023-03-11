@@ -1,4 +1,24 @@
 .orders {
-    width: 100%;
-    
+    padding-bottom: 80px;
+    .orders-container {
+        .orders-body {
+            .ant-col {
+                font-size: 1.4rem;
+            }
+            .orders-body__heading {
+                padding: 10px 0;
+                background-color: #a1bcee24;
+                margin-top: 10px;
+            }
+        }
+        
+    }
+}
+.orders-footer {
+    text-align: center;
+    padding: 20px 0;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
 }

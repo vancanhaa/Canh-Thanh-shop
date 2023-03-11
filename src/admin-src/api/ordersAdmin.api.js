@@ -6,5 +6,6 @@ export const ordersAdminApi = {
 
     getOrderDetail: (id) => {
         return API.get(`${BASE_URL}/api/orders/${id}`)
-    }
+    },
+    deleteOrder: (id) => API.delete(`${BASE_URL}/api/orders`, id)
 }

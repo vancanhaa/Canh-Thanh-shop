@@ -47,3 +47,21 @@ a {
         color: var(--primary-color);
     }
 }
+
+.price--yellow {
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+.unconfirmed {
+    color: orange;
+}
+.confirmed {
+    color: #4096ff;
+}
+.delivery {
+    color: #675bf1;
+}
+.received {
+    color: #04be00
+}

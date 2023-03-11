@@ -6,6 +6,7 @@ import common from "../../../../utils/common";
 import "./order.scss";
 import {ROUTE} from "../../../../constants"
 import { Link } from "react-router-dom";
+import { STATUS_ORDER } from "../../../../constants/order.const";
 
 function Order() {
   const dispatch = useDispatch();
@@ -27,25 +28,25 @@ function Order() {
         </div>
         <div className="order-content">
           <Row className="order-content__header">
-            <Col lg={24} md={24} sm={0} xs={0}>
-              <Row gutter={[8, 8]}>
-                <Col lg={3} md={3}>
+            <Col lg={24} md={24} sm={24} xs={24}>
+              <Row gutter={[16, 16]}>
+                <Col span={3}>
                   Mã đơn hàng
                 </Col>
-                <Col lg={3} md={3}>
+                <Col span={3}>
                   Ngày mua
                 </Col>
-                <Col lg={7} md={7}>
+                <Col span={7}>
                   Địa chỉ giao hàng
                 </Col>
-                <Col lg={3} md={3} >
+                <Col span={3} >
                   Giá trị đơn hàng
                 </Col>
-                <Col lg={4} md={4}>
+                <Col span={4}>
                   Trạng thái thanh toán
                 </Col>
-                <Col lg={4} md={4}>
-                  Trạng thái đon hàng
+                <Col span={4}>
+                  Trạng thái đơn hàng
                 </Col>
               </Row>
             </Col>
@@ -61,30 +62,30 @@ function Order() {
                 status_order,
                 total_order
               } = order;
-
+              const statusOrderLabel = STATUS_ORDER.find((status, index) => status.status === status_order)?.label
               return (
                 <Row key={id} className="order-item">
-                  <Col lg={24} md={24} sm={0} xs={0}>
-                    <Row gutter={[8, 8]}>
-                      <Col lg={3} md={3}>
+                  <Col lg={24} md={24} sm={24} xs={24}>
+                    <Row gutter={[16, 16]}>
+                      <Col span={3}>
                         <Link to={`/account/order/${id}`}>
                         #{id.slice(0, 5)}
                         </Link>
                       </Col>
-                      <Col lg={3} md={3}>
+                      <Col span={3}>
                         {time_create}
                       </Col>
-                      <Col lg={7} md={7}>
+                      <Col span={7}>
                         {checkout_address.address}
                       </Col>
-                      <Col lg={3} md={3} className="order-item__price">
+                      <Col span={3} className="order-item__price">
                         {common.formatPrice(total_order)}đ
                       </Col>
-                      <Col lg={4} md={4}>
+                      <Col span={4}>
                         {status_payment ? "Đã thanh toán" : "Chưa thanh toán"}
                       </Col>
-                      <Col lg={4} md={4}>
-                        {status_order}
+                      <Col span={4} className={status_order}>
+                        {statusOrderLabel}
                       </Col>
                     </Row>
                   </Col>

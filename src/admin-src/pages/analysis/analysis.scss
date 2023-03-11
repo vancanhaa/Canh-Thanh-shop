@@ -1,0 +1,14 @@
+.analysis {
+    .analysis__item {
+    width: 350px;
+    height: 150px;
+    border-radius: 10px;
+    box-shadow: 1px 1px 2px 1px rgba(2, 86, 116, 0.6588235294);
+    background-image: linear-gradient(to top left, #daf2f9, #eff6f8);
+    padding: 15px 20px;
+    margin: 20px 30px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    }
+}

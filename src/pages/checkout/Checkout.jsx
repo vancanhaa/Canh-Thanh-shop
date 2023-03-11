@@ -118,7 +118,6 @@ function Checkout() {
 
   const onSearch = (value) => {};
   const handleSave = (value) => {
-    console.log(value);
   };
 
   const handleCancel = (e) => {
