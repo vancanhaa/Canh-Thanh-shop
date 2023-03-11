@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { productsAdminApi } from "../../api";
 
 export const fetchProductsListAdmin = createAsyncThunk(
-  "product/fetchProductsListAdmin",
+  "productsAdmin/fetchProductsListAdmin",
   async (payload, thunkApi) => {
     const { textSearch, filter, page, limit } = payload;
 
@@ -26,7 +26,7 @@ export const fetchProductsListAdmin = createAsyncThunk(
 );
 
 export const fetchDeleteProductAdmin = createAsyncThunk(
-  "product/fetchDeteteProductAdmin",
+  "productsAdmin/fetchDeteteProductAdmin",
   async (payload, thunkApi) => {
     const response = await productsAdminApi.deleteProduct(payload)
     return response.data

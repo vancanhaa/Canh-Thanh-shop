@@ -17,7 +17,7 @@ function HeaderBar() {
   const handleSearch = (value) => {
     let textSearch = value.trim();
     if (textSearch) {
-      dispatch(fetchProductsListAdmin({ page: 1, limit: 9, textSearch }));
+      dispatch(fetchProductsListAdmin({ page: 1, limit: 10, textSearch }));
       dispatch(changeTextSearch(textSearch));
     }
     setValueSearch("");
@@ -47,7 +47,7 @@ function HeaderBar() {
     dispatch(
       fetchProductsListAdmin({
         page: 1,
-        limit: 9,
+        limit: 10,
         filter: { ...filter, category: value },
         textSearch,
       })
@@ -65,7 +65,7 @@ function HeaderBar() {
     dispatch(
       fetchProductsListAdmin({
         page: 1,
-        limit: 9,
+        limit: 10,
         textSearch,
         filter: { ...filter, ...filterPriceRange },
       })
@@ -77,7 +77,7 @@ function HeaderBar() {
       dispatch(
         fetchProductsListAdmin({
           page: 1,
-          limit: 9,
+          limit: 10,
           filter: { ...filter, _sort: null, _order: null },
           textSearch,
         })
@@ -86,7 +86,7 @@ function HeaderBar() {
       dispatch(
         fetchProductsListAdmin({
           page: 1,
-          limit: 9,
+          limit: 10,
           filter: { ...filter, _sort: "price", _order: value },
           textSearch,
         })
@@ -102,8 +102,7 @@ function HeaderBar() {
           <Select
             style={{
               minWidth: 110,
-              marginLeft: 8,
-              marginRight: 10,
+              marginLeft: 4,
             }}
             value={categorySelect}
             defaultValue=""
@@ -117,8 +116,7 @@ function HeaderBar() {
             onClick={handleChangePrice}
             style={{
               minWidth: 180,
-              marginLeft: 8,
-              marginRight: 10,
+              marginLeft: 4,
             }}
             value={priceRangeSelect}
             defaultValue={0}
@@ -133,8 +131,7 @@ function HeaderBar() {
             value={sortValueSelect}
             style={{
               minWidth: 160,
-              marginLeft: 8,
-              marginRight: 10,
+              marginLeft: 4,
             }}
             onChange={handleSort}
             options={[

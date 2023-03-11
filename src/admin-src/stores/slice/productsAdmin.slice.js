@@ -9,7 +9,7 @@ const productsAdminInitialState = {
   filter: {},
   pagination: {
     page: 1,
-    limit: 9,
+    limit: 10,
     total: 0,
   },
 

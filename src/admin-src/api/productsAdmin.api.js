@@ -1,6 +1,6 @@
 import { BASE_URL, API } from "./constants.api";
 export const productsAdminApi = {
-  getProductList: (page = 1, limit = 9, filter = {}, textSearch) => {
+  getProductList: (page = 1, limit = 10, filter = {}, textSearch) => {
     const paginationString = `_page=${page}&_limit=${limit}`;
 
     const filterString = Object.keys(filter)

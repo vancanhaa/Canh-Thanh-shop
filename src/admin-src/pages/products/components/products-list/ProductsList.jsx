@@ -12,7 +12,7 @@ function ProductsList() {
   const productsAdminState = useSelector((state) => state.productsAdmin);
   const { listProducts, pagination, textSearch, filter } = productsAdminState;
   const {page, limit} = pagination
-  const indexItem = (page - 1) * 9
+  const indexItem = (page - 1) * 10
   const [modal, contextHolder] = Modal.useModal();
 
   const confirm = (id, index) => {

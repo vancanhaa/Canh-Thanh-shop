@@ -12,33 +12,6 @@
       "updateAt": 1678430625573
     },
     {
-      "email": "canhpham@gmail.com",
-      "password": "$2a$10$W07KhBQFazbmn7c5BuN3v.egcy8UgJ6qxw0dwPIcd1Gscl0pNeoGe",
-      "id": "726a34f1-3cad-460b-988e-bc5f67c7c22e",
-      "role": "user",
-      "first_name": "canh",
-      "last_name": "pham",
-      "phone": "123456789",
-      "createdAt": 1676033311499,
-      "updateAt": 1676033311499,
-      "address": [
-        {
-          "province": "Quang Nam"
-        }
-      ]
-    },
-    {
-      "email": "haihoang@gmail.com",
-      "password": "$2a$10$Z6nEd4WVPcKqI7e.C6sJgu.9gdLLZmuE4ammy5U9nrHSBJmNVPgoq",
-      "id": "dc6b7ac5-cdb8-4947-aa42-5876ee376683",
-      "role": "user",
-      "first_name": "hoang",
-      "last_name": "hai",
-      "phone": "5666582665",
-      "createdAt": 1676466197728,
-      "updateAt": 1676466197728
-    },
-    {
       "email": "canhpham1997@gmail.com",
       "password": "$2a$10$z22zIV7ng1ERJlWPgvGM9.AZtmiqrA2p51HuxD0h6ehE2Hk4YdUgW",
       "id": "df15115e-b8ea-43dc-979f-edb4bd6db760",
@@ -59,17 +32,6 @@
       "phone": "16374294",
       "createdAt": 1677172056871,
       "updateAt": 1677172056871
-    },
-    {
-      "email": "mailan@gmail.com",
-      "password": "$2a$10$0filBUu7AVzLHI13LGeID.XuST7BAwMJaVbUGiibH3eGuv7GeYqbq",
-      "id": "e900ed68-fe81-42b9-91cc-9a108f20997f",
-      "role": "user",
-      "first_name": "Lan",
-      "last_name": "Mai",
-      "phone": "846584654",
-      "createdAt": 1677352480560,
-      "updateAt": 1677352480560
     },
     {
       "email": "hatran@gmail.com",

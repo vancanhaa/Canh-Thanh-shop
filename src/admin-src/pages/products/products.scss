@@ -1,16 +1,15 @@
 .products {
+    padding-bottom: 80px;
+
         .products-container {
         .products-header {
             
         }
         .products-body {
-            border-radius: 8px;
             .ant-col {
                 font-size: 1.2rem;
             }
-            .center-text {
-                text-align: center;
-            }
+
             .products-body__heading {
                 padding: 10px 0;
                 background-color: #a1bcee24;
@@ -18,9 +17,14 @@
             }
             
         }
-        .products-footer {
-            text-align: center;
-            margin: 20px 0;
-        }
+        
     }
+}
+.products-footer {
+    text-align: center;
+    padding: 20px 0;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
 }

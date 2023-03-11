@@ -16,7 +16,7 @@ function Products() {
 
   const productsAdminState = useSelector((state) => state.productsAdmin);
   useEffect(() => {
-    dispatch(fetchProductsListAdmin({ page: 1, limit: 9 }));
+    dispatch(fetchProductsListAdmin({ page: 1, limit: 10 }));
   }, []);
 
 
@@ -29,6 +29,7 @@ function Products() {
   }, [page])
 
   return (
+    <>
     <div className="products">
       <div className="products-container">
         <div className="products-header">
@@ -58,7 +59,10 @@ function Products() {
           </div>
           <ProductsList />
         </div>
-        <div className="products-footer">
+        
+      </div>
+    </div>
+    <div className="products-footer">
           <Pagination
             onChange={(page, pageSize) => {
 
@@ -76,8 +80,7 @@ function Products() {
             pageSize={Number(limit)}
           />
         </div>
-      </div>
-    </div>
+    </>
   );
 }
 

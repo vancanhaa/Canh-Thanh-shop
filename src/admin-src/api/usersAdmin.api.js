@@ -4,7 +4,7 @@ export const usersAdminApi = {
         return API.get(`${BASE_URL}/api/users?_page=${page}&_limit=${limit}`)
     },
 
-    getUserDetail: (id) => {
-        return API.get(`${BASE_URL}/api/users/${id}`)
-    }
+    getUserDetail: (id) => API.get(`${BASE_URL}/api/users/${id}`),
+    
+    deleteUser: (id) => API.delete(`${BASE_URL}/api/users`, id)
 }
