@@ -1,0 +1,56 @@
+.analysis {
+  width: 100%;
+  max-width: 800px;
+  margin: 30px auto 0 auto;
+  .analysis__item {
+    width: 350px;
+    height: 150px;
+    border-radius: 10px;
+    box-shadow: 1px 1px 2px 1px rgba(237, 165, 9, 0.9);
+    background-image: linear-gradient(to top left, #feedc8, #fffdfa);
+    padding: 15px 20px;
+    position: relative;
+    .analysis__title {
+      display: flex;
+      justify-content: space-between;
+
+      p {
+        color:  var(--title-color);
+        font-weight: 600;
+        font-size: 1.8rem;
+      }
+
+      .icon {
+        width: 45px;
+        height: 45px;
+        border-radius: 5px;
+        background-color: rgb(237, 237, 237);
+        box-shadow: 1px 1px 2px 1px rgba(128, 128, 128, 0.321);
+        text-align: center;
+        line-height: 45px;
+        color: var(--title-color);
+        font-size: 2.6rem;
+      }
+    }
+    .analysis__content {
+      position: relative;
+
+      .revenue-value {
+        position: relative;
+        top: 15px;
+        font-size: 35px;
+      }
+      p {
+        font-size: 26px;
+        color: rgb(38, 23, 23);
+
+        span {
+          display: inline-block;
+          width: 40%;
+          color: var(--placeholder-color);
+          font-size: 16px;
+        }
+      }
+    }
+  }
+}

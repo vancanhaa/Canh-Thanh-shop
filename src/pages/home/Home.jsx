@@ -3,7 +3,11 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import Slider from "react-slick";
-import { settingsProductsLg, settingsProductsMd, settingsProductsSm } from "../../constants/home.const";
+import {
+  settingsProductsLg,
+  settingsProductsMd,
+  settingsProductsSm,
+} from "../../constants/home.const";
 import MainLayout from "../../layouts/main-layout/MainLayout";
 import { fetchAllProducts } from "../../stores/actions/product.action";
 import "./home.scss";
@@ -67,10 +71,10 @@ function Home() {
                           <ProductItem
                             item={item}
                             handleOpenAddCartModal={handleOpenAddCartModal}
+                            key={item.id}
                           />
                         );
                       })}
-                     
                     </Slider>
                   </Col>
                   <Col lg={0} md={24} sm={0} xs={0}>
@@ -78,12 +82,12 @@ function Home() {
                       {listProductBestSeller.map((item, index) => {
                         return (
                           <ProductItem
+                            key={item.id}
                             item={item}
                             handleOpenAddCartModal={handleOpenAddCartModal}
                           />
                         );
                       })}
-                     
                     </Slider>
                   </Col>
                   <Col lg={0} md={0} sm={24} xs={24}>
@@ -91,12 +95,12 @@ function Home() {
                       {listProductBestSeller.map((item, index) => {
                         return (
                           <ProductItem
+                            key={item.id}
                             item={item}
                             handleOpenAddCartModal={handleOpenAddCartModal}
                           />
                         );
                       })}
-                     
                     </Slider>
                   </Col>
                 </Row>
@@ -110,12 +114,12 @@ function Home() {
                       {listProductNew.map((item, index) => {
                         return (
                           <ProductItem
+                            key={item.id}
                             item={item}
                             handleOpenAddCartModal={handleOpenAddCartModal}
                           />
                         );
                       })}
-                     
                     </Slider>
                   </Col>
                   <Col lg={0} md={24} sm={0} xs={0}>
@@ -123,12 +127,12 @@ function Home() {
                       {listProductNew.map((item, index) => {
                         return (
                           <ProductItem
+                            key={item.id}
                             item={item}
                             handleOpenAddCartModal={handleOpenAddCartModal}
                           />
                         );
                       })}
-                     
                     </Slider>
                   </Col>
                   <Col lg={0} md={0} sm={24} xs={24}>
@@ -136,12 +140,12 @@ function Home() {
                       {listProductNew.map((item, index) => {
                         return (
                           <ProductItem
+                            key={item.id}
                             item={item}
                             handleOpenAddCartModal={handleOpenAddCartModal}
                           />
                         );
                       })}
-                     
                     </Slider>
                   </Col>
                 </Row>

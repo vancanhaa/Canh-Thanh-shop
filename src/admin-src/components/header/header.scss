@@ -1,0 +1,80 @@
+.header-admin-container {
+  width: 100%;
+  background: linear-gradient(#feedc8, #fff);
+  box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.05);
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 5px 10px 0 10px;
+  min-height: 55px;
+
+  .header-left {
+    display: flex;
+    .header-logo {
+      a {
+        color: var(--primary-color);
+        font-size: 2.8rem;
+        font-weight: 800;
+      }
+    }
+    .header-menu {
+      width: 420px;
+      margin-left: 16px;
+      .ant-menu {
+        background-color: transparent;
+        border-color: transparent;
+        .ant-menu-item {
+          padding-inline: 10px;
+          color: var(--title-color);
+          font-size: 1.6rem;
+          font-weight: 600;
+          &:hover {
+            color: var(--error-color);
+            &::after {
+              border-bottom-color: var(--error-color);
+              border-bottom-width: 3px;
+            }
+          }
+          &.ant-menu-item-selected {
+            color: var(--error-color);
+            &::after {
+              border-bottom-color: var(--error-color);
+              border-bottom-width: 3px;
+            }
+          }
+
+          .ant-menu-title-content {
+            letter-spacing: -1px;
+            word-spacing: -1px;
+            margin-left: 4px;
+          }
+        }
+      }
+    }
+  }
+  .header-right {
+    .header-account {
+      display: flex;
+      align-items: center;
+      padding: 5px;
+      color: #fff;
+      background-color: var(--primary-color);
+      border-radius: 4px;
+      .header-account__icon {
+        position: relative;
+        top: 2px;
+        font-size: 1.8rem;
+        path {
+          stroke: #fff;
+        }
+      }
+      .header-account__email {
+        margin-left: 4px;
+      }
+    }
+  }
+}

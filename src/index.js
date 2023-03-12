@@ -7,12 +7,14 @@ import { Provider } from "react-redux";
 
 import GlobalStyles from "./components/global-styles/GlobalStyles";
 import { rootStore } from "./stores/index";
+import ScrollToTop from "./layouts/ScrollToTop";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   // <React.StrictMode>
     <Provider store={rootStore}>
       <BrowserRouter>
+        <ScrollToTop />
         <GlobalStyles>
           <App />
         </GlobalStyles>

@@ -42,6 +42,17 @@ function ModalAddCart({
     setValueQuantity(1);
   };
 
+  const showMessage = ({ itemAddCart, valueQuantity }) => {
+    notification.success({
+      message: `Đã thêm thành công ${valueQuantity} sản phẩm`,
+      description: `${itemAddCart.name}`,
+      placement: "topRight",
+      style: { border: "2px solid #71be34" },
+      duration: 2
+    });
+  };
+
+
   const handleAddItemToCart = ({ itemAddCart, options, valueQuantity }) => {
 
     const newItemAddCart = {
@@ -92,13 +103,8 @@ function ModalAddCart({
         })
       );
     }
+    showMessage({itemAddCart, valueQuantity})
     handleResetOption();
-    notification.info({
-      message: `Đã thêm thành công ${valueQuantity} sản phẩm`,
-      description: `${itemAddCart.name}`,
-      placement: "topRight",
-      icon: <CheckOutlined />,
-    });
   };
 
   return (

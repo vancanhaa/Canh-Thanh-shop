@@ -7,3 +7,11 @@ export const SHOP_BY_PRICE = [
   { priceRange: 5, title: "Từ 500.000đ - 700.000đ", price_gte: 500000, price_lte: 700000 },
   { priceRange: 6, title: "Lớn hơn 700.000đ", price_gte: 700000, price_lte: null },
 ];
+
+export const SHOP_BY_CATEGORY = [
+  {title: "Tất cả", value: ""},
+  {title: "Áo Polo", value: "polo"},
+  {title: "Áo thun", value: "t-shirt"},
+  {title: "Áo khoác", value: "jacket"},
+  {title: "Quần jean", value: "jeans"},
+]

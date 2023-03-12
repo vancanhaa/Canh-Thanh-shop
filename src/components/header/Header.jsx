@@ -5,21 +5,22 @@ import { AiTwotonePhone, AiOutlineUser } from "react-icons/ai";
 import { BsHandbag } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useRef, useState } from "react";
+import { GrUserAdmin } from "react-icons/gr"
+import { DeleteOutlined, ExclamationCircleOutlined } from "@ant-design/icons";
+import { v4 } from "uuid";
 
 import "./header.scss";
 import { ROUTE } from "../../constants";
 import { logOut } from "../../stores/slice/auth.slice";
 import { fetchProductList } from "../../stores/actions/product.action";
 import { changeTextSearch } from "../../stores/slice/product.slice";
-import { DeleteOutlined, ExclamationCircleOutlined } from "@ant-design/icons";
 import common from "../../utils/common";
 import { fetchCart, fetchChangeCart } from "../../stores/actions/cart.action";
-import { v4 } from "uuid";
+
 function Header() {
-  const [valueSearch, setValueSearch] = useState("");
-  const searchRef = useRef();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const searchRef = useRef();
   const { Search } = Input;
   const userInfo = useSelector((state) => state.user.userInfoState.data);
   const cart = useSelector((state) => state.cart.cart);
@@ -27,31 +28,8 @@ function Header() {
     if (userInfo) dispatch(fetchCart({ idUser: userInfo.id }));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
   const [modal, contextHolder] = Modal.useModal();
-
-  const confirm = (index) => {
-    modal.confirm({
-      className: "confirm-delete-item",
-      title: "Bạn có chắc chắn muốn xoá sản phẩm này khỏi giỏ hàng?",
-      icon: <ExclamationCircleOutlined />,
-      content: `${cart.products[index].name}`,
-      okText: "Đồng ý",
-      cancelText: "Không",
-      onOk: () => handleDeleteItem(index),
-    });
-  };
-
-  const handleSearch = (value) => {
-    let textSearch = value.trim();
-    if (textSearch) {
-      dispatch(fetchProductList({ page: 1, limit: 12, textSearch }));
-      dispatch(changeTextSearch(textSearch));
-    }
-    setValueSearch("");
-    searchRef.current.blur();
-    if (textSearch) navigate(ROUTE.PRODUCT);
-  };
+  const [valueSearch, setValueSearch] = useState("");
 
   function AccountComponent({ userInfo }) {
     const handleLogOut = () => {
@@ -103,43 +81,6 @@ function Header() {
     );
   }
 
-  const handleDeleteItem = (index) => {
-    let newProducts = [...cart.products];
-    newProducts.splice(index, 1);
-    let data = {
-      products: newProducts,
-    };
-    dispatch(fetchChangeCart({ idUser: cart.id, data }));
-  };
-
-  const handleIncreaseQuantity = (index) => {
-    const newProducts = [...cart.products];
-    newProducts[index] = {
-      ...newProducts[index],
-      quantity: newProducts[index].quantity + 1,
-    };
-    let data = {
-      products: newProducts,
-    };
-    dispatch(fetchChangeCart({ idUser: cart.id, data }));
-  };
-
-  const handleDecreaseQuantity = (index) => {
-    let newProducts = [...cart.products];
-    if (newProducts[index].quantity <= 1) {
-      confirm(index);
-    } else {
-      newProducts[index] = {
-        ...newProducts[index],
-        quantity: newProducts[index].quantity - 1,
-      };
-      let data = {
-        products: newProducts,
-      };
-      dispatch(fetchChangeCart({ idUser: cart.id, data }));
-    }
-  };
-
   function HeaderCartComponent() {
     return (
       <div className="header-cart">
@@ -148,7 +89,7 @@ function Header() {
             <BsHandbag />
             <div
               className={
-                cart.products?.length > 0
+                cart.products?.length > 0 && cart.products[0].id !== ""
                   ? "header-cart__number-item is-cart"
                   : "header-cart__number-item"
               }
@@ -264,6 +205,89 @@ function Header() {
     );
   }
 
+  function HeaderAdminComponent ({userInfo}) {
+    if(userInfo && userInfo.role === "admin") {
+      return (
+        <div className="header-admin">
+          <Link to={ROUTE.ADMIN}>
+            <div className="header-admin__icon">
+            <GrUserAdmin />
+            </div>
+            <p>ADMIN</p>
+          </Link>
+        </div>
+      )
+    }
+    return null
+  }
+
+  const confirm = (index) => {
+    modal.confirm({
+      className: "confirm-delete-item",
+      title: "Bạn có chắc chắn muốn xoá sản phẩm này khỏi giỏ hàng?",
+      icon: <ExclamationCircleOutlined />,
+      content: `${cart.products[index].name}`,
+      okText: "Đồng ý",
+      cancelText: "Không",
+      onOk: () => handleDeleteItem(index),
+    });
+  };
+
+  const handleSearch = (value) => {
+    let textSearch = value.trim();
+    if (textSearch) {
+      dispatch(fetchProductList({ page: 1, limit: 12, textSearch }));
+      dispatch(changeTextSearch(textSearch));
+    }
+    setValueSearch("");
+    searchRef.current.blur();
+    if (textSearch) navigate(ROUTE.PRODUCT);
+  };
+
+ 
+
+  const handleDeleteItem = (index) => {
+    let newProducts = [...cart.products];
+    newProducts.splice(index, 1);
+    let data = {
+      products: newProducts,
+    };
+    dispatch(fetchChangeCart({ idUser: cart.id, data }));
+  };
+
+  const handleIncreaseQuantity = (index) => {
+    const newProducts = [...cart.products];
+    newProducts[index] = {
+      ...newProducts[index],
+      quantity: newProducts[index].quantity + 1,
+    };
+    let data = {
+      products: newProducts,
+    };
+    dispatch(fetchChangeCart({ idUser: cart.id, data }));
+  };
+
+  const handleDecreaseQuantity = (index) => {
+    let newProducts = [...cart.products];
+    if (newProducts[index].quantity <= 1) {
+      confirm(index);
+    } else {
+      newProducts[index] = {
+        ...newProducts[index],
+        quantity: newProducts[index].quantity - 1,
+      };
+      let data = {
+        products: newProducts,
+      };
+      dispatch(fetchChangeCart({ idUser: cart.id, data }));
+    }
+  };
+
+ 
+
+ 
+
+
   return (
     <div className="header">
       <div className="header-container">
@@ -337,8 +361,8 @@ function Header() {
             </Col>
             <Col lg={8} md={0}>
               <div className="bottombar-right">
+                {HeaderAdminComponent({userInfo})}
                 {HeaderCartComponent()}
-
                 {AccountComponent({ userInfo })}
               </div>
             </Col>

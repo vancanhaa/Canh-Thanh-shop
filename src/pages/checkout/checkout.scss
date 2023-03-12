@@ -25,7 +25,7 @@
       line-height: 48px;
     }
 
-    input {
+    input, textarea {
       &::placeholder {
         color: #7a7a9d;
         opacity: 1;
@@ -348,6 +348,7 @@
           p {
             display: flex;
             justify-content: space-between;
+            margin-bottom: 2px;
             span {
               color: #000;
               opacity: 1;
@@ -370,6 +371,7 @@
             border: none;
             border-radius: 6px;
             font-weight: 600;
+            margin-top: 10px;
           }
         }
       }
