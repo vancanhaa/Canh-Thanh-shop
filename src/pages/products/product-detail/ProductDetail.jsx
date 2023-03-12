@@ -48,7 +48,6 @@ function ProductDetail() {
     dispatch(
       fetchProductList({
         filter: { category: products.category },
-        page: 1,
         limit: 4,
       })
     );
@@ -134,6 +133,8 @@ function ProductDetail() {
       icon: <CheckOutlined />,
     });
   };
+  const sumRiview = product.riviews?.length;
+  console.log("sum", sumRiview);
 
   const currentReviews = useMemo(
     () => (product ? product.riviews : []),
@@ -264,8 +265,8 @@ function ProductDetail() {
                       <div className="users-rat">
                         <input
                           className="user-comment"
-                          type="text"
                           value={item.riview}
+                          type="text"
                           disabled
                         />
                         <div className="raiting">
@@ -289,7 +290,7 @@ function ProductDetail() {
                       <i class="fa-solid fa-star"></i>
                       <i class="fa-solid fa-star"></i>
                       <i class="fa-solid fa-star"></i>
-                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>({sumRiview})
                     </div>
                   </div>
                   <div className="product-price">

@@ -1,5 +1,5 @@
 import common from "../../utils/common";
-import "./product-item.scss"
+import "./product-item.scss";
 import { Link } from "react-router-dom";
 
 function ProductItem({ item, handleOpenAddCartModal }) {
@@ -18,7 +18,9 @@ function ProductItem({ item, handleOpenAddCartModal }) {
         <div className="product-item__sold">
           <div className="y-line"></div>
           Đã bán
-          <span className="product-item__sold-number">{item.sold}</span>
+          <span className="product-item__sold-number">
+            {common.formatPrice(item.sold)}
+          </span>
         </div>
       </div>
       <div className="product-item__images">
