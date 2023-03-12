@@ -169,7 +169,7 @@ function Checkout() {
         note_shipping,
       },
       payment_method: paymentMethod,
-      status_order: "Chưa vận chuyển",
+      status_order: "unconfirmed",
       status_payment: false,
       total_order: totalOrderNotShipping + shippingPrice,
       shipping_price: shippingPrice,

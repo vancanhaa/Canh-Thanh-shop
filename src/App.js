@@ -63,6 +63,8 @@ function App() {
             </ProtectedRouteAdmin>
           }
         >
+          <Route index element={<Analysis />} />
+
           <Route path={ROUTE.PRODUCTS_ADMIN} element={<Products />} />
           <Route path={ROUTE.ORDERS_ADMIN} element={<Orders />} />
           <Route path={ROUTE.USERS_ADMIN} element={<Users />} />

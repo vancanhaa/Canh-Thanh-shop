@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchProductsListAdmin } from "../actions/productsAdmin.action";
+import { fetchAllProductsAdmin, fetchProductsListAdmin } from "../actions/productsAdmin.action";
 
 const productsAdminInitialState = {
   allProducts: [],
@@ -39,6 +39,19 @@ const productsAdminSlice = createSlice({
     });
     builder.addCase(fetchProductsListAdmin.rejected, (state, action) => {
       state.fetchingProductList = false;
+    });
+
+    //fetchAllProductsAdmin
+    builder.addCase(fetchAllProductsAdmin.pending, (state, action) => {
+      state.fetchingProductsAdmin = true;
+    });
+    builder.addCase(fetchAllProductsAdmin.fulfilled, (state, action) => {
+      state.allProducts = action.payload
+      state.fetchingProductsAdmin = false;
+
+    });
+    builder.addCase(fetchAllProductsAdmin.rejected, (state, action) => {
+      state.fetchingProductsAdmin = false;
     });
   },
 });

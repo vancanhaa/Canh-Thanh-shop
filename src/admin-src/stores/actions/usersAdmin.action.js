@@ -24,3 +24,11 @@ export const fetchDeleteUserAdmin = createAsyncThunk(
         return response.data
     }
 )
+
+export const fetchAllUsersAdmin = createAsyncThunk(
+    "usersAdmin/fetchAllUsersAdmin",
+    async (payload, thunkApi) => {
+        const response = await usersAdminApi.getAllUsers()
+        return response.data
+    }
+)

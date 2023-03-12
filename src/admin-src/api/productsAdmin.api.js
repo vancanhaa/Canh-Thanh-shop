@@ -24,5 +24,6 @@ export const productsAdminApi = {
   getProductDetail: (id) => API.get(`${BASE_URL}/api/products/${id}`),
   postNewProduct: (data) => API.post(`${BASE_URL}/api/products`, data),
   editProduct: (id, data) => API.patch(`${BASE_URL}/api/products`, id, data),
-  deleteProduct: (id) => API.delete(`${BASE_URL}/api/products`, id)
+  deleteProduct: (id) => API.delete(`${BASE_URL}/api/products`, id),
+  getAllProducts: () => API.get(`${BASE_URL}/api/products`)
 };

@@ -6,5 +6,6 @@ export const usersAdminApi = {
 
     getUserDetail: (id) => API.get(`${BASE_URL}/api/users/${id}`),
     
-    deleteUser: (id) => API.delete(`${BASE_URL}/api/users`, id)
+    deleteUser: (id) => API.delete(`${BASE_URL}/api/users`, id),
+    getAllUsers: () => API.get(`${BASE_URL}/api/users`)
 }

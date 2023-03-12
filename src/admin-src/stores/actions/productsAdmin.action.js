@@ -32,3 +32,11 @@ export const fetchDeleteProductAdmin = createAsyncThunk(
     return response.data
   }
 )
+
+export const fetchAllProductsAdmin = createAsyncThunk(
+  "productsAdmin/fetchAllProductsAdmin",
+  async (payload, thunkApi) => {
+      const response = await productsAdminApi.getAllProducts()
+      return response.data
+  }
+)

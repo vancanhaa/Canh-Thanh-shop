@@ -18,9 +18,17 @@ export const fetchOrdersListAdmin = createAsyncThunk(
 )
 
 export const fetchDeleteOrderAdmin = createAsyncThunk(
-    "usersAdmin/fetchDeleteUserAdmin",
+    "ordersAdmin/fetchDeleteOrderAdmin",
     async (payload, thunkApi) => {
         const response = await ordersAdminApi.deleteOrder(payload)
+        return response.data
+    }
+)
+
+export const fetchAllOrdersAdmin = createAsyncThunk(
+    "ordersAdmin/fetchAllOrdersAdmin",
+    async (payload, thunkApi) => {
+        const response = await ordersAdminApi.getAllOrders()
         return response.data
     }
 )
