@@ -343,24 +343,16 @@ function Header() {
               <nav className="header-nav">
                 <ul className="list-item-big">
                   <li className="nav-item">
-                    <a href="/">TRANG CHỦ</a>
-                  </li>
-                  <li className="nav-item">
                     <Link to={ROUTE.HOME_PAGE}>TRANG CHỦ</Link>
                   </li>
                   <li className="nav-item">
                     <Link to={ROUTE.PRODUCT}>CỬA HÀNG</Link>
                   </li>
                   <li className="nav-item">
-                    <a href="/contact">LIÊN HỆ</a>
+                  <Link to={ROUTE.CONTACT}>LIÊN HỆ</Link>
                   </li>
                   <li className="nav-item">
-                    <a href="/aboutus">VỀ CHÚNG TÔI</a>
-
-                    <Link to={"/#"}>LIÊN HỆ</Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link to={"/#"}>VỀ CHÚNG TÔI</Link>
+                  <Link to={ROUTE.ABOUTUS}>VỀ CHÚNG TÔI</Link>
                   </li>
                 </ul>
               </nav>
