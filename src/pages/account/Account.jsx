@@ -2,6 +2,7 @@ import { FileDoneOutlined, UserOutlined } from "@ant-design/icons";
 import { Col, Menu, Row } from "antd";
 import React, { useEffect, useState } from "react";
 import { ImLocation } from "react-icons/im";
+import { useSelector } from "react-redux";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { ROUTE } from "../../constants";
 import MainLayout from "../../layouts/main-layout/MainLayout";
@@ -10,6 +11,7 @@ import "./account.scss";
 function Account() {
   const [title, setTitle] = useState("TÀI KHOẢN");
   const location = useLocation();
+  const userInfo = useSelector((state) => state.user.userInfoState.data);
   useEffect(() => {
     if (location.pathname === "/account/address") {
       setTitle("ĐỊA CHỈ");
@@ -43,7 +45,7 @@ function Account() {
                   <div className="menu_bar-avatar">
                     <UserOutlined />
                   </div>
-                  <p className="menu_bar-user_name">Pham Canh</p>
+                  <p className="menu_bar-user_name">{`${userInfo.last_name} ${userInfo.first_name}`}</p>
                   <button className="btn-logout">Đăng xuất</button>
                 </div>
                 <div className="menu_bar-body">

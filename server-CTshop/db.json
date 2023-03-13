@@ -134,30 +134,6 @@
           "idProduct": "APM5393",
           "rate": 3,
           "riview": "chất lượng tốt"
-        },
-        {
-          "idUser": "f6f08abd-b1b9-479a-b9e9-7a5d0982bc94",
-          "first_name": "Tien",
-          "last_name": "Thanh",
-          "idProduct": "APM5393",
-          "rate": 5,
-          "riview": "5 sao"
-        },
-        {
-          "idUser": "f6f08abd-b1b9-479a-b9e9-7a5d0982bc94",
-          "first_name": "Tien",
-          "last_name": "Thanh",
-          "idProduct": "APM5393",
-          "rate": 2,
-          "riview": "hahaha"
-        },
-        {
-          "idUser": "f6f08abd-b1b9-479a-b9e9-7a5d0982bc94",
-          "first_name": "Tien",
-          "last_name": "Thanh",
-          "idProduct": "APM5393",
-          "rate": 4.5,
-          "riview": "dâdadad"
         }
       ],
       "thumbnail": "https://bizweb.dktcdn.net/100/438/408/products/apm5393-xhd-3.jpg?v=1662358179350",
@@ -228,6 +204,14 @@
           "idProduct": "APM5329",
           "rate": 2.5,
           "riview": "da"
+        },
+        {
+          "idUser": "f6f08abd-b1b9-479a-b9e9-7a5d0982bc94",
+          "first_name": "Tien",
+          "last_name": "Thanh",
+          "idProduct": "APM5329",
+          "rate": 3.5,
+          "riview": "nice"
         }
       ],
       "thumbnail": "https://bizweb.dktcdn.net/100/438/408/products/apm5329-xlo-3.jpg?v=1675313492517",
@@ -377,15 +361,7 @@
       "sold": 6800,
       "brand": "Yody",
       "category": "jeans",
-      "riviews": [
-        {
-          "idUser": "726a34f1-3cad-460b-988e-bc5f67c7c22e",
-          "first_name": "canh",
-          "last_name": "pham",
-          "rate": 2.5,
-          "riview": "sản pham ok"
-        }
-      ],
+      "riviews": [],
       "thumbnail": "https://bizweb.dktcdn.net/100/438/408/products/quan-jeans-nam-ong-suong-co-gian-thoang-mat-qjm3071-xah-6.jpg?v=1676603943627",
       "createdAt": 1678187010285
     },
@@ -1922,35 +1898,7 @@
     },
     {
       "id": "f6f08abd-b1b9-479a-b9e9-7a5d0982bc94",
-      "products": [
-        {
-          "id": "APM5329",
-          "name": "Áo Polo Nam Cafe Thêu Ngực",
-          "image_url": "https://bizweb.dktcdn.net/100/438/408/products/apm5329-nau-7.jpg?v=1675312941750",
-          "quantity": 1,
-          "price": 379000,
-          "color": "Nâu",
-          "size": "S"
-        },
-        {
-          "id": "APM5329",
-          "name": "Áo Polo Nam Cafe Thêu Ngực",
-          "image_url": "https://bizweb.dktcdn.net/100/438/408/products/apm5329-xmn-7.jpg?v=1675313492517",
-          "quantity": 2,
-          "price": 379000,
-          "color": "Xanh mint",
-          "size": "S"
-        },
-        {
-          "id": "QJM6007",
-          "name": "Quần Jean Nam Slimfit Rayon Dây Dệt Túi Đồng Hồ",
-          "image_url": "https://bizweb.dktcdn.net/100/438/408/products/qjm6007-dek-4.jpg?v=1672978135417",
-          "quantity": 2,
-          "price": 469000,
-          "color": "Đen khói",
-          "size": "30"
-        }
-      ],
+      "products": [],
       "createdAt": 1678380100781,
       "updateAt": 1678380100781
     },
@@ -82657,9 +82605,38 @@
       "status_payment": false,
       "total_order": 2534000,
       "shipping_price": 0,
-      "total_order_not_shipping": 2534000,
-      "createdAt": 1678608565648,
-      "updateAt": 1678608565648
+      "total_order_not_shipping": 738000,
+      "createdAt": 1678376563038,
+      "updateAt": 1678376563038
+    },
+    {
+      "id": "3a5d4c36-1c1e-493b-9497-21a8922ead9c",
+      "id_user": "f6f08abd-b1b9-479a-b9e9-7a5d0982bc94",
+      "time_create": "01:50:07 12/3/2023",
+      "cart": [
+        {
+          "id": "APM5393",
+          "name": "Áo Polo Nam Pique Sồi",
+          "image_url": "https://bizweb.dktcdn.net/100/438/408/products/apm5393-xng-5.jpg?v=1662358179350",
+          "quantity": 1,
+          "price": 369000,
+          "color": "Xanh ngọc",
+          "size": "XL"
+        }
+      ],
+      "checkout_address": {
+        "full_name": "thanh",
+        "address": "148 hàn thuyên, Phường Hòa Cường Bắc, Quận Hải Châu, Thành phố Đà Nẵng",
+        "phone_number": "0345958939"
+      },
+      "payment_method": 2,
+      "status_order": "Chưa vận chuyển",
+      "status_payment": false,
+      "total_order": 399000,
+      "shipping_price": 30000,
+      "total_order_not_shipping": 369000,
+      "createdAt": 1678560607687,
+      "updateAt": 1678560607687
     },
     {
       "id": "cf20af0b-0758-43a8-b1b6-c8a75130ac9c",
