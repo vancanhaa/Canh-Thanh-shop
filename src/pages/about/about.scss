@@ -1,0 +1,25 @@
+.about {
+     width: 1240px;
+     margin: 0 auto;
+     padding: 24px;
+     .breadcrumb-bar {
+          
+          .breadcrumb {
+            display: flex;
+            padding: 0;
+            align-items: center;
+            .breadcrumb-item {
+              display: block;
+              height: 30px;
+              &:hover a{
+                color: var(--primary-color);
+              }
+              a {
+                width: 100%;
+                margin-right: 4px;
+                margin-left: 4px;
+              }
+            }
+          }
+        }
+}

@@ -5,7 +5,7 @@ import { AiTwotonePhone, AiOutlineUser } from "react-icons/ai";
 import { BsHandbag } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useRef, useState } from "react";
-import { GrUserAdmin } from "react-icons/gr"
+import { GrUserAdmin } from "react-icons/gr";
 import { DeleteOutlined, ExclamationCircleOutlined } from "@ant-design/icons";
 import { v4 } from "uuid";
 
@@ -46,7 +46,7 @@ function Header() {
           </div>
           <div className="header-account__menu">
             <ul>
-            <li>
+              <li>
                 <Link to={ROUTE.PROFILE}>Tài khoản của tôi</Link>
               </li>
               <li>
@@ -205,20 +205,20 @@ function Header() {
     );
   }
 
-  function HeaderAdminComponent ({userInfo}) {
-    if(userInfo && userInfo.role === "admin") {
+  function HeaderAdminComponent({ userInfo }) {
+    if (userInfo && userInfo.role === "admin") {
       return (
         <div className="header-admin">
           <Link to={ROUTE.ADMIN}>
             <div className="header-admin__icon">
-            <GrUserAdmin />
+              <GrUserAdmin />
             </div>
             <p>ADMIN</p>
           </Link>
         </div>
-      )
+      );
     }
-    return null
+    return null;
   }
 
   const confirm = (index) => {
@@ -243,8 +243,6 @@ function Header() {
     searchRef.current.blur();
     if (textSearch) navigate(ROUTE.PRODUCT);
   };
-
- 
 
   const handleDeleteItem = (index) => {
     let newProducts = [...cart.products];
@@ -282,11 +280,6 @@ function Header() {
       dispatch(fetchChangeCart({ idUser: cart.id, data }));
     }
   };
-
- 
-
- 
-
 
   return (
     <div className="header">
@@ -344,24 +337,24 @@ function Header() {
             <Col lg={16} md={16}>
               <nav className="header-nav">
                 <ul className="list-item-big">
-                <li className="nav-item">
+                  <li className="nav-item">
                     <a href="/">TRANG CHỦ</a>
                   </li>
                   <li className="nav-item">
                     <a href="/product">SẢN PHẨM</a>
                   </li>
                   <li className="nav-item">
-                    <a href="#!">LIÊN HỆ</a>
+                    <a href="/contact">LIÊN HỆ</a>
                   </li>
                   <li className="nav-item">
-                    <a href="#!">VỀ CHÚNG TÔI</a>
+                    <a href="/aboutus">VỀ CHÚNG TÔI</a>
                   </li>
                 </ul>
               </nav>
             </Col>
             <Col lg={8} md={0}>
               <div className="bottombar-right">
-                {HeaderAdminComponent({userInfo})}
+                {HeaderAdminComponent({ userInfo })}
                 {HeaderCartComponent()}
                 {AccountComponent({ userInfo })}
               </div>
