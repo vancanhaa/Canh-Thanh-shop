@@ -5,20 +5,37 @@ import { v4 } from "uuid";
 import common from "../../../../../utils/common";
 import "antd/dist/antd";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
-import { fetchDeleteProductAdmin, fetchProductsListAdmin } from "../../../../stores/actions/productsAdmin.action";
+import {
+  fetchDeleteProductAdmin,
+  fetchProductsListAdmin,
+} from "../../../../stores/actions/productsAdmin.action";
+import { useEffect } from "react";
 
 function ProductsList() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const productsAdminState = useSelector((state) => state.productsAdmin);
-  const { listProducts, pagination, textSearch, filter } = productsAdminState;
-  const {page, limit} = pagination
-  const indexItem = (page - 1) * 10
+  const { listProducts, pagination, textSearch, filter, isDeleteProductSuccess } = productsAdminState;
+  const { page, limit } = pagination;
+  const indexItem = (page - 1) * 10;
   const [modal, contextHolder] = Modal.useModal();
+  useEffect(() => {
+    if(isDeleteProductSuccess) {
+      dispatch(
+        fetchProductsListAdmin({
+          page: page,
+          limit: limit,
+          textSearch: textSearch,
+          filter: { ...filter },
+        })
+      );
+    }
+  }, [isDeleteProductSuccess])
 
   const confirm = (id, index) => {
     modal.confirm({
       className: "confirm-delete-item",
-      title: "Quản trị viên có chắc chắn muốn xoá sản phẩm này khỏi danh sách sản phẩm?",
+      title:
+        "Quản trị viên có chắc chắn muốn xoá sản phẩm này khỏi danh sách sản phẩm?",
       icon: <ExclamationCircleOutlined />,
       content: `${listProducts[index].name}`,
       okText: "Đồng ý",
@@ -28,8 +45,7 @@ function ProductsList() {
   };
 
   const handleDeleteProduct = (id) => {
-    dispatch(fetchDeleteProductAdmin(id))
-    dispatch(fetchProductsListAdmin({page: page, limit: limit, textSearch: textSearch, filter: {...filter}}))
+    dispatch(fetchDeleteProductAdmin(id));
   };
   return (
     <div className="products-body__content">
@@ -44,7 +60,7 @@ function ProductsList() {
           description,
           options,
           size,
-          id
+          id,
         } = item;
         const colors = options.map((colorItem) => {
           return colorItem.color;
@@ -55,7 +71,7 @@ function ProductsList() {
           <div className="products-item" key={v4()}>
             <Row justify="space-between" align="middle" gutter={[16, 16]}>
               <Col span={1} className="center-text">
-                {indexItem + index + 1 }
+                {indexItem + index + 1}
               </Col>
               <Col span={2}>{name}</Col>
               <Col span={2} className="center-text">
@@ -87,25 +103,30 @@ function ProductsList() {
                 {size.join(", ")}
               </Col>
               <Col span={4} className="center-text">
-                  <div className="slick-image">
-                  <Carousel autoplay >
+                <div className="slick-image">
+                  <Carousel autoplay>
                     {imagesUrl.map((url) => (
                       <div key={v4()}>
-                        <img src={url} alt="" width={"120px"}/>
+                        <img src={url} alt="" width={"120px"} />
                       </div>
                     ))}
                   </Carousel>
-                  </div>
+                </div>
               </Col>
               <Col span={2} className="center-text">
                 <div className="edit-action">Sửa</div>
-                <div className="delete-action" onClick={() => confirm(id, index)}>Xóa</div>
+                <div
+                  className="delete-action"
+                  onClick={() => confirm(id, index)}
+                >
+                  Xóa
+                </div>
               </Col>
             </Row>
           </div>
         );
       })}
-       {contextHolder}
+      {contextHolder}
     </div>
   );
 }

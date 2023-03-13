@@ -54,6 +54,28 @@
       "phone": "0909798679",
       "createdAt": 1678609148012,
       "updateAt": 1678609148012
+    },
+    {
+      "email": "anquynh@gmail.com",
+      "password": "$2a$10$emy8W.d/cmzbSEpJdyn3sOb5nPQf.ZPddegyDIVy7gQBDTk8E2sea",
+      "id": "b1b7f15f-2409-4eea-8a09-48eab4c54f26",
+      "role": "user",
+      "first_name": "An",
+      "last_name": "Quynh",
+      "phone": "0909385942",
+      "createdAt": 1678612250989,
+      "updateAt": 1678612250989
+    },
+    {
+      "email": "dungbui@gmail.com",
+      "password": "$2a$10$RwyKFpZNNhVqA2eMuA6hJuZbhIEXENvkOp0wQig/BLBKwjDoRem8.",
+      "id": "1d5df183-5dda-40e7-9f20-65e8392f8a4c",
+      "role": "user",
+      "first_name": "Dung",
+      "last_name": "Bui",
+      "phone": "0909273944",
+      "createdAt": 1678631034516,
+      "updateAt": 1678631034516
     }
   ],
   "products": [
@@ -884,7 +906,7 @@
         "Chất liệu Cotton",
         "Thoải mái với chất liệu thấm hút tốt, co giãn vừa phải",
         "Form dáng suông cơ bản dành cho nam giới",
-        "Thích hợp phối với đa dạng items đi làm, đi chơi, đi học như áo polo, sơ mi, áo thun…",
+        "Thích hợp phối với đa dạng items đi làm, đi chơi, đi học…",
         "YODY - Look good. Feel good."
       ],
       "options": [

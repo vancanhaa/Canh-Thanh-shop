@@ -1,17 +1,24 @@
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 import { Col, Modal, Row } from "antd";
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { v4 } from "uuid";
 import { fetchDeleteUserAdmin, fetchUsersListAdmin } from "../../../../stores/actions/usersAdmin.action";
 import "./users-list.scss";
+import {Loading} from "../../../analysis/components/loading/Loading"
 
 function UsersList() {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const usersAdminState = useSelector((state) => state.usersAdmin);
-  const { listUsers, pagination } = usersAdminState;
+  const { listUsers, pagination, isDeleteUserSuccess, fetchingUsersAdmin } = usersAdminState;
   const { page, limit } = pagination;
   const [modal, contextHolder] = Modal.useModal();
+
+  useEffect(() => {
+    if(isDeleteUserSuccess) {
+      dispatch(fetchUsersListAdmin({page: page, limit: limit}))
+    }
+  }, [isDeleteUserSuccess])
 
   const confirm = (id, index) => {
     modal.confirm({
@@ -27,12 +34,12 @@ function UsersList() {
 
   const handleDeleteProduct = (id) => {
     dispatch(fetchDeleteUserAdmin(id))
-    dispatch(fetchUsersListAdmin({page: page, limit: limit}))
   };
   const indexUser = (page - 1) * 10;
+  console.log(listUsers);
   return (
     <div className="users-body__content">
-      {listUsers.map((user, index) => {
+      {fetchingUsersAdmin ? <Loading /> : listUsers.map((user, index) => {
         const { email, password, id, role, first_name, last_name, phone } = user;
           return (
             <div className="users-item" key={v4()}>

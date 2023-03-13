@@ -1,0 +1,96 @@
+// Khai báo kích thước tương ứng với màn hình thiết bị
+$XS: 480px;
+$SM: 767.9px;
+$MD: 1024px;
+$XL: 1170px;
+
+// media queries
+@mixin Responsive($canvas) {
+  @if $canvas == XS {
+    @media only screen and (max-width: $XS) {
+      @content;
+    }
+  } @else if $canvas == SM {
+    @media only screen and (max-width: $SM) {
+      @content;
+    }
+  } @else if $canvas == MD {
+    @media only screen and (max-width: $MD) {
+      @content;
+    }
+  } @else if $canvas == XL {
+    @media only screen and (min-width: $XL) {
+      @content;
+    }
+  }
+}
+
+.header-mobile {
+  width: 100%;
+  @include Responsive(SM) {
+    height: 100px;
+  }
+  .ant-row {
+    height: 100%;
+  }
+  .header-logo {
+    font-size: 2.7rem;
+    font-weight: 700;
+    text-align: center;
+    a {
+      color: var(--primary-color);
+    }
+  }
+  .header-menu {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    line-height: 1;
+    nav {
+      display: flex;
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 2rem;
+      background-color: #fff;
+      transition: 0.5s;
+      z-index: 1000;
+      transform: translateX(-100%);
+      &.responsive {
+        transform: none;
+      }
+      a {
+        color: var(--title-color);
+        margin: 0 1rem;
+        &:hover {
+          color: var(--primary-color);
+        }
+      }
+    }
+    .nav-btn {
+      padding: 2px;
+      cursor: pointer;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: var(--title-color);
+      font-size: 1.8rem;
+      visibility: visible;
+      opacity: 1;
+      position: relative;
+      top: 5px;
+      &.nav-close-btn {
+        color: var(--error-color);
+        position: absolute;
+        top: 2rem;
+        right: 2rem;
+      }
+     
+    }
+  }
+}

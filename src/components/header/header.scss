@@ -1,3 +1,30 @@
+// Khai báo kích thước tương ứng với màn hình thiết bị
+$XS: 480px;
+$SM: 768px;
+$MD: 1024px;
+$XL: 1170px;
+
+// media queries
+@mixin Responsive($canvas) {
+  @if $canvas == XS {
+    @media only screen and (max-width: $XS) {
+      @content;
+    }
+  } @else if $canvas == SM {
+    @media only screen and (max-width: $SM) {
+      @content;
+    }
+  } @else if $canvas == MD {
+    @media only screen and (max-width: $MD) {
+      @content;
+    }
+  } @else if $canvas == XL {
+    @media only screen and (min-width: $XL) {
+      @content;
+    }
+  }
+}
+
 .header {
   width: 100%;
   height: 100px;
@@ -12,6 +39,9 @@
     margin-right: auto;
     .header-topbar {
       padding-top: 10px;
+      @include Responsive(SM) {
+        padding-top: 0;
+      }
       .header-logo {
         a {
           color: var(--primary-color);
@@ -116,6 +146,9 @@
     }
     .header-bottombar {
       margin-top: 14px;
+      @include Responsive(SM) {
+        margin-top: 0;
+      }
       .list-item-big {
         list-style: none outside;
         padding-left: 0;

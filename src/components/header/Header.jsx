@@ -16,6 +16,7 @@ import { fetchProductList } from "../../stores/actions/product.action";
 import { changeTextSearch } from "../../stores/slice/product.slice";
 import common from "../../utils/common";
 import { fetchCart, fetchChangeCart } from "../../stores/actions/cart.action";
+import HeaderMobile from "./header-mobile/HeaderMobile";
 
 function Header() {
   const navigate = useNavigate();
@@ -291,19 +292,20 @@ function Header() {
   return (
     <div className="header">
       <div className="header-container">
+        <HeaderMobile/>
         <div className="header-topbar">
           <Row
             justify="space-between"
             style={{ marginLeft: "10px", marginRight: "10px" }}
           >
-            <Col lg={12} md={14}>
+            <Col lg={12} md={14} xs={0} sm={0}>
               <Row justify={"space-between"} gutter={8}>
                 <Col flex="140px">
                   <div className="header-logo">
                     <Link to={"/"}>CT-shop</Link>
                   </div>
                 </Col>
-                <Col flex="auto">
+                <Col flex="auto" sm={0} xs={0}>
                   <div className="header-search_bar">
                     <Search
                       ref={searchRef}
@@ -317,7 +319,7 @@ function Header() {
                 </Col>
               </Row>
             </Col>
-            <Col lg={6} md={8}>
+            <Col lg={6} md={8} sm={0} xs={0}>
               <div className="header-contact">
                 <div className="header-location">
                   <Link to={"#!"}>
@@ -338,10 +340,11 @@ function Header() {
               </div>
             </Col>
           </Row>
+        
         </div>
         <div className="header-bottombar">
           <Row justify="space-between" style={{ margin: "0 10px 0 10px" }}>
-            <Col lg={16} md={16}>
+            <Col lg={16} md={16} sm={0} xs={0}>
               <nav className="header-nav">
                 <ul className="list-item-big">
                 <li className="nav-item">
@@ -359,7 +362,7 @@ function Header() {
                 </ul>
               </nav>
             </Col>
-            <Col lg={8} md={0}>
+            <Col lg={8} md={8} sm={0} xs={0}>
               <div className="bottombar-right">
                 {HeaderAdminComponent({userInfo})}
                 {HeaderCartComponent()}
