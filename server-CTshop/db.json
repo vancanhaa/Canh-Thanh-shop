@@ -54,17 +54,6 @@
       "phone": "0909798679",
       "createdAt": 1678609148012,
       "updateAt": 1678609148012
-    },
-    {
-      "email": "admin@gmail.com",
-      "password": "$2a$10$wR8r8jVAYhYND7VL0Ri2Bu6fo1B14FroR6qr2lbDf/RYp7nPMaq8y",
-      "id": "bcf4d0f9-2695-4856-8173-4b85890878fe",
-      "role": "user",
-      "first_name": "Page",
-      "last_name": "Admin",
-      "phone": "0356789465",
-      "createdAt": 1678691405673,
-      "updateAt": 1678691405673
     }
   ],
   "products": [
@@ -838,7 +827,7 @@
         "Chất liệu Cotton",
         "Thoải mái với chất liệu thấm hút tốt, co giãn vừa phải",
         "Form dáng suông cơ bản dành cho nam giới",
-        "Thích hợp phối với đa dạng items đi làm, đi chơi, đi học như áo polo, sơ mi, áo thun…",
+        "Thích hợp phối với đa dạng items đi làm, đi chơi, đi học…",
         "YODY - Look good. Feel good."
       ],
       "options": [
@@ -1916,43 +1905,19 @@
     },
     {
       "id": "d3a3c8e7-b391-45b7-ac51-bde0a4063fb3",
-      "products": [],
-      "createdAt": 1678609189251,
-      "updateAt": 1678609189251
-    },
-    {
-      "id": "bcf4d0f9-2695-4856-8173-4b85890878fe",
       "products": [
         {
           "id": "PHM5001",
           "name": "Áo Phao Nam Có Mũ Siêu Nhẹ Siêu Ấm",
-          "image_url": "https://bizweb.dktcdn.net/100/438/408/products/phm5001-reu-5.jpg?v=1677119319313",
-          "quantity": 1,
-          "price": 599000,
-          "color": "Rêu",
-          "size": "M"
-        },
-        {
-          "id": "APM5393",
-          "name": "Áo Polo Nam Pique Sồi",
-          "image_url": "https://bizweb.dktcdn.net/100/438/408/products/apm5393-xng-5.jpg?v=1662358179350",
-          "quantity": 1,
-          "price": 369000,
-          "color": "Xanh ngọc",
-          "size": "S"
-        },
-        {
-          "id": "APM5329",
-          "name": "Áo Polo Nam Cafe Thêu Ngực",
-          "image_url": "https://bizweb.dktcdn.net/100/438/408/products/apm5329-xmn-7.jpg?v=1675313492517",
+          "image_url": "https://bizweb.dktcdn.net/100/438/408/products/phm5001-tit-3.jpg?v=1677119319310",
           "quantity": 2,
-          "price": 379000,
-          "color": "Xanh mint",
+          "price": 599000,
+          "color": "Tím than",
           "size": "S"
         }
       ],
-      "createdAt": 1678694399103,
-      "updateAt": 1678694399103
+      "createdAt": 1678609189251,
+      "updateAt": 1678609189251
     }
   ],
   "address": [

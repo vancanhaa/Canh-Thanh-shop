@@ -38,7 +38,6 @@ const authSlice = createSlice({
       };
       notification.success({
         message: "Đăng nhập thành công",
-        description: "Chào mừng bạn đã quay lại!",
         style: { border: "3px solid #71be34" },
         duration: 2
       });
@@ -100,8 +99,14 @@ const authSlice = createSlice({
         ...state.userInfoState,
         data: null,
       };
+    },
+    changeIsRegisterSuccess: (state, action) => {
+      state.userInfoState = {
+        ...state.userInfoState,
+        isRegisterSuccess: false
+      }
     }
   }
 });
-export const { logOut } = authSlice.actions 
+export const { logOut, changeIsRegisterSuccess } = authSlice.actions 
 export const authReducer = authSlice.reducer;

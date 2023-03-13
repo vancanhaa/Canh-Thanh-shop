@@ -8,6 +8,7 @@ import { ROUTE } from "../../constants/index";
 import { useDispatch, useSelector } from "react-redux";
 import { loginAction } from "../../stores/actions/auth.action";
 import { useEffect } from "react";
+import { changeIsRegisterSuccess } from "../../stores/slice/auth.slice";
 
 function UserLogin() {
   const dispatch = useDispatch();
@@ -19,7 +20,9 @@ function UserLogin() {
     };
     dispatch(loginAction(payload));
   };
-
+  useEffect(() => {
+    dispatch(changeIsRegisterSuccess())
+  }, [])
   if (userInfo) return <Navigate to={ROUTE.HOME_PAGE} />;
 
   return (

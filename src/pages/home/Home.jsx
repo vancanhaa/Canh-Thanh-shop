@@ -53,11 +53,21 @@ function Home() {
     <MainLayout>
       <div className="home">
         <div className="home-container">
-          <div className="slider">
-            <img
+          <div className="slider" >
+            <img onClick={() => navigate(ROUTE.PRODUCT)}
               src="https://cdn.shopify.com/s/files/1/0685/2237/7522/files/Artwork_collection_Web_desktop.jpg?v=1672812634&width=2000"
               alt=""
+              className="slider-top"
             />
+            <div className="slider-bottom">
+              <img src="https://bizweb.dktcdn.net/100/438/408/themes/899432/assets/banner-home-khuyen-mai.png?1678372935235" alt="" />
+              <div className="slider-bottom__icon">
+                <img src="https://bizweb.dktcdn.net/100/438/408/themes/899432/assets/home_khuyenmai_4_image.png?1678444209948" alt="" />
+                <img src="https://bizweb.dktcdn.net/100/438/408/themes/899432/assets/home_khuyenmai_3_image.png?1678444209948" alt="" />
+              </div>
+              <div className="text-promotion">ĐẶC BIỆT</div>
+            
+            </div>
           </div>
           <div className="home-body">
             <div className="home-product">
