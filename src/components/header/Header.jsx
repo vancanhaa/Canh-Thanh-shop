@@ -51,19 +51,19 @@ function Header() {
                 <Link to={ROUTE.PROFILE}>Tài khoản của tôi</Link>
               </li>
               <li>
-                <a href="#!">Đổi mật khẩu</a>
+                <Link to={"#!"}>Đổi mật khẩu</Link>
               </li>
               <li>
                 <Link to={ROUTE.ADDRESS}>Sổ địa chỉ</Link>
               </li>
               <li>
-                <a href="#!">Đã xem gần đây</a>
+                <Link to={"#!"}>Đã xem gần đây</Link>
               </li>
               <li>
-                <a href="#!">Sản phẩm yêu thích</a>
+                <Link to={"#!"}>Sản phẩm yêu thích</Link>
               </li>
               <li className="logout" onClick={handleLogOut}>
-                <a href="/">Đăng xuất</a>
+                <Link to={"/"}>Đăng xuất</Link>
               </li>
             </ul>
           </div>
@@ -75,7 +75,7 @@ function Header() {
           <AiOutlineUser />
         </div>
         <div className="header-account__body">
-          <Link to={ROUTE.REGISTER}>ĐĂNG KÝ</Link>/
+          <Link to={ROUTE.REGISTER} className="register">ĐĂNG KÝ</Link><span className="register">/</span>
           <Link to={ROUTE.LOGIN}> ĐĂNG NHẬP</Link>
         </div>
       </div>
@@ -305,7 +305,7 @@ function Header() {
                     <Link to={"/"}>CT-shop</Link>
                   </div>
                 </Col>
-                <Col flex="auto" sm={0} xs={0}>
+                <Col flex="auto" >
                   <div className="header-search_bar">
                     <Search
                       ref={searchRef}
@@ -348,16 +348,16 @@ function Header() {
               <nav className="header-nav">
                 <ul className="list-item-big">
                 <li className="nav-item">
-                    <a href="/">TRANG CHỦ</a>
+                <Link to={ROUTE.HOME_PAGE}>TRANG CHỦ</Link>
                   </li>
                   <li className="nav-item">
-                    <a href="/product">SẢN PHẨM</a>
+                  <Link to={ROUTE.PRODUCT}>CỬA HÀNG</Link>
                   </li>
                   <li className="nav-item">
-                    <a href="#!">LIÊN HỆ</a>
+                  <Link to={"/#"}>LIÊN HỆ</Link>
                   </li>
                   <li className="nav-item">
-                    <a href="#!">VỀ CHÚNG TÔI</a>
+                  <Link to={"/#"}>VỀ CHÚNG TÔI</Link>
                   </li>
                 </ul>
               </nav>
