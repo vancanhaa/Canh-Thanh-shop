@@ -134,7 +134,12 @@ function ProductDetail() {
     });
   };
   const sumRiview = product.riviews?.length;
-  console.log("sum", sumRiview);
+  // console.log(sumRiview);
+
+  const filterRiview = product.riviews?.reduce((accumulator, currentValue) => {
+    return Math.round(accumulator + currentValue.rate / sumRiview);
+  }, 0);
+  console.log("filter :", filterRiview);
 
   const currentReviews = useMemo(
     () => (product ? product.riviews : []),
@@ -253,28 +258,34 @@ function ProductDetail() {
                 </div>
                 <hr />
                 <div className="users-riview">
-                  {product.riviews?.map((item, index) => (
-                    <Col key={v4()}>
-                      <div className="info-user">
-                        <Avatar icon={<UserOutlined />} />
-                        <div className="name-user">
-                          {`${item.first_name} ${item.last_name}`}
-                        </div>
-                      </div>
+                  {sumRiview === 0 ? (
+                    <p>Hiện không có đánh giá nào về Sản Phẩm!</p>
+                  ) : (
+                    <>
+                      {product.riviews?.map((item, index) => (
+                        <Col key={v4()}>
+                          <div className="info-user">
+                            <Avatar icon={<UserOutlined />} />
+                            <div className="name-user">
+                              {`${item.first_name} ${item.last_name}`}
+                            </div>
+                          </div>
 
-                      <div className="users-rat">
-                        <input
-                          className="user-comment"
-                          value={item.riview}
-                          type="text"
-                          disabled
-                        />
-                        <div className="raiting">
-                          <StarsRating value={item.rate} disabled />
-                        </div>
-                      </div>
-                    </Col>
-                  ))}
+                          <div className="users-rat">
+                            <input
+                              className="user-comment"
+                              value={item.riview}
+                              type="text"
+                              disabled
+                            />
+                            <div className="raiting">
+                              <StarsRating value={item.rate} disabled />
+                            </div>
+                          </div>
+                        </Col>
+                      ))}
+                    </>
+                  )}
                 </div>
               </div>
             </Col>
@@ -286,13 +297,14 @@ function ProductDetail() {
                   <div className="product-top">
                     <h2 className="product-id">Mã sản phẩm : {product.id}</h2>
                     <div className="product-raiting">
-                      <i class="fa-solid fa-star"></i>
-                      <i class="fa-solid fa-star"></i>
-                      <i class="fa-solid fa-star"></i>
-                      <i class="fa-solid fa-star"></i>
-                      <i class="fa-solid fa-star"></i>({sumRiview})
+                      <StarsRating value={filterRiview} disabled />({sumRiview})
                     </div>
                   </div>
+                  {/* heelo fsdf
+                   fsd
+                   fs
+                   f
+                   ${({  }) => };*/}
                   <div className="product-price">
                     {common.formatPrice(product.price)}đ
                   </div>
@@ -473,53 +485,6 @@ function ProductDetail() {
                       />
                     </Col>
                   ))}
-                  {/* {products.map((item, index) => (
-                    <Col key={v4()} lg={6} md={8} sm={12} xs={12}>
-                      <div data-id={item.id} className="product-item">
-                        <Link to={`/product-detail/${item.id}`}>
-                          <div className="product-item__raiting-sold">
-                            <div className="product-item__raiting">
-                              <img
-                                width="10"
-                                height="10"
-                                src="https://bizweb.dktcdn.net/100/438/408/themes/894085/assets/icon_start.svg?1676625752773"
-                                alt=""
-                              />
-                              <span>{item.rating}</span>
-                            </div>
-                            <div className="product-item__sold">
-                              <div className="y-line"></div>
-                              Đã bán
-                              <span className="product-item__sold-number">
-                                {common.formatPrice(item.sold)}
-                              </span>
-                            </div>
-                          </div>
-                          <div className="product-item__images">
-                            <img
-                              className="product-thumbnail"
-                              src={item.thumbnail}
-                              alt=""
-                            />
-                            <img
-                              className="product-thumbnail--hover"
-                              src={item.options[1]?.["image_url"]}
-                              alt=""
-                            />
-                          </div>
-
-                          <div className="product-item__info">
-                            <h3 className="product-item__name">{item.name}</h3>
-                            <div className="product-item__prices">
-                              <ins>{common.formatPrice(item.price)}đ</ins>
-                              <del>{common.formatPrice(item.price)}đ</del>
-                              <span>-{item.discountPercentage}%</span>
-                            </div>
-                          </div>
-                        </Link>
-                      </div>
-                    </Col>
-                  ))} */}
                 </Row>
               </div>
             </div>

@@ -20,6 +20,8 @@ import Products from "./admin-src/pages/products/Products";
 import Orders from "./admin-src/pages/orders/Orders";
 import Users from "./admin-src/pages/users/Users";
 import Analysis from "./admin-src/pages/analysis/Analysis";
+import Contact from "./pages/contact/Contact";
+import AboutUs from "./pages/about/AboutUs";
 
 function App() {
   return (
@@ -27,6 +29,8 @@ function App() {
       <Routes>
         <Route path={ROUTE.HOME_PAGE} element={<Home />} />
         <Route path={ROUTE.PRODUCT} element={<Product />} />
+        <Route path={ROUTE.CONTACT} element={<Contact />} />
+        <Route path={ROUTE.ABOUTUS} element={<AboutUs />} />
         <Route path={ROUTE.PRODUCT_DETAIL} element={<ProductDetail />} />
         <Route path={ROUTE.LOGIN} element={<UserLogin />} />
         <Route path={ROUTE.REGISTER} element={<UserRegister />} />

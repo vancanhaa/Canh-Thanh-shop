@@ -7,6 +7,8 @@ export const ROUTE = {
   REGISTER: "/register",
   PRODUCT: "/product",
   ADDRESS: "/account/address",
+  ABOUTUS: "/aboutus",
+  CONTACT: "/contact",
   ACCOUNT: "/account",
   PROFILE: "/account/profile",
   ORDER: "/account/order",
