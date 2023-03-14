@@ -15,14 +15,29 @@
       color: white;
       background-color: #026082;
       border-radius: 4px;
+      &:disabled {
+        cursor: not-allowed;
+        color: grey;
+        background-color: rgb(223, 223, 223);
+      }
       &:hover {
         opacity: 0.9;
       }
       &.btn--save {
         background-color: var(--placeholder-color);
+        &:disabled {
+          cursor: not-allowed;
+          color: grey;
+          background-color: rgb(223, 223, 223);
+        }
       }
       &.btn--delete {
         background-color: var(--error-color);
+        &:disabled {
+          cursor: not-allowed;
+          color: grey;
+          background-color: rgb(223, 223, 223);
+        }
       }
     }
   }

@@ -40,3 +40,20 @@ export const fetchAllProductsAdmin = createAsyncThunk(
       return response.data
   }
 )
+
+export const fetchProductDetailAdmin = createAsyncThunk(
+  "productsAdmin/fetchProductDetailAdmin",
+  async (payload, thunkApi) => {
+    const response = await productsAdminApi.getProductDetail(payload)
+    return response.data
+  }
+)
+
+export const fetchEditProductAdmin = createAsyncThunk(
+  "productsAdmin/fetchEditProductAdmin",
+  async (payload, thunkApi) => {
+    const {id, data} = payload
+    const response = await productsAdminApi.editProduct(id, data)
+    return response.data
+  }
+)
