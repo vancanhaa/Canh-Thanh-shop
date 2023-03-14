@@ -26,9 +26,12 @@ function Header() {
   const userInfo = useSelector((state) => state.user.userInfoState.data);
   const cart = useSelector((state) => state.cart.cart);
   useEffect(() => {
-    if (userInfo) dispatch(fetchCart({ idUser: userInfo.id }));
+  dispatch(fetchCart({ idUser: userInfo?.id }));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [userInfo]);
+
+  console.log(cart);  
+
   const [modal, contextHolder] = Modal.useModal();
   const [valueSearch, setValueSearch] = useState("");
 
@@ -104,7 +107,7 @@ function Header() {
           <p>GIỎ HÀNG</p>
         </Link>
         <div className="header-cart__body">
-          {cart.products[0]?.id ? (
+          {cart.products?.[0]?.id ? (
             <div className="header-cart__availabel">
               <div className="header-cart__inner">
                 {cart.products?.map((item, index) => {

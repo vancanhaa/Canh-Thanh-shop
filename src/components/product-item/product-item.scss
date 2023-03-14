@@ -1,3 +1,15 @@
+// Khai báo kích thước tương ứng với màn hình thiết bị
+$SM: 767.9px;
+
+// media queries
+@mixin Responsive($canvas) {
+  @if $canvas == SM {
+    @media only screen and (max-width: $SM) {
+      @content;
+    }
+  } 
+}
+
 .product-item {
     position: relative;
     .product-item__raiting-sold {
@@ -43,6 +55,9 @@
       &:hover {
         .btn-add-cart {
           display: block;
+          @include Responsive(SM) {
+            display: none;
+          }
         }
       }
       img.product-thumbnail {

@@ -2,13 +2,15 @@ import { FileDoneOutlined, UserOutlined } from "@ant-design/icons";
 import { Col, Menu, Row } from "antd";
 import React, { useEffect, useState } from "react";
 import { ImLocation } from "react-icons/im";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { ROUTE } from "../../constants";
 import MainLayout from "../../layouts/main-layout/MainLayout";
+import { logOut } from "../../stores/slice/auth.slice";
 import { getItem } from "../../utils/menu";
 import "./account.scss";
 function Account() {
+  const dispatch = useDispatch();
   const [title, setTitle] = useState("TÀI KHOẢN");
   const location = useLocation();
   const userInfo = useSelector((state) => state.user.userInfoState.data);
@@ -46,12 +48,24 @@ function Account() {
                     <UserOutlined />
                   </div>
                   <p className="menu_bar-user_name">{`${userInfo.last_name} ${userInfo.first_name}`}</p>
-                  <button className="btn-logout">Đăng xuất</button>
+                  <button
+                    className="btn-logout"
+                    onClick={() => {
+                      navigate("/");
+                      dispatch(logOut());
+                    }}
+                  >
+                    Đăng xuất
+                  </button>
                 </div>
                 <div className="menu_bar-body">
                   <Menu
                     defaultSelectedKeys={[ROUTE.PROFILE]}
-                    selectedKeys={[location.pathname === "/account" ? ROUTE.PROFILE : location.pathname]}
+                    selectedKeys={[
+                      location.pathname === "/account"
+                        ? ROUTE.PROFILE
+                        : location.pathname,
+                    ]}
                     mode="inline"
                     items={items}
                     onSelect={handleSelect}

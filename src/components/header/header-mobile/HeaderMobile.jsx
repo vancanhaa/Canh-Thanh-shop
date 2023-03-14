@@ -1,6 +1,6 @@
 import { FileDoneOutlined } from "@ant-design/icons";
 import { Col, Row } from "antd";
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { AiOutlineUser } from "react-icons/ai";
 import { RiLogoutBoxLine } from "react-icons/ri";
 import { FaBars, FaTimes } from "react-icons/fa";
@@ -12,10 +12,12 @@ import { ROUTE } from "../../../constants";
 import "./header-mobile.scss";
 import { logOut } from "../../../stores/slice/auth.slice";
 import { BsHandbag } from "react-icons/bs";
+import { fetchCart } from "../../../stores/actions/cart.action";
 function HeaderMobile() {
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.user.userInfoState.data);
   const cart = useSelector((state) => state.cart.cart);
+
   const navRef = useRef();
   const showNavbar = () => {
     navRef.current.classList.toggle("responsive");
@@ -94,14 +96,16 @@ function HeaderMobile() {
                     <li
                       className="logout"
                       onClick={() => {
-                        dispatch(logOut());
                         showNavbar();
+                        dispatch(logOut());
                       }}
                     >
-                      <span>
-                        <RiLogoutBoxLine />
-                      </span>
-                      Đăng xuất
+                      <Link to={ROUTE.HOME_PAGE}>
+                        <span>
+                          <RiLogoutBoxLine />
+                        </span>
+                        Đăng xuất
+                      </Link>
                     </li>
                   ) : null}
                 </ul>
