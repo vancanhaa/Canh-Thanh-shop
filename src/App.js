@@ -22,6 +22,8 @@ import Users from "./admin-src/pages/users/Users";
 import Analysis from "./admin-src/pages/analysis/Analysis";
 import Contact from "./pages/contact/Contact";
 import AboutUs from "./pages/about/AboutUs";
+import EditProduct from "./admin-src/pages/products/components/edit-product/EditProduct";
+import AddProduct from "./admin-src/pages/products/components/add-new-product/AddProduct";
 
 function App() {
   return (
@@ -68,8 +70,10 @@ function App() {
           }
         >
           <Route index element={<Analysis />} />
-
           <Route path={ROUTE.PRODUCTS_ADMIN} element={<Products />} />
+          <Route path={ROUTE.ADD_NEW_PRODUCT} element={<AddProduct />} />
+          <Route path={ROUTE.PRODUCT_EDIT} element={<EditProduct />} />
+          <Route path={ROUTE.ADD_NEW_PRODUCT} element={<Products />} />
           <Route path={ROUTE.ORDERS_ADMIN} element={<Orders />} />
           <Route path={ROUTE.USERS_ADMIN} element={<Users />} />
           <Route path={ROUTE.ANALYSIS_ADMIN} element={<Analysis />} />

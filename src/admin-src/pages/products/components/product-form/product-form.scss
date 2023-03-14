@@ -1,0 +1,302 @@
+.admin-product-form {
+  .error-message {
+    color: red;
+    font-size: 1.2rem;
+  }
+  .edit-form {
+    width: 100%;
+    margin: 10px auto;
+    padding: 20px;
+    background-color: #fffbf3;
+    border-radius: 6px;
+    box-shadow: 1px 1px 4px 1px rgba(237, 165, 9, 0.9);
+    .form-group {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      .input-wrap {
+        position: relative;
+        flex-basis: 31%;
+        height: -moz-fit-content;
+        height: fit-content;
+        padding: 6px 0;
+        display: flex;
+        justify-content: center;
+        div {
+          flex-grow: 1;
+          input,
+          select {
+            width: 100%;
+            font-size: 1.5rem;
+            border: unset;
+            text-align: center;
+            background-color: #f8f8f8;
+            box-shadow: 1px 1px 4px 1px rgba(128, 128, 128, 0.5882352941);
+            &:focus {
+              outline: unset;
+              background-color: white;
+            }
+          }
+        }
+        &.product-name {
+          flex-basis: 100%;
+          div {
+            width: 84%;
+          }
+        }
+        label {
+          width: 100px;
+          flex-grow: 1;
+          padding-top: 3px;
+          margin-right: 5px;
+          text-align: left;
+          color: var(--title-color);
+          font-weight: 600;
+          font-size: 1.5rem;
+        }
+      }
+    }
+  }
+  .description-form {
+    width: 100%;
+    height: -moz-fit-content;
+    height: fit-content;
+    padding: 20px;
+    margin: 10px auto;
+    background-color: #fffbf3;
+    border-radius: 6px;
+    box-shadow: 1px 1px 4px 1px rgba(237, 165, 9, 0.9);
+    .description__title {
+      font-size: 1.5rem;
+      color: var(--title-color);
+      font-weight: 600;
+    }
+    .description__list {
+      padding: 10px 0;
+      ul {
+        padding-left: 10px;
+        li {
+          list-style: inside;
+          font-size: 1.4rem;
+          .delete-icon {
+            color: var(--error-color);
+            &:hover {
+              cursor: pointer;
+              color: red;
+            }
+          }
+        }
+      }
+    }
+    .description__input {
+      display: flex;
+      justify-content: center;
+      margin: auto;
+      div {
+        width: 90%;
+        input {
+          display: inline-block;
+          width: 90%;
+          font-size: 1.5rem;
+          border: unset;
+          text-align: center;
+          background-color: #f8f8f8;
+          box-shadow: 1px 1px 4px 1px rgba(128, 128, 128, 0.5882352941);
+          &:focus {
+            outline: unset;
+            background-color: white;
+          }
+        }
+      }
+
+      button {
+        width: 70px;
+        background-color: var(--placeholder-color);
+        border: unset;
+        color: white;
+        font-size: 1.4rem;
+        height: 24px;
+        border-radius: 4px;
+      }
+    }
+  }
+  .color_image-form {
+    width: 100%;
+    height: -moz-fit-content;
+    height: fit-content;
+    padding: 20px;
+    margin: 10px auto;
+    background-color: #fffbf3;
+    border-radius: 6px;
+    box-shadow: 1px 1px 4px 1px rgba(237, 165, 9, 0.9);
+    .color_image__title {
+      font-size: 1.5rem;
+      color: var(--title-color);
+      font-weight: 600;
+    }
+    .color_image__group {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      width: 100%;
+      height: -moz-fit-content;
+      height: fit-content;
+      padding: 0 20px;
+      margin: auto;
+      .color_image__item {
+        position: relative;
+        width: 124px;
+        margin: 15px;
+        font-size: 1.4rem;
+        text-align: center;
+        padding: 5px;
+        border: 1px solid var(--placeholder-color);
+        border-radius: 4px;
+        p {
+          font-size: 1.4rem;
+          line-height: 1.6rem;
+          height: 3.2rem;
+          overflow: hidden;
+          display: block;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 2;
+        }
+        img {
+          margin-top: 4px;
+          width: 110px;
+        }
+        .delete-icon {
+          position: absolute;
+          top: -12px;
+          right: -10px;
+          padding: 2px;
+          color: var(--error-color);
+          font-size: 1.6rem;
+          &:hover {
+            color: red;
+            cursor: pointer;
+          }
+          span {
+            background-color: white;
+          }
+        }
+      }
+    }
+    .color_image__input {
+      display: flex;
+      justify-content: center;
+      margin: auto;
+      align-items: center;
+      div {
+        width: 90%;
+        input {
+          margin-top: 10px;
+          display: inline-block;
+          width: 90%;
+          font-size: 1.5rem;
+          border: unset;
+          text-align: center;
+          background-color: #f8f8f8;
+          box-shadow: 1px 1px 4px 1px rgba(128, 128, 128, 0.5882352941);
+          &:focus {
+            outline: unset;
+            background-color: white;
+          }
+        }
+      }
+      button {
+        width: 70px;
+        background-color: var(--placeholder-color);
+        border: unset;
+        color: white;
+        font-size: 1.4rem;
+        height: 24px;
+        border-radius: 4px;
+      }
+    }
+  }
+  .size-form {
+    width: 100%;
+    height: -moz-fit-content;
+    height: fit-content;
+    padding: 20px;
+    margin: 10px auto;
+    background-color: #fffbf3;
+    border-radius: 6px;
+    box-shadow: 1px 1px 4px 1px rgba(237, 165, 9, 0.9);
+    .size__title {
+      font-size: 1.5rem;
+      color: var(--title-color);
+      font-weight: 600;
+    }
+    .size__group {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      width: 100%;
+      height: -moz-fit-content;
+      height: fit-content;
+      padding: 0 20px;
+      margin: auto;
+      .size__item {
+        position: relative;
+        width: 60px;
+        margin: 15px;
+        font-size: 1.4rem;
+        text-align: center;
+        padding: 5px;
+        border: 1px solid var(--placeholder-color);
+        border-radius: 4px;
+        .delete-icon {
+          position: absolute;
+          top: -12px;
+          right: -10px;
+          padding: 2px;
+          color: var(--error-color);
+          font-size: 1.6rem;
+          &:hover {
+            color: red;
+            cursor: pointer;
+          }
+          span {
+            background-color: white;
+          }
+        }
+      }
+    }
+    .size__input {
+        display: flex;
+        justify-content: center;
+        margin: auto;
+        align-items: flex-start;
+        div {
+            width: 90%;
+            input {
+              display: inline-block;
+              width: 90%;
+              font-size: 1.5rem;
+              border: unset;
+              text-align: center;
+              background-color: #f8f8f8;
+              box-shadow: 1px 1px 4px 1px rgba(128, 128, 128, 0.5882352941);
+              &:focus {
+                outline: unset;
+                background-color: white;
+              }
+            }
+        }
+        button {
+            width: 70px;
+            background-color: var(--placeholder-color);
+            border: unset;
+            color: white;
+            font-size: 1.4rem;
+            height: 24px;
+            border-radius: 4px;
+          }
+    }
+  }
+}

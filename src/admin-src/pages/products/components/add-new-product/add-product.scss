@@ -1,0 +1,29 @@
+.add-product {
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    .add-product__btn-wrap {
+      width: -moz-fit-content;
+      width: fit-content;
+      margin: auto;
+      .add-product__btn {
+        font-size: 1.6rem;
+        width: 100px;
+        border: unset;
+        padding: 5px;
+        margin: 20px;
+        color: white;
+        border-radius: 4px;
+        &:hover {
+          opacity: 0.9;
+        }
+        &.btn--save {
+          background-color: var(--placeholder-color);
+        }
+        &.btn--delete {
+          background-color: var(--error-color);
+        }
+      }
+    }
+  }
+  

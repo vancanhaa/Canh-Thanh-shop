@@ -17,6 +17,7 @@ export const ROUTE = {
   PRODUCTS_ADMIN: "/admin/products",
   USERS_ADMIN: "/admin/users",
   ORDERS_ADMIN: "/admin/orders",
-  ANALYSIS_ADMIN: "/admin/analysis"
-
+  ANALYSIS_ADMIN: "/admin/analysis",
+  PRODUCT_EDIT: "/admin/products/edit/:idProduct",
+  ADD_NEW_PRODUCT: "/admin/products/add-new"
 };
