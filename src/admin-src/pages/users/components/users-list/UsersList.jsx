@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { v4 } from "uuid";
 import {
+  fetchChangeUserAdmin,
   fetchDeleteUserAdmin,
   fetchUsersListAdmin,
 } from "../../../../stores/actions/usersAdmin.action";
@@ -25,21 +26,24 @@ function UsersList() {
     }
   }, [isDeleteUserSuccess]);
 
-  const confirm = (id, index) => {
+  const confirm = (id) => {
+    const userDetail = listUsers.find((user, index) => user.id === id)
+
     modal.confirm({
       className: "confirm-delete-item",
       title:
         "Quản trị viên có chắc chắn muốn xoá người dùng này khỏi danh sách người dùng?",
       icon: <ExclamationCircleOutlined />,
-      content: `${listUsers[index].email}`,
+      content: userDetail.email,
       okText: "Đồng ý",
       cancelText: "Không",
-      onOk: () => handleDeleteProduct(id),
+      onOk: () => handleDeleteUser(id),
     });
   };
 
-  const handleDeleteProduct = (id) => {
+  const handleDeleteUser = (id) => {
     dispatch(fetchDeleteUserAdmin(id));
+    setIsOpen(false)
   };
   const indexUser = (page - 1) * 10;
 
@@ -50,9 +54,10 @@ function UsersList() {
     setCurrentUserChange(change);
   };
   const handleOk = () => {
-    if (window.confirm("Save changed?")) {
+    if (window.confirm("Lưu thay đổi?")) {
+      dispatch(fetchChangeUserAdmin({id: currentUserChange.id, data: currentUserChange}))
       setIsOpen(false);
-      //  dispatch(updateUserDataAction(currentUserChange))
+
     }
   };
 
@@ -61,16 +66,6 @@ function UsersList() {
     setCurrentUserSelection({ ...currentUserSelection });
   };
 
-  const handleDelete = () => {
-    if (
-      window.confirm(
-        `Delete ${currentUserSelection.firstName} ${currentUserSelection.lastName}?`
-      )
-    ) {
-      setIsOpen(false);
-      //  dispatch(deleteUserDataAction(currentUserSelection.id))
-    }
-  };
   const handleOpenModal = (id, index) => {
     setCurrentUserSelection(listUsers[index]);
     setIsOpen(true);
@@ -109,7 +104,7 @@ function UsersList() {
                   </div>
                   <div
                     className="delete-action"
-                    onClick={() => confirm(id, index)}
+                    onClick={() => confirm(id)}
                   >
                     Xóa
                   </div>
@@ -133,12 +128,12 @@ function UsersList() {
               key="cancel"
               onClick={handleCancel}
             >
-              Đặt lại
+              Thoát
             </Button>,
             <Button
               className="modal-button delete-btn"
               key="delete"
-              onClick={handleDelete}
+              onClick={() => confirm(currentUserSelection.id)}
             >
               Xóa
             </Button>,

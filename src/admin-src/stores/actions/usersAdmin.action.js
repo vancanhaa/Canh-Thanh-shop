@@ -32,3 +32,12 @@ export const fetchAllUsersAdmin = createAsyncThunk(
         return response.data
     }
 )
+
+export const fetchChangeUserAdmin = createAsyncThunk(
+    "usersAdmin/fetchChangeUserAdmin",
+    async (payload, thunkApi) => {
+        const { id, data } = payload
+        const response = await usersAdminApi.changeInfoUser(id, data)
+        return response.data
+    }
+)

@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchAllUsersAdmin, fetchDeleteUserAdmin, fetchUsersListAdmin } from "../actions/usersAdmin.action";
+import { message, notification } from "antd";
+import { fetchAllUsersAdmin, fetchChangeUserAdmin, fetchDeleteUserAdmin, fetchUsersListAdmin } from "../actions/usersAdmin.action";
 
 const usersAdminInitialState = {
   listUsers: [],
@@ -51,9 +52,29 @@ const usersAdminSlice = createSlice({
     });
     builder.addCase(fetchDeleteUserAdmin.fulfilled, (state, action) => {
       state.fetchingUsersAdmin = false;
-      state.isDeleteUserSuccess = true
+      state.isDeleteUserSuccess = true;
+      message.success({
+        content: "Xóa thành công!",
+        duration: 2
+      })
     });
     builder.addCase(fetchDeleteUserAdmin.rejected, (state, action) => {
+      state.fetchingUsersAdmin = false;
+    });
+
+    //fetchChangeUserAdmin
+    builder.addCase(fetchChangeUserAdmin.pending, (state, action) => {
+      state.fetchingUsersAdmin = true;
+    });
+    builder.addCase(fetchChangeUserAdmin.fulfilled, (state, action) => {
+      state.fetchingUsersAdmin = false;
+      state.isDeleteUserSuccess = true;
+      message.success({
+        content: "Lưu thay đổi thành công!",
+        duration: 2
+      })
+    });
+    builder.addCase(fetchChangeUserAdmin.rejected, (state, action) => {
       state.fetchingUsersAdmin = false;
     });
   },
