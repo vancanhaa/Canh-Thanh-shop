@@ -1,5 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchAllProducts, fetchProductById, fetchProductList } from "../actions/product.action";
+import {
+  fetchAllProducts,
+  fetchProductById,
+  fetchProductList,
+} from "../actions/product.action";
 const productInitialState = {
   allProducts: [],
   products: [],
@@ -35,9 +39,9 @@ const productSlice = createSlice({
     builder.addCase(fetchProductList.fulfilled, (state, action) => {
       const { products, textSearch, filter, pagination } = action.payload;
       state.fetchingProductList = false;
+      state.filter = filter;
       state.products = products;
       state.textSearch = textSearch;
-      state.filter = filter;
       state.pagination = pagination;
     });
     builder.addCase(fetchProductList.rejected, (state, action) => {

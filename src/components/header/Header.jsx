@@ -26,11 +26,9 @@ function Header() {
   const userInfo = useSelector((state) => state.user.userInfoState.data);
   const cart = useSelector((state) => state.cart.cart);
   useEffect(() => {
-  dispatch(fetchCart({ idUser: userInfo?.id }));
+    dispatch(fetchCart({ idUser: userInfo?.id }));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userInfo]);
-
-  console.log(cart);  
 
   const [modal, contextHolder] = Modal.useModal();
   const [valueSearch, setValueSearch] = useState("");
@@ -352,10 +350,10 @@ function Header() {
                     <Link to={ROUTE.PRODUCT}>CỬA HÀNG</Link>
                   </li>
                   <li className="nav-item">
-                  <Link to={ROUTE.CONTACT}>LIÊN HỆ</Link>
+                    <Link to={ROUTE.CONTACT}>LIÊN HỆ</Link>
                   </li>
                   <li className="nav-item">
-                  <Link to={ROUTE.ABOUTUS}>VỀ CHÚNG TÔI</Link>
+                    <Link to={ROUTE.ABOUTUS}>VỀ CHÚNG TÔI</Link>
                   </li>
                 </ul>
               </nav>

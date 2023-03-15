@@ -106,7 +106,6 @@ function Product() {
     }
   };
 
-  console.log(filter);
   const [openAddCartModal, setOpenAddCartModal] = useState(false);
   const [idProduct, setIdProduct] = useState(null);
   const handleOpenAddCartModal = (id) => {
