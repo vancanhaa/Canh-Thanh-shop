@@ -4,8 +4,9 @@ import "./header-bar.scss";
 import { Input, Menu, Select } from "antd";
 import { fetchProductsListAdmin } from "../../../../stores/actions/productsAdmin.action";
 import { changeTextSearch } from "../../../../stores/slice/productsAdmin.slice";
-import { SHOP_BY_CATEGORY, SHOP_BY_PRICE } from "../../../../../constants";
+import { ROUTE, SHOP_BY_CATEGORY, SHOP_BY_PRICE } from "../../../../../constants";
 import { getItem } from "../../../../../utils/menu";
+import { Link } from "react-router-dom";
 
 function HeaderBar() {
   const productsAdminState = useSelector((state) => state.productsAdmin);
@@ -163,7 +164,7 @@ function HeaderBar() {
           />
         </div>
         <div className="header-bar__add-product">
-          <button>Thêm sản phẩm</button>
+          <Link to={ROUTE.ADD_NEW_PRODUCT}>Thêm sản phẩm</Link>
         </div>
       </div>
     </div>

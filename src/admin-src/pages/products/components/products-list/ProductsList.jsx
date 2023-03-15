@@ -10,6 +10,8 @@ import {
   fetchProductsListAdmin,
 } from "../../../../stores/actions/productsAdmin.action";
 import { useEffect } from "react";
+import { ROUTE } from "../../../../../constants";
+import { Link } from "react-router-dom";
 
 function ProductsList() {
   const dispatch = useDispatch();
@@ -114,7 +116,9 @@ function ProductsList() {
                 </div>
               </Col>
               <Col span={2} className="center-text">
-                <div className="edit-action">Sửa</div>
+                <div className="edit-action">
+                  <Link to={`/admin/products/edit/${id}`} >Sửa</Link>
+                </div>
                 <div
                   className="delete-action"
                   onClick={() => confirm(id, index)}

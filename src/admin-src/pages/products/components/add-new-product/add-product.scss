@@ -1,0 +1,44 @@
+.add-product {
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  .add-product__btn-wrap {
+    width: -moz-fit-content;
+    width: fit-content;
+    margin: auto;
+    .add-product__btn {
+      font-size: 1.6rem;
+      width: 100px;
+      border: unset;
+      padding: 5px;
+      margin: 20px;
+      color: white;
+      background-color: #026082;
+      border-radius: 4px;
+      &:disabled {
+        cursor: not-allowed;
+        color: grey;
+        background-color: rgb(223, 223, 223);
+      }
+      &:hover {
+        opacity: 0.9;
+      }
+      &.btn--save {
+        background-color: var(--placeholder-color);
+        &:disabled {
+          cursor: not-allowed;
+          color: grey;
+          background-color: rgb(223, 223, 223);
+        }
+      }
+      &.btn--delete {
+        background-color: var(--error-color);
+        &:disabled {
+          cursor: not-allowed;
+          color: grey;
+          background-color: rgb(223, 223, 223);
+        }
+      }
+    }
+  }
+}

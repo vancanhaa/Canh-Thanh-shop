@@ -41,3 +41,31 @@
        }
     }
 }
+
+.user-detail-container{
+    .ant-modal-title{
+       font-weight: 600;
+       color: var(--title-color);
+       font-size: 20px;
+    }
+    .modal-button{
+       color: white;
+       background-color: #026082;
+       border: none;
+       width: 80px;
+        &:hover {
+            color: #fff;
+            opacity: 0.8;
+        }
+        &.delete-btn {
+            background-color: var(--error-color);
+        }
+        &.save-btn {
+            background-color: var(--placeholder-color);
+        }
+       span{
+          font-size: 1.3rem;
+       }
+    }
+
+ }

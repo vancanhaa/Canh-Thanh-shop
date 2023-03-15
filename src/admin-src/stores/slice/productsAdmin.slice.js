@@ -1,5 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchAllProductsAdmin, fetchDeleteProductAdmin, fetchProductsListAdmin } from "../actions/productsAdmin.action";
+import { message } from "antd";
+import {
+  fetchAddProductAdmin,
+  fetchAllProductsAdmin,
+  fetchDeleteProductAdmin,
+  fetchEditProductAdmin,
+  fetchProductDetailAdmin,
+  fetchProductsListAdmin,
+} from "../actions/productsAdmin.action";
 
 const productsAdminInitialState = {
   allProducts: [],
@@ -22,8 +30,8 @@ const productsAdminSlice = createSlice({
   initialState: productsAdminInitialState,
   reducers: {
     changeTextSearch: (state, action) => {
-        state.textSearch = action.payload;
-      },
+      state.textSearch = action.payload;
+    },
   },
   extraReducers: (builder) => {
     //fetchProductsListAdminAdmin
@@ -37,7 +45,7 @@ const productsAdminSlice = createSlice({
       state.textSearch = textSearch;
       state.filter = filter;
       state.pagination = pagination;
-      state.isDeleteProductSuccess = false
+      state.isDeleteProductSuccess = false;
     });
     builder.addCase(fetchProductsListAdmin.rejected, (state, action) => {
       state.fetchingProductList = false;
@@ -48,9 +56,8 @@ const productsAdminSlice = createSlice({
       state.fetchingProductsAdmin = true;
     });
     builder.addCase(fetchAllProductsAdmin.fulfilled, (state, action) => {
-      state.allProducts = action.payload
+      state.allProducts = action.payload;
       state.fetchingProductsAdmin = false;
-
     });
     builder.addCase(fetchAllProductsAdmin.rejected, (state, action) => {
       state.fetchingProductsAdmin = false;
@@ -63,8 +70,55 @@ const productsAdminSlice = createSlice({
     builder.addCase(fetchDeleteProductAdmin.fulfilled, (state, action) => {
       state.fetchingProductsAdmin = false;
       state.isDeleteProductSuccess = true;
+      message.success({
+        content: "Xóa sản phẩm thành công!",
+        duration: 2,
+      });
+
     });
     builder.addCase(fetchDeleteProductAdmin.rejected, (state, action) => {
+      state.fetchingProductsAdmin = false;
+    });
+
+    //fetchProductDetail
+    builder.addCase(fetchProductDetailAdmin.pending, (state, action) => {
+      state.fetchingProductsAdmin = true;
+    });
+    builder.addCase(fetchProductDetailAdmin.fulfilled, (state, action) => {
+      state.fetchingProductsAdmin = false;
+      state.productDetail = action.payload;
+    });
+    builder.addCase(fetchProductDetailAdmin.rejected, (state, action) => {
+      state.fetchingProductsAdmin = false;
+    });
+
+    //fetchEditProductAdmin
+    builder.addCase(fetchEditProductAdmin.pending, (state, action) => {
+      state.fetchingProductsAdmin = true;
+    });
+    builder.addCase(fetchEditProductAdmin.fulfilled, (state, action) => {
+      state.fetchingProductsAdmin = false;
+      message.success({
+        content: "Lưu thay đổi thành công!",
+        duration: 2,
+      });
+    });
+    builder.addCase(fetchEditProductAdmin.rejected, (state, action) => {
+      state.fetchingProductsAdmin = false;
+    });
+
+    //fetchAddProductAdmin
+    builder.addCase(fetchAddProductAdmin.pending, (state, action) => {
+      state.fetchingProductsAdmin = true;
+    });
+    builder.addCase(fetchAddProductAdmin.fulfilled, (state, action) => {
+      state.fetchingProductsAdmin = false;
+      message.success({
+        content: "Thêm sản phẩm thành công!",
+        duration: 2,
+      });
+    });
+    builder.addCase(fetchAddProductAdmin.rejected, (state, action) => {
       state.fetchingProductsAdmin = false;
     });
   },
@@ -72,4 +126,3 @@ const productsAdminSlice = createSlice({
 
 export const productsAdminReducer = productsAdminSlice.reducer;
 export const { changeTextSearch } = productsAdminSlice.actions;
-
