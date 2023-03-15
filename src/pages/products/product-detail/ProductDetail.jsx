@@ -43,6 +43,7 @@ function ProductDetail() {
 
   const productState = useSelector((state) => state.product);
   const { products, filter } = productState;
+  const thumbnail = product.thumbnail;
   useLayoutEffect(() => {
     dispatch(
       fetchProductList({
@@ -50,14 +51,19 @@ function ProductDetail() {
         limit: 4,
       })
     );
-  }, [id]);
-  console.log(filter);
-  console.log(products);
+  }, []);
+
+  console.log("product: ", product);
 
   const cart = useSelector((state) => state.cart.cart);
   const userInfo = useSelector((state) => state.user.userInfoState.data);
 
   const [options, setOptions] = useState({});
+  console.log("options: ", options);
+
+  useEffect(() => {
+    product && setOptions(product.options[0]);
+  }, [product]);
 
   const handleChangeOptions = (option) => {
     const newOptions = { ...options, ...option };
@@ -170,8 +176,7 @@ function ProductDetail() {
         data: { riviews: [...currentReviews, newComment] },
       })
     );
-    console.log("id", id);
-    console.log("data", newComment);
+
     resetRiview();
     notification.info({
       message: `Đánh giá thành công ${riview} sản phẩm`,
@@ -218,10 +223,10 @@ function ProductDetail() {
             <Col lg={12} md={14} sm={24} xs={24}>
               <div className="product--grid__img">
                 <img
-                  src={`${options.image_url}`}
+                  src={`${options.image_url | product.thumbnail}`}
                   onError={({ currentTarget }) => {
                     currentTarget.onerror = null; // prevents looping
-                    currentTarget.src = `${product.thumbnail}`;
+                    currentTarget.src = `${options.image_url}`;
                   }}
                   alt=""
                 />
