@@ -14,10 +14,10 @@ function Profile() {
         </div>
         <div className="profile-content">
           <Row gutter={[16, 16]}>
-            <Col lg={12} md={10} sm={24} xs={24}><span>Họ và tên: </span>{`${userInfo.last_name} ${userInfo.first_name}`}</Col>
-            <Col lg={12} md={14} sm={24} xs={24}><span>Địa chỉ email: </span>{userInfo.email}</Col>
-            <Col lg={12} md={10} sm={24} xs={24}><span>Số điện thoại</span>{userInfo.phone}</Col>
-            <Col lg={12} md={14} sm={24} xs={24}><span>Địa chỉ: </span></Col>
+            <Col span={24}><span>Họ: </span>{userInfo.last_name}</Col>
+            <Col span={24}><span>Tên: </span>{userInfo.first_name}</Col>
+            <Col span={24}><span>Địa chỉ email: </span>{userInfo.email}</Col>
+            <Col span={24}><span>Số điện thoại</span>{userInfo.phone}</Col>
           </Row>
         </div>
       </div>
