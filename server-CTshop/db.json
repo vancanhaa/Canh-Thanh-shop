@@ -65,6 +65,17 @@
       "phone": "0909364982",
       "createdAt": 1678858100444,
       "updateAt": 1678858100444
+    },
+    {
+      "email": "dacdat@gmail.com",
+      "password": "$2a$10$G3Phtg1aVtRsSXVeSFxrbOAgz96dxxiT9xRoiGC0ste12TU64UwIq",
+      "id": "345a639e-8d92-4b81-afe8-8484dbedfcab",
+      "role": "user",
+      "first_name": "Đạt",
+      "last_name": "Phạm Đắc",
+      "phone": "0909374939",
+      "createdAt": 1678863729729,
+      "updateAt": 1678863729729
     }
   ],
   "products": [
@@ -1984,6 +1995,28 @@
       ],
       "createdAt": 1678609189251,
       "updateAt": 1678609189251
+    },
+    {
+      "id": "a66f3b57-effc-4c16-aeaf-78201c219a91",
+      "products": [],
+      "createdAt": 1678863037507,
+      "updateAt": 1678863037507
+    },
+    {
+      "id": "345a639e-8d92-4b81-afe8-8484dbedfcab",
+      "products": [
+        {
+          "id": "APM5393",
+          "name": "Áo Polo Nam Pique Sồi",
+          "image_url": "https://bizweb.dktcdn.net/100/438/408/products/apm5393-xng-5.jpg?v=1662358179350",
+          "quantity": 1,
+          "price": 369000,
+          "color": "Xanh ngọc",
+          "size": "S"
+        }
+      ],
+      "createdAt": 1678863843444,
+      "updateAt": 1678863843444
     }
   ],
   "address": [
@@ -82866,6 +82899,53 @@
       "total_order_not_shipping": 1476000,
       "createdAt": 1678811753409,
       "updateAt": 1678811753409
+    },
+    {
+      "id": "cf42b0e3-4948-4849-acf1-232ebdb213a3",
+      "id_user": "a66f3b57-effc-4c16-aeaf-78201c219a91",
+      "time_create": "3/15/2023, 1:52:03 PM",
+      "cart": [
+        {
+          "id": "SKM5055",
+          "name": "Áo Khoác Thể Thao Nam Có Mũ",
+          "image_url": "https://bizweb.dktcdn.net/100/438/408/products/ao-khoac-nam-skm5055-cvt-6-yody-vn.jpg?v=1671240945797",
+          "quantity": 2,
+          "price": 299000,
+          "color": "Cổ vịt",
+          "size": "M"
+        },
+        {
+          "id": "QJM6007",
+          "name": "Quần Jean Nam Slimfit Rayon Dây Dệt Túi Đồng Hồ",
+          "image_url": "https://bizweb.dktcdn.net/100/438/408/products/qjm6007-den-6.jpg?v=1672978135417",
+          "quantity": 2,
+          "price": 469000,
+          "color": "Đen",
+          "size": "30"
+        },
+        {
+          "id": "APM5393",
+          "name": "Áo Polo Nam Pique Sồi",
+          "image_url": "https://bizweb.dktcdn.net/100/438/408/products/apm5393-cdt-6.jpg?v=1662358179350",
+          "quantity": 2,
+          "price": 369000,
+          "color": "Cam đất",
+          "size": "M"
+        }
+      ],
+      "checkout_address": {
+        "full_name": "Phạm Minh Hiếu",
+        "address": "Số 5, Hồ Hoàn Kiếm, Phường Đồng Xuân, Quận Hoàn Kiếm, Thành phố Hà Nội",
+        "phone_number": "0904826398"
+      },
+      "payment_method": 3,
+      "status_order": "received",
+      "status_payment": false,
+      "total_order": 2274000,
+      "shipping_price": 0,
+      "total_order_not_shipping": 2274000,
+      "createdAt": 1678863123219,
+      "updateAt": 1678863123219
     }
   ]
 }

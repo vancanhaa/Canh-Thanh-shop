@@ -27,7 +27,7 @@ function UsersList() {
   }, [isDeleteUserSuccess]);
 
   const confirm = (id) => {
-    const userDetail = listUsers.find((user, index) => user.id === id)
+    const userDetail = listUsers.find((user, index) => user.id === id);
 
     modal.confirm({
       className: "confirm-delete-item",
@@ -43,7 +43,7 @@ function UsersList() {
 
   const handleDeleteUser = (id) => {
     dispatch(fetchDeleteUserAdmin(id));
-    setIsOpen(false)
+    setIsOpen(false);
   };
   const indexUser = (page - 1) * 10;
 
@@ -55,9 +55,13 @@ function UsersList() {
   };
   const handleOk = () => {
     if (window.confirm("Lưu thay đổi?")) {
-      dispatch(fetchChangeUserAdmin({id: currentUserChange.id, data: currentUserChange}))
+      dispatch(
+        fetchChangeUserAdmin({
+          id: currentUserChange.id,
+          data: currentUserChange,
+        })
+      );
       setIsOpen(false);
-
     }
   };
 
@@ -70,8 +74,6 @@ function UsersList() {
     setCurrentUserSelection(listUsers[index]);
     setIsOpen(true);
   };
-
-  console.log(currentUserChange);
 
   return (
     <div className="users-body__content">
@@ -102,10 +104,7 @@ function UsersList() {
                   >
                     Sửa
                   </div>
-                  <div
-                    className="delete-action"
-                    onClick={() => confirm(id)}
-                  >
+                  <div className="delete-action" onClick={() => confirm(id)}>
                     Xóa
                   </div>
                 </Col>

@@ -5,6 +5,7 @@ import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
 import { v4 } from "uuid";
 import { ROUTE } from "../../../../constants";
 import { PAYMENTS_METHOD } from "../../../../constants/checkout.const";
+import { STATUS_ORDER } from "../../../../constants/order.const";
 import { fetchOrderDetail } from "../../../../stores/actions/order.action";
 import common from "../../../../utils/common";
 import "./order-detail.scss";
@@ -19,6 +20,10 @@ function OrderDetail() {
   }, []);
   console.log(orderDetail)
   if (orderDetail) {
+    const statusOrderLabel = STATUS_ORDER.find(
+      (status, index) => status.status === orderDetail.status_order
+    )?.label;
+
     return (
       <div className="order-detail">
         <div className="order-detail-container">
@@ -41,7 +46,7 @@ function OrderDetail() {
                 </span>
               </Col>
               <Col lg={12} md={12} sm={24} xs={24}>
-                Trạng thái đơn hàng: <span>{orderDetail.status_order}</span>
+                Trạng thái đơn hàng: <span className={orderDetail.status_order}>{statusOrderLabel}</span>
               </Col>
               <Col span={24}>
                 Mã vận đơn:{" "}

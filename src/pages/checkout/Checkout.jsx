@@ -576,6 +576,7 @@ function Checkout() {
                           đ
                         </strong>
                       </p>
+                      <Link to={ROUTE.CART}> &lt;&lt;&lt; Quay lại giỏ hàng</Link>
                       <button className="order-btn" onClick={handleOrder}>
                         Đặt hàng
                       </button>
