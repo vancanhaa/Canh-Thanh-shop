@@ -31,7 +31,7 @@ function ProductDetail() {
   const [rate, setRate] = useState(0);
   const [riview, setRiview] = useState("");
 
-  const resetRiview = () => {
+  const resetRiviews = () => {
     setRate(0);
     setRiview("");
   };
@@ -130,7 +130,7 @@ function ProductDetail() {
       dispatch(
         fetchAddNewCart({
           idUser: userInfo.id,
-          data: { products: [newproduct] },
+          data: { products: [newproduct] },   
         })
       );
     }
@@ -179,7 +179,7 @@ function ProductDetail() {
       })
     );
 
-    resetRiview();
+    resetRiviews();
     notification.info({
       message: `Đánh giá thành công ${riview} sản phẩm`,
       description: `${product.name}`,
