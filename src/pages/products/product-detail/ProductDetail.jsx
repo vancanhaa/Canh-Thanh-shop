@@ -13,7 +13,7 @@ import {
 } from "../../../stores/actions/cart.action";
 import { Avatar, Col, notification, Row } from "antd";
 import StarsRating from "react-star-rate";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useLayoutEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import MainLayout from "../../../layouts/main-layout/MainLayout";
@@ -42,16 +42,17 @@ function ProductDetail() {
   }, [id, riview]);
 
   const productState = useSelector((state) => state.product);
-  let { products } = productState;
-
-  useEffect(() => {
+  const { products, filter } = productState;
+  useLayoutEffect(() => {
     dispatch(
       fetchProductList({
-        filter: { category: products.category },
+        filter: { ...filter, category: product.category },
         limit: 4,
       })
     );
-  }, []);
+  }, [id]);
+  console.log(filter);
+  console.log(products);
 
   const cart = useSelector((state) => state.cart.cart);
   const userInfo = useSelector((state) => state.user.userInfoState.data);
@@ -133,13 +134,13 @@ function ProductDetail() {
       icon: <CheckOutlined />,
     });
   };
+
   const sumRiview = product.riviews?.length;
   // console.log(sumRiview);
 
   const filterRiview = product.riviews?.reduce((accumulator, currentValue) => {
     return Math.round(accumulator + currentValue.rate / sumRiview);
   }, 0);
-  console.log("filter :", filterRiview);
 
   const currentReviews = useMemo(
     () => (product ? product.riviews : []),

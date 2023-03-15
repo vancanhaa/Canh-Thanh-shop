@@ -1,10 +1,7 @@
-import { CheckOutlined } from "@ant-design/icons";
 import { Col, Modal, notification, Row } from "antd";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { v4 } from "uuid";
-import { ROUTE } from "../../constants";
 import {
   fetchAddNewCart,
   fetchChangeCart,
@@ -24,7 +21,6 @@ function ModalAddCart({
   },
 }) {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   console.log(itemAddCart);
   const cart = useSelector((state) => state.cart.cart);
 
@@ -48,13 +44,11 @@ function ModalAddCart({
       description: `${itemAddCart.name}`,
       placement: "topRight",
       style: { border: "2px solid #71be34" },
-      duration: 2
+      duration: 2,
     });
   };
 
-
   const handleAddItemToCart = ({ itemAddCart, options, valueQuantity }) => {
-
     const newItemAddCart = {
       id: itemAddCart.id,
       name: itemAddCart.name,
@@ -103,7 +97,7 @@ function ModalAddCart({
         })
       );
     }
-    showMessage({itemAddCart, valueQuantity})
+    showMessage({ itemAddCart, valueQuantity });
     handleResetOption();
   };
 

@@ -22,6 +22,7 @@ export const fetchProductList = createAsyncThunk(
         total: response.headers["x-total-count"],
       },
     };
+    
   }
 );
 
