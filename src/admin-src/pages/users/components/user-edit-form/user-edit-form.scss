@@ -1,0 +1,37 @@
+.user-edit-form{
+    .form-group{
+       width: 90%;
+       margin: 5px auto;
+ 
+       span{
+          display: inline-block;
+          width: 100px;
+          color: var(--title-color);
+          font-size: 14px;
+          font-weight: 600;
+       }
+       input, textarea{
+          display: inline-table;
+          width: 75%;
+          padding: 3px;
+          border: unset;
+          border-bottom: 1px solid #026082
+       }
+       textarea{
+          height: 60px
+       }
+       input:focus{
+          outline: unset;
+       }
+       select{
+          outline: unset;
+          border: unset;
+          border-bottom: 1px solid #026082;
+       }
+       input, textarea {  
+         &:disabled {
+            cursor: not-allowed;
+         }
+       }
+    }
+ }

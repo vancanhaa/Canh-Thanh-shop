@@ -28,32 +28,40 @@ export const fetchProductsListAdmin = createAsyncThunk(
 export const fetchDeleteProductAdmin = createAsyncThunk(
   "productsAdmin/fetchDeteteProductAdmin",
   async (payload, thunkApi) => {
-    const response = await productsAdminApi.deleteProduct(payload)
-    return response.data
+    const response = await productsAdminApi.deleteProduct(payload);
+    return response.data;
   }
-)
+);
 
 export const fetchAllProductsAdmin = createAsyncThunk(
   "productsAdmin/fetchAllProductsAdmin",
   async (payload, thunkApi) => {
-      const response = await productsAdminApi.getAllProducts()
-      return response.data
+    const response = await productsAdminApi.getAllProducts();
+    return response.data;
   }
-)
+);
 
 export const fetchProductDetailAdmin = createAsyncThunk(
   "productsAdmin/fetchProductDetailAdmin",
   async (payload, thunkApi) => {
-    const response = await productsAdminApi.getProductDetail(payload)
-    return response.data
+    const response = await productsAdminApi.getProductDetail(payload);
+    return response.data;
   }
-)
+);
 
 export const fetchEditProductAdmin = createAsyncThunk(
   "productsAdmin/fetchEditProductAdmin",
   async (payload, thunkApi) => {
-    const {id, data} = payload
-    const response = await productsAdminApi.editProduct(id, data)
-    return response.data
+    const { id, data } = payload;
+    const response = await productsAdminApi.editProduct(id, data);
+    return response.data;
   }
-)
+);
+
+export const fetchAddProductAdmin = createAsyncThunk(
+  "productsAdmin/fetchAddProductAdmin",
+  async (payload, thunkApi) => {
+    const response = await productsAdminApi.postNewProduct(payload);
+    return response.data;
+  }
+);

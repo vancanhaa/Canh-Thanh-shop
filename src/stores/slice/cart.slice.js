@@ -38,7 +38,20 @@ const cartSlice = createSlice({
         });
         builder.addCase(fetchCart.rejected, (state, action) => {
             state.fetchingCart = false
-            state.cart = {}
+            state.cart = {
+                id: "",
+                products: [
+                    {
+                        id: "",
+                        name: "",
+                        imageUrl: "",
+                        color: "",
+                        size:"",
+                        quantity: 0,
+                        price: 0
+                    }
+                ]
+            }
         })
 
         //fetchChangeCart

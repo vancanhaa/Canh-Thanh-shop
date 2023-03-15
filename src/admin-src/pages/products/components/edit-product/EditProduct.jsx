@@ -1,3 +1,5 @@
+import { ExclamationCircleOutlined } from "@ant-design/icons";
+import { Modal } from "antd";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
@@ -19,7 +21,21 @@ function EditProduct() {
   useEffect(() => {
     dispatch(fetchProductDetailAdmin(idProduct));
   }, []);
-  const [productInfoChange, setProductInfoChange] = useState();
+  const [modal, contextHolder] = Modal.useModal();
+  const initialProduct = {
+    id: "",
+    name: "",
+    category: "",
+    import_total: "",
+    price: "",
+    raiting: 5,
+    stock: 0,
+    sold: 0,
+    description: [],
+    options: [],
+    size: [],
+  };
+  const [productInfoChange, setProductInfoChange] = useState({...initialProduct});
   useEffect(() => {
     setProductInfoChange({ ...productDetail });
   }, [productDetail]);
@@ -72,18 +88,19 @@ function EditProduct() {
     setNewColor("");
     setNewImageUrl("");
   };
-  const handleDeleteOptions = (index) => {
+  const handleDeleteOptions = (index, setIsProductOptionValid) => {
     const newOptions = [...productInfoChange.options];
     newOptions.splice(index, 1);
     setProductInfoChange((state) => ({ ...state, options: newOptions }));
     setIsSaved(false);
+    newOptions.length !== 0 ? setIsProductOptionValid(true) : setIsProductOptionValid(false)
   };
 
   const handleAddDescription = () => {
     handleChange("description", newDescription);
     setNewDescription("");
   };
-  const handleDeleteDescription = (index) => {
+  const handleDeleteDescription = (index, setIsProductDescriptionValid) => {
     const newDescription = [...productInfoChange.description];
     newDescription.splice(index, 1);
     setProductInfoChange((state) => ({
@@ -91,16 +108,19 @@ function EditProduct() {
       description: newDescription,
     }));
     setIsSaved(false);
+    newDescription.length !== 0 ? setIsProductDescriptionValid(true) : setIsProductDescriptionValid(false)
   };
 
   const handleAddSize = () => {
     handleChange("size", newSize);
     setNewSize("");
   };
-  const handleDeleteSize = (index) => {
+  const handleDeleteSize = (index, setIsProductSizeValid) => {
     const newSize = [...productInfoChange.size];
     newSize.splice(index, 1);
     setProductInfoChange((state) => ({ ...state, size: newSize }));
+    newSize.length !== 0 ? setIsProductSizeValid(true) : setIsProductSizeValid(false)
+    setIsSaved(false)
   };
 
   //Validate
@@ -129,9 +149,10 @@ function EditProduct() {
           fetchEditProductAdmin({ id: idProduct, data: productInfoChange })
         );
         setIsSaved(true);
-      } else {
-        alert("Không thể lưu thay đổi");
-      }
+        navigate(-1)
+      } 
+    }else {
+      alert("Không thể lưu thay đổi, vui lòng kiểm tra lại và điền đầy đủ vào tất cả các trường!");
     }
   };
 
@@ -149,6 +170,19 @@ function EditProduct() {
 
   window.onload = () => {
     setIsSaved(true);
+  };
+
+  const confirm = () => {
+    modal.confirm({
+      className: "confirm-delete-item",
+      title:
+        "Quản trị viên có chắc chắn muốn xoá sản phẩm này khỏi danh sách sản phẩm?",
+      icon: <ExclamationCircleOutlined />,
+      content: `${productDetail?.name}`,
+      okText: "Đồng ý",
+      cancelText: "Không",
+      onOk: () => handleDeleteProduct(),
+    });
   };
 
   return (
@@ -182,8 +216,9 @@ function EditProduct() {
         <button className="edit-product__btn btn--reset" disabled={isSaved} onClick={handleReset}>
           Đặt lại
         </button>
-        <button className="edit-product__btn btn--delete" onClick={handleDeleteProduct}>Xóa</button>
+        <button className="edit-product__btn btn--delete" onClick={() => confirm()}>Xóa</button>
       </div>
+      {contextHolder}
     </div>
   );
 }

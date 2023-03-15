@@ -30,7 +30,7 @@ function Users() {
               <Col span={3}>Tên</Col>
               <Col span={4}>Số điện thoại</Col>
               <Col span={4}>Email</Col>
-              <Col span={3}>Role</Col>
+              <Col span={3}>Vai trò</Col>
               <Col span={3}>Action</Col>
             </Row>
           </div>

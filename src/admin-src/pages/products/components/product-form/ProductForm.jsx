@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { v4 } from "uuid";
 import "./product-form.scss";
 function ProductForm({
-  productInfoChange,
+  productInfoChange = {},
   handleChange,
   setIsValid,
 
@@ -24,6 +24,7 @@ function ProductForm({
   handleAddSize,
   handleDeleteSize,
 }) {
+  console.log(productInfoChange);
   const [isProductNameValid, setIsProductNameValid] = useState(true);
   const [isProductPriceValid, setIsProductPriceValid] = useState(true);
   const [isProductCategoryValid, setIsProductCategoryValid] = useState(true);
@@ -161,7 +162,7 @@ function ProductForm({
                   isProductPriceValid ? "" : "active"
                 }`}
               >
-                * Giá của sản phẩm?
+                * Giá phải là số nguyên dương!
               </p>
             </div>
           </div>
@@ -180,7 +181,7 @@ function ProductForm({
                   isProductImportTotalValid ? "" : "active"
                 }`}
               >
-                * Số lượng nhập kho?
+                *Số lượng phải là số nguyên dương!
               </p>
             </div>
           </div>
@@ -197,7 +198,7 @@ function ProductForm({
                 <span
                   className="delete-icon"
                   onClick={() => {
-                    handleDeleteDescription(index);
+                    handleDeleteDescription(index, setIsProductDescriptionValid);
                   }}
                 >
                   <CloseCircleOutlined />
@@ -240,7 +241,7 @@ function ProductForm({
               <p>{option.color}</p>
               <img src={option.image_url} alt="" />
               <div className="delete-icon" 
-              onClick={() => {handleDeleteOptions(index)}}
+              onClick={() => {handleDeleteOptions(index, setIsProductOptionValid)}}
               >
                 <CloseCircleOutlined />
               </div>
@@ -287,7 +288,7 @@ function ProductForm({
             <div className="size__item" key={v4()}>
               <p>{sz}</p>
               <div className="delete-icon" 
-              onClick={() => {handleDeleteSize(index)}}
+              onClick={() => {handleDeleteSize(index, setIsProductSizeValid)}}
               >
                 <CloseCircleOutlined />
               </div>

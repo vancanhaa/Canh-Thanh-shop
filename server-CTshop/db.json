@@ -54,6 +54,17 @@
       "phone": "0909798679",
       "createdAt": 1678609148012,
       "updateAt": 1678609148012
+    },
+    {
+      "email": "tranhoang@gmail.com",
+      "password": "$2a$10$EyYotgxnjUJ1n52OZ3NGeuISdL5aEynjdQyR1o6PZkS2wqwNgBj7q",
+      "id": "e48316da-3148-47c1-bec2-e279b53e4d74",
+      "role": "user",
+      "first_name": "Hoàng",
+      "last_name": "Trần",
+      "phone": "0909364982",
+      "createdAt": 1678858100444,
+      "updateAt": 1678858100444
     }
   ],
   "products": [
@@ -88,7 +99,7 @@
         "M",
         "L",
         "XL",
-        "XXL"
+        "2XL"
       ],
       "price": 369000,
       "discountPercentage": 10,
@@ -96,7 +107,7 @@
       "stock": 94,
       "sold": 15200,
       "brand": "Yody",
-      "import_total": "1000",
+      "import_total": "10000",
       "category": "polo",
       "riviews": [
         {
@@ -1957,6 +1968,31 @@
       ],
       "createdAt": 1678609189251,
       "updateAt": 1678609189251
+    },
+    {
+      "id": "e48316da-3148-47c1-bec2-e279b53e4d74",
+      "products": [
+        {
+          "id": "SAM5001",
+          "name": "Áo Polo Thể Thao Nam Airy Cool In Phản Quang - Đỏ",
+          "image_url": "https://bizweb.dktcdn.net/100/438/408/products/ao-the-thao-sam5001-ddo-5-yody-vn.jpg?v=1649215554240",
+          "quantity": 1,
+          "price": 349000,
+          "color": "Đỏ",
+          "size": "M"
+        },
+        {
+          "id": "APM5393",
+          "name": "Áo Polo Nam Pique Sồi",
+          "image_url": "https://bizweb.dktcdn.net/100/438/408/products/apm5393-cdt-6.jpg?v=1662358179350",
+          "quantity": 1,
+          "price": 369000,
+          "color": "Cam đất",
+          "size": "M"
+        }
+      ],
+      "createdAt": 1678858276527,
+      "updateAt": 1678858276527
     }
   ],
   "address": [
