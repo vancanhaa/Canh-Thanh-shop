@@ -51,7 +51,7 @@ function ProductDetail() {
         limit: 4,
       })
     );
-  }, []);
+  }, [thumbnail]);
 
   console.log("product: ", product);
 
@@ -62,9 +62,11 @@ function ProductDetail() {
   console.log("options: ", options);
 
   useEffect(() => {
-    product && setOptions(product.options[0]);
+    if (Object.keys(product).length) {
+      setOptions(product.options.length ? product.options[0] : {});
+    }
   }, [product]);
-
+  
   const handleChangeOptions = (option) => {
     const newOptions = { ...options, ...option };
     setOptions(newOptions);
@@ -223,12 +225,20 @@ function ProductDetail() {
             <Col lg={12} md={14} sm={24} xs={24}>
               <div className="product--grid__img">
                 <img
-                  src={`${options.image_url | product.thumbnail}`}
+                  src={`${options.image_url || product.thumbnail}`}
                   onError={({ currentTarget }) => {
                     currentTarget.onerror = null; // prevents looping
-                    currentTarget.src = `${options.image_url}`;
+                    currentTarget.src = `${
+                      product.thumbnail || options.image_url
+                    }`;
                   }}
                   alt=""
+                  // src={`${options.image_url}`}
+                  // onError={({ currentTarget }) => {
+                  //   currentTarget.onerror = null; // prevents looping
+                  //   currentTarget.src = `${thumbnail}`;
+                  // }}
+                  // alt=""
                 />
               </div>
 
